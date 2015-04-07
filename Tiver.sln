@@ -3,8 +3,60 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55D28FBE-FE5F-4047-8E6A-FC6A8448E9BF}"
+	ProjectSection(SolutionItems) = preProject
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DBDF5CEF-537D-4B8B-AB41-F1EA2513F0B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvcEmberJsTests", "Tests\TodoMvcEmberJsTests\TodoMvcEmberJsTests.csproj", "{802C99D1-606F-4151-8332-6521AAD9AE34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tiver", "Tiver", "{64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Tiver\Core\Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingBase", "Tiver\TestingBase\TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverExtended", "Tiver\WebDriverExtended\WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E424E86C-0085-4C3E-8142-8C57F29D1052}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{802C99D1-606F-4151-8332-6521AAD9AE34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{802C99D1-606F-4151-8332-6521AAD9AE34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{802C99D1-606F-4151-8332-6521AAD9AE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{802C99D1-606F-4151-8332-6521AAD9AE34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1AEE3FE-937B-4B20-A335-266490872764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1AEE3FE-937B-4B20-A335-266490872764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1AEE3FE-937B-4B20-A335-266490872764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1AEE3FE-937B-4B20-A335-266490872764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1FB4583-BBA4-420B-85BF-C55959005D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1FB4583-BBA4-420B-85BF-C55959005D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1FB4583-BBA4-420B-85BF-C55959005D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1FB4583-BBA4-420B-85BF-C55959005D54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{802C99D1-606F-4151-8332-6521AAD9AE34} = {DBDF5CEF-537D-4B8B-AB41-F1EA2513F0B0}
+		{A1AEE3FE-937B-4B20-A335-266490872764} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{B1FB4583-BBA4-420B-85BF-C55959005D54} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{22283771-8AFB-47B7-ACE1-70DBE2397E02} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 	EndGlobalSection
 EndGlobal
