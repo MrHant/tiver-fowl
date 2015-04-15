@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B1FB4583-BBA4-420B-85BF-C55959005D54}</ProjectGuid>
+    <ProjectGuid>{22283771-8AFB-47B7-ACE1-70DBE2397E02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tiver.TestingBase</RootNamespace>
-    <AssemblyName>TestingBase</AssemblyName>
+    <RootNamespace>Tiver.WebDriverExtended</RootNamespace>
+    <AssemblyName>Tiver.WebDriverExtended</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -18,7 +18,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>b21e440b</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>c3621b03</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,6 +47,12 @@
       <HintPath>..\..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -61,23 +67,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Attributes\WebDriverTestAttribute.cs" />
-    <Compile Include="BaseTest.cs" />
-    <Compile Include="IBaseTest.cs" />
-    <Compile Include="BaseTestForMsTest.cs" />
-    <Compile Include="Flow.cs" />
+    <Compile Include="Browsers\Browser.cs" />
+    <Compile Include="Browsers\BrowserFactory.cs" />
+    <Compile Include="Browsers\FirefoxBrowser.cs" />
+    <Compile Include="Browsers\FirefoxBrowserFactory.cs" />
+    <Compile Include="Exceptions\IncorrectBrowserConfigurationException.cs" />
+    <Compile Include="Configuration\BrowserConfigurationSection .cs" />
+    <Compile Include="Configuration\IBrowserConfiguration.cs" />
+    <Compile Include="Configuration\IResolution.cs" />
+    <Compile Include="Configuration\ResolutionElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestExecutionContext.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{a1aee3fe-937b-4b20-a335-266490872764}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebDriverExtended\WebDriverExtended.csproj">
-      <Project>{22283771-8afb-47b7-ace1-70dbe2397e02}</Project>
-      <Name>WebDriverExtended</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

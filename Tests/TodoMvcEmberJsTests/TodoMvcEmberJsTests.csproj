@@ -72,13 +72,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tiver\TestingBase\TestingBase.csproj">
+    <ProjectReference Include="..\..\Tiver\TestingBase\Tiver.TestingBase.csproj">
       <Project>{b1fb4583-bba4-420b-85bf-c55959005d54}</Project>
-      <Name>TestingBase</Name>
+      <Name>Tiver.TestingBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tiver\WebDriverExtended\WebDriverExtended.csproj">
+    <ProjectReference Include="..\..\Tiver\WebDriverExtended\Tiver.WebDriverExtended.csproj">
       <Project>{22283771-8afb-47b7-ace1-70dbe2397e02}</Project>
-      <Name>WebDriverExtended</Name>
+      <Name>Tiver.WebDriverExtended</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

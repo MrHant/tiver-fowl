@@ -14,11 +14,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvcEmberJsTests", "Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tiver", "Tiver", "{64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Tiver\Core\Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Core", "Tiver\Core\Tiver.Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingBase", "Tiver\TestingBase\TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.TestingBase", "Tiver\TestingBase\Tiver.TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverExtended", "Tiver\WebDriverExtended\WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.WebDriverExtended", "Tiver\WebDriverExtended\Tiver.WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E424E86C-0085-4C3E-8142-8C57F29D1052}"
 	ProjectSection(SolutionItems) = preProject
