@@ -8,9 +8,6 @@
 
     public class Wait
     {
-        private static TimeSpan defaultPollingInterval = TimeSpan.FromMilliseconds(250);
-        private static TimeSpan defaultTimeout = TimeSpan.FromSeconds(10);
-
         public static TResult Until<TResult>(Func<TResult> condition)
         {
             WaitConfigurationSection config = (WaitConfigurationSection)System.Configuration.ConfigurationManager.GetSection("waitConfigurationGroup/waitConfiguration");
@@ -41,7 +38,7 @@
                 if (elapsedMilliseconds > timeout)
                 {
                     stopwatch.Stop();
-                    throw new WaitTimeoutException(string.Format("Wait timeout reached after {0}ms waiting.", elapsedMilliseconds));
+                    throw new WaitTimeoutException(string.Format("Wait timeout reached after {0} milliseconds waiting.", elapsedMilliseconds));
                 }
 
                 // No exit conditions met - Sleep for polling interval
