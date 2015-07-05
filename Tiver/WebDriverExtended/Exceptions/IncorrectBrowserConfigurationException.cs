@@ -3,6 +3,7 @@
     using System;
     using System.Runtime.Serialization;
 
+    [Serializable]
     public class IncorrectBrowserConfigurationException : Exception, ISerializable
     {
         public IncorrectBrowserConfigurationException()
