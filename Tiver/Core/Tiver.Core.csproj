@@ -82,10 +82,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.WebDriverExtended.Contracts.csproj">
       <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>
