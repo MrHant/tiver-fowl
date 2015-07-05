@@ -57,7 +57,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="BaseTestForMsTest.cs" />
     <Compile Include="Flow.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

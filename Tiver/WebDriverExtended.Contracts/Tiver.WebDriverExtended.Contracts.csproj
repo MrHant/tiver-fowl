@@ -51,7 +51,7 @@
     <Compile Include="Browsers\IBrowser.cs" />
     <Compile Include="Configuration\IBrowserConfiguration.cs" />
     <Compile Include="Configuration\IResolution.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

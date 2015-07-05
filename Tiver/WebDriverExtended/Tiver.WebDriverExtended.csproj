@@ -67,7 +67,7 @@
     <Compile Include="Exceptions\IncorrectBrowserConfigurationException.cs" />
     <Compile Include="Configuration\BrowserConfigurationSection .cs" />
     <Compile Include="Configuration\ResolutionElement.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
