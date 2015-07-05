@@ -1,19 +1,28 @@
 ﻿namespace Tiver.TestingBase
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Tiver.Core.Context;
+    using Tiver.TestingBase.Contracts;
 
     public class BaseTestForMsTest : BaseTest, IBaseTest
     {
         [TestInitialize]
         public void SetUp()
         {
-            Flow.SetUp(this.Context);
+            Flow.SetUp();
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            Flow.TearDown(this.Context);
+            Flow.TearDown();
+            GeneralContext.ClearTestContext();
+        }
+
+        [AssemblyCleanup]
+        public void AssemblyTearDown()
+        {
+            GeneralContext.ClearSessionContext();
         }
     }
 }

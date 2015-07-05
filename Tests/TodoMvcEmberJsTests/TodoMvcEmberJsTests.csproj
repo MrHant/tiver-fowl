@@ -18,7 +18,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>6c59bee1</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>33acdc0e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,14 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StyleCop, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.CSharp, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -69,16 +61,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Tiver\Core\Tiver.Core.csproj">
+      <Project>{a1aee3fe-937b-4b20-a335-266490872764}</Project>
+      <Name>Tiver.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tiver\TestingBase.Contracts\Tiver.TestingBase.Contracts.csproj">
+      <Project>{e3095a2a-e817-4aee-be96-ef83d397cda2}</Project>
+      <Name>Tiver.TestingBase.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tiver\TestingBase\Tiver.TestingBase.csproj">
       <Project>{b1fb4583-bba4-420b-85bf-c55959005d54}</Project>
       <Name>Tiver.TestingBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tiver\WebDriverExtended\Tiver.WebDriverExtended.csproj">
-      <Project>{22283771-8afb-47b7-ace1-70dbe2397e02}</Project>
-      <Name>Tiver.WebDriverExtended</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

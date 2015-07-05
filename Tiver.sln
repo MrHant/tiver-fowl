@@ -8,6 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E424E86C-0085-4C3E-8142-8C57F29D1052}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DBDF5CEF-537D-4B8B-AB41-F1EA2513F0B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvcEmberJsTests", "Tests\TodoMvcEmberJsTests\TodoMvcEmberJsTests.csproj", "{802C99D1-606F-4151-8332-6521AAD9AE34}"
@@ -20,12 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.TestingBase", "Tiver\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.WebDriverExtended", "Tiver\WebDriverExtended\Tiver.WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E424E86C-0085-4C3E-8142-8C57F29D1052}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.ViewBase", "Tiver\ViewBase\Tiver.ViewBase.csproj", "{FAC33B29-E159-483F-9A62-B3CDCFE4910F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.WebDriverExtended.Contracts", "Tiver\WebDriverExtended.Contracts\Tiver.WebDriverExtended.Contracts.csproj", "{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.ViewBase.Contracts", "Tiver\ViewBase.Contracts\Tiver.ViewBase.Contracts.csproj", "{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.TestingBase.Contracts", "Tiver\TestingBase.Contracts\Tiver.TestingBase.Contracts.csproj", "{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +57,22 @@ Global
 		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22283771-8AFB-47B7-ACE1-70DBE2397E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC33B29-E159-483F-9A62-B3CDCFE4910F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC33B29-E159-483F-9A62-B3CDCFE4910F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC33B29-E159-483F-9A62-B3CDCFE4910F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC33B29-E159-483F-9A62-B3CDCFE4910F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,5 +82,9 @@ Global
 		{A1AEE3FE-937B-4B20-A335-266490872764} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{B1FB4583-BBA4-420B-85BF-C55959005D54} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{22283771-8AFB-47B7-ACE1-70DBE2397E02} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{FAC33B29-E159-483F-9A62-B3CDCFE4910F} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{E3095A2A-E817-4AEE-BE96-EF83D397CDA2} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 	EndGlobalSection
 EndGlobal

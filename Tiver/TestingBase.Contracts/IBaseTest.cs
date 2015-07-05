@@ -1,4 +1,4 @@
-﻿namespace Tiver.TestingBase
+﻿namespace Tiver.TestingBase.Contracts
 {
     public interface IBaseTest
     {

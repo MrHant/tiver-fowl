@@ -1,4 +1,4 @@
-﻿namespace Tiver.WebDriverExtended.Configuration
+﻿namespace Tiver.WebDriverExtended.Contracts.Configuration
 {
     public interface IResolution
     {

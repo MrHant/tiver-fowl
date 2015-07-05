@@ -2,8 +2,8 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Tiver.Core.Attributes;
     using Tiver.TestingBase;
-    using Tiver.TestingBase.Attributes;
 
     [TestClass]
     [WebDriverTest]

@@ -4,7 +4,7 @@
     using System.Drawing;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Firefox;
-    using Tiver.WebDriverExtended.Configuration;
+    using Tiver.WebDriverExtended.Contracts.Configuration;
 
     public class FirefoxBrowserFactory : BrowserFactory
     {

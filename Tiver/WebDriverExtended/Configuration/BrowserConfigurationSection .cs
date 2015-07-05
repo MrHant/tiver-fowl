@@ -1,6 +1,7 @@
 ﻿namespace Tiver.WebDriverExtended.Configuration
 {
     using System.Configuration;
+    using Tiver.WebDriverExtended.Contracts.Configuration;
 
     public class BrowserConfigurationSection : ConfigurationSection, IBrowserConfiguration
     {

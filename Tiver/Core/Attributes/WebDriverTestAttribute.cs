@@ -1,4 +1,4 @@
-﻿namespace Tiver.TestingBase.Attributes
+﻿namespace Tiver.Core.Attributes
 {
     using System;
 

@@ -1,6 +1,7 @@
 ﻿namespace Tiver.WebDriverExtended.Browsers
 {
     using Tiver.WebDriverExtended.Configuration;
+    using Tiver.WebDriverExtended.Contracts.Configuration;
     using Tiver.WebDriverExtended.Exceptions;
 
     public abstract class BrowserFactory

@@ -1,22 +1,23 @@
 ﻿namespace Tiver.TestingBase
 {
+    using Tiver.Core.Context;
     using Tiver.WebDriverExtended.Browsers;
 
     public class Flow
     {
-        public static void SetUp(TestExecutionContext context)
+        public static void SetUp()
         {
-            if (context.IsWebDriverTest)
+            if (TestExecutionContext.IsWebDriverTest)
             {
-                context.Browser = BrowserFactory.GetBrowser();
+                TestExecutionContext.Browser = BrowserFactory.GetBrowser();
             }
         }
 
-        public static void TearDown(TestExecutionContext context)
+        public static void TearDown()
         {
-            if (context.IsWebDriverTest)
+            if (TestExecutionContext.IsWebDriverTest)
             {
-                context.Browser.Quit();
+                TestExecutionContext.Browser.Quit();
             }
         }
     }

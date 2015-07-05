@@ -18,7 +18,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>c3621b03</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>5a625b94</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,14 +38,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StyleCop, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.CSharp, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
@@ -73,13 +65,21 @@
     <Compile Include="Browsers\FirefoxBrowserFactory.cs" />
     <Compile Include="Exceptions\IncorrectBrowserConfigurationException.cs" />
     <Compile Include="Configuration\BrowserConfigurationSection .cs" />
-    <Compile Include="Configuration\IBrowserConfiguration.cs" />
-    <Compile Include="Configuration\IResolution.cs" />
     <Compile Include="Configuration\ResolutionElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.WebDriverExtended.Contracts.csproj">
+      <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>
+      <Name>Tiver.WebDriverExtended.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Tiver.Core.csproj">
+      <Project>{a1aee3fe-937b-4b20-a335-266490872764}</Project>
+      <Name>Tiver.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
