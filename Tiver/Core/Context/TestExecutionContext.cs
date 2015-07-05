@@ -40,7 +40,8 @@
             {
                 if (TestExecutionContext.TestType.Equals(typeof(NullContextItem)))
                 {
-                    throw new ContextItemNotInitializedException("Initialize Test.TestType before trying to get IsWebDriverTest property.");
+                    // Initialize Test.TestType before trying to get IsWebDriverTest property.
+                    return false;
                 }
 
                 var attribute = Attribute.GetCustomAttribute(TestExecutionContext.TestType, typeof(WebDriverTestAttribute));
