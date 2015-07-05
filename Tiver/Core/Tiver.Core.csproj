@@ -64,7 +64,6 @@
     <Compile Include="Configuration\WaitConfiguration.cs" />
     <Compile Include="Configuration\WaitConfigurationSection.cs" />
     <Compile Include="Context\Context.cs" />
-    <Compile Include="Context\GeneralContext.cs" />
     <Compile Include="Context\IStorage.cs" />
     <Compile Include="Context\NullContextItem.cs" />
     <Compile Include="Context\Storage.cs" />

@@ -16,13 +16,13 @@
         public void TearDown()
         {
             Flow.TearDown();
-            GeneralContext.ClearTestContext();
+            Context.ClearTestContext();
         }
 
         [AssemblyCleanup]
         public void AssemblyTearDown()
         {
-            GeneralContext.ClearSessionContext();
+            Context.ClearSessionContext();
         }
     }
 }

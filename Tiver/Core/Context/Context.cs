@@ -1,6 +1,6 @@
 ﻿namespace Tiver.Core.Context
 {
-    internal static class Context
+    public static class Context
     {
         private static IStorage session = new Storage();
         private static IStorage test = new Storage();
@@ -19,6 +19,16 @@
             {
                 return test;
             }
+        }
+
+        public static void ClearTestContext()
+        {
+            Context.Test.Clear();
+        }
+
+        public static void ClearSessionContext()
+        {
+            Context.Session.Clear();
         }
     }
 }
