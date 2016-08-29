@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55D28FBE-FE5F-4047-8E6A-FC6A8448E9BF}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,21 +19,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DBDF5CEF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvcEmberJsTests", "Tests\TodoMvcEmberJsTests\TodoMvcEmberJsTests.csproj", "{802C99D1-606F-4151-8332-6521AAD9AE34}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tiver", "Tiver", "{64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tiver.Fowl", "Tiver.Fowl", "{64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Core", "Tiver\Core\Tiver.Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.Core", "Tiver\Fowl\Core\Tiver.Fowl.Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.TestingBase", "Tiver\TestingBase\Tiver.TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.TestingBase", "Tiver\Fowl\TestingBase\Tiver.Fowl.TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.WebDriverExtended", "Tiver\WebDriverExtended\Tiver.WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.WebDriverExtended", "Tiver\Fowl\WebDriverExtended\Tiver.Fowl.WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.ViewBase", "Tiver\ViewBase\Tiver.ViewBase.csproj", "{FAC33B29-E159-483F-9A62-B3CDCFE4910F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.ViewBase", "Tiver\Fowl\ViewBase\Tiver.Fowl.ViewBase.csproj", "{FAC33B29-E159-483F-9A62-B3CDCFE4910F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.WebDriverExtended.Contracts", "Tiver\WebDriverExtended.Contracts\Tiver.WebDriverExtended.Contracts.csproj", "{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.WebDriverExtended.Contracts", "Tiver\Fowl\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj", "{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.ViewBase.Contracts", "Tiver\ViewBase.Contracts\Tiver.ViewBase.Contracts.csproj", "{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.ViewBase.Contracts", "Tiver\Fowl\ViewBase.Contracts\Tiver.Fowl.ViewBase.Contracts.csproj", "{A24887FA-06A7-45FF-AB5B-B7C247BC2CA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.TestingBase.Contracts", "Tiver\TestingBase.Contracts\Tiver.TestingBase.Contracts.csproj", "{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.TestingBase.Contracts", "Tiver\Fowl\TestingBase.Contracts\Tiver.Fowl.TestingBase.Contracts.csproj", "{E3095A2A-E817-4AEE-BE96-EF83D397CDA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

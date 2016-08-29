@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{802C99D1-606F-4151-8332-6521AAD9AE34}</ProjectGuid>
+    <ProjectGuid>{22283771-8AFB-47B7-ACE1-70DBE2397E02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TodoMvcEmberJsTests</RootNamespace>
-    <AssemblyName>TodoMvcEmberJsTests</AssemblyName>
+    <RootNamespace>Tiver.Fowl.WebDriverExtended</RootNamespace>
+    <AssemblyName>Tiver.Fowl.WebDriverExtended</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -16,9 +16,9 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>33acdc0e</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>5a625b94</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,8 +29,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,7 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -57,31 +60,27 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="SmokeTest.cs" />
+    <Compile Include="Browsers\Browser.cs" />
+    <Compile Include="Browsers\BrowserFactory.cs" />
+    <Compile Include="Browsers\FirefoxBrowser.cs" />
+    <Compile Include="Browsers\FirefoxBrowserFactory.cs" />
+    <Compile Include="Exceptions\IncorrectBrowserConfigurationException.cs" />
+    <Compile Include="Configuration\BrowserConfigurationSection .cs" />
+    <Compile Include="Configuration\ResolutionElement.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tiver\Fowl\Core\Tiver.Fowl.Core.csproj">
+    <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">
+      <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>
+      <Name>Tiver.Fowl.WebDriverExtended.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Tiver.Fowl.Core.csproj">
       <Project>{a1aee3fe-937b-4b20-a335-266490872764}</Project>
       <Name>Tiver.Fowl.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tiver\Fowl\TestingBase.Contracts\Tiver.Fowl.TestingBase.Contracts.csproj">
-      <Project>{e3095a2a-e817-4aee-be96-ef83d397cda2}</Project>
-      <Name>Tiver.Fowl.TestingBase.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tiver\Fowl\TestingBase\Tiver.Fowl.TestingBase.csproj">
-      <Project>{b1fb4583-bba4-420b-85bf-c55959005d54}</Project>
-      <Name>Tiver.Fowl.TestingBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tiver\Fowl\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">
-      <Project>{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}</Project>
-      <Name>Tiver.Fowl.WebDriverExtended.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
