@@ -4,16 +4,16 @@
     using Tiver.Core.Context;
     using Tiver.TestingBase.Contracts;
 
-    public class BaseTestForMsTest : BaseTest, IBaseTest
+    public class BaseTestForMsTest : BaseTest
     {
         [TestInitialize]
-        public void SetUp()
+        public override void SetUp()
         {
             Flow.SetUp();
         }
 
         [TestCleanup]
-        public void TearDown()
+        public override void TearDown()
         {
             Flow.TearDown();
             Context.ClearTestContext();

@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -77,6 +78,10 @@
     <ProjectReference Include="..\..\Tiver\TestingBase\Tiver.TestingBase.csproj">
       <Project>{b1fb4583-bba4-420b-85bf-c55959005d54}</Project>
       <Name>Tiver.TestingBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tiver\WebDriverExtended.Contracts\Tiver.WebDriverExtended.Contracts.csproj">
+      <Project>{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}</Project>
+      <Name>Tiver.WebDriverExtended.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
