@@ -2,8 +2,8 @@
 {
     public interface IBaseTest
     {
-        void SetUp();
+        void Setup();
 
-        void TearDown();
+        void Teardown();
     }
 }

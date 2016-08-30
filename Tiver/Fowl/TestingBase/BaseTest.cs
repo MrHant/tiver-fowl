@@ -10,8 +10,8 @@
             TestExecutionContext.TestType = GetType();
         }
 
-        public abstract void SetUp();
+        public abstract void Setup();
 
-        public abstract void TearDown();
+        public abstract void Teardown();
     }
 }

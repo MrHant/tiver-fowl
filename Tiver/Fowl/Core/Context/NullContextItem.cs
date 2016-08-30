@@ -4,7 +4,12 @@
     {
         private object key;
 
-        public NullContextItem(object key = null)
+        public NullContextItem()
+        {
+            this.key = null;
+        }
+
+        public NullContextItem(object key)
         {
             this.key = key;
         }

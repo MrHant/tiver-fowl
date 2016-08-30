@@ -10,12 +10,12 @@
         {
             get
             {
-                return (Type)Context.Test.Get("TestType");
+                return (Type)Context.Test.Read("TestType");
             }
 
             set
             {
-                Context.Test.Add("TestType", value);
+                Context.Test.Write("TestType", value);
             }
         }
 
@@ -23,12 +23,12 @@
         {
             get
             {
-                return (IBrowser)Context.Test.Get("Browser");
+                return (IBrowser)Context.Test.Read("Browser");
             }
 
             set
             {
-                Context.Test.Add("Browser", value);
+                Context.Test.Write("Browser", value);
             }
         }
 

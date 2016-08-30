@@ -6,7 +6,7 @@
     using Configuration;
     using Exceptions;
 
-    public class Wait
+    public static class Wait
     {
         public static TResult Until<TResult>(Func<TResult> condition)
         {

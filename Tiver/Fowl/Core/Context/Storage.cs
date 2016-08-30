@@ -20,12 +20,12 @@
             }
         }
 
-        public void Add(object key, object value)
+        public void Write(object key, object value)
         {
             this.Items.Add(key, value);
         }
 
-        public object Get(object key)
+        public object Read(object key)
         {
             object result = null;
             var success = this.Items.TryGetValue(key, out result);

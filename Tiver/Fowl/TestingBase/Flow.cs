@@ -5,7 +5,7 @@
 
     public class Flow
     {
-        public static void SetUp()
+        public static void Setup()
         {
             if (TestExecutionContext.IsWebDriverTest)
             {
@@ -13,7 +13,7 @@
             }
         }
 
-        public static void TearDown()
+        public static void Teardown()
         {
             if (TestExecutionContext.IsWebDriverTest)
             {

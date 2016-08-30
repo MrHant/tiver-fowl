@@ -3,23 +3,23 @@
     using Core.Context;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    public class BaseTestForMsTest : BaseTest
+    public class BaseTestForMSTest : BaseTest
     {
         [TestInitialize]
-        public override void SetUp()
+        public override void Setup()
         {
-            Flow.SetUp();
+            Flow.Setup();
         }
 
         [TestCleanup]
-        public override void TearDown()
+        public override void Teardown()
         {
-            Flow.TearDown();
+            Flow.Teardown();
             Context.ClearTestContext();
         }
 
         [AssemblyCleanup]
-        public void AssemblyTearDown()
+        public void AssemblyTeardown()
         {
             Context.ClearSessionContext();
         }

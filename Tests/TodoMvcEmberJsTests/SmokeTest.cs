@@ -7,7 +7,7 @@
 
     [TestClass]
     [WebDriverTest]
-    public class SmokeTest : BaseTestForMsTest
+    public class SmokeTest : BaseTestForMSTest
     {
         [TestMethod]
         public void AddTaskTest()

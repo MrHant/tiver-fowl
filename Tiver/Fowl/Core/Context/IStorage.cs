@@ -2,9 +2,9 @@
 {
     public interface IStorage
     {
-        void Add(object key, object value);
+        void Write(object key, object value);
 
-        object Get(object key);
+        object Read(object key);
 
         void Clear();
     }
