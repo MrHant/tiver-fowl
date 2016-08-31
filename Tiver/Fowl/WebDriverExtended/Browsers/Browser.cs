@@ -28,10 +28,7 @@
             {
                 return elements.Single();
             }
-            else
-            {
-                throw new NoSuchElementException();
-            }
+            throw new NoSuchElementException();
         }
     }
 }

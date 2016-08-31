@@ -33,10 +33,8 @@
             {
                 return result;
             }
-            else
-            {
-                return new NullContextItem(key);
-            }
+
+            return new NullContextItem(key);
         }
 
         public void Clear()

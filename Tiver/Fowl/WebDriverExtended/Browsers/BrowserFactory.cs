@@ -1,5 +1,6 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
+    using System.Configuration;
     using Configuration;
     using Contracts.Configuration;
     using Exceptions;
@@ -26,7 +27,7 @@
 
         public static Browser GetBrowser()
         {
-            BrowserConfigurationSection config = (BrowserConfigurationSection)System.Configuration.ConfigurationManager.GetSection("browserConfigurationGroup/browserConfiguration");
+            BrowserConfigurationSection config = (BrowserConfigurationSection)ConfigurationManager.GetSection("browserConfigurationGroup/browserConfiguration");
             var factory = GetFactory(config.BrowserType);
             return factory.Build(config);
         }

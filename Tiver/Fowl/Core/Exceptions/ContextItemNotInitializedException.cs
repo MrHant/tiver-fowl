@@ -7,7 +7,6 @@
     public class ContextItemNotInitializedException : Exception, ISerializable
     {
         public ContextItemNotInitializedException()
-            : base()
         {
         }
 

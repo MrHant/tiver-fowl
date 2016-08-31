@@ -36,13 +36,13 @@
         {
             get
             {
-                if (TestExecutionContext.TestType.Equals(typeof(NullContextItem)))
+                if (TestType == typeof(NullContextItem))
                 {
                     // Initialize Test.TestType before trying to get IsWebDriverTest property.
                     return false;
                 }
 
-                var attribute = Attribute.GetCustomAttribute(TestExecutionContext.TestType, typeof(WebDriverTestAttribute));
+                var attribute = Attribute.GetCustomAttribute(TestType, typeof(WebDriverTestAttribute));
                 return attribute != null;
             }
         }

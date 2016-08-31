@@ -7,7 +7,6 @@
     public class IncorrectBrowserConfigurationException : Exception, ISerializable
     {
         public IncorrectBrowserConfigurationException()
-            : base()
         {
         }
 

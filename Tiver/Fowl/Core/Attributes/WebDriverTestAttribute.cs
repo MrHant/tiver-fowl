@@ -3,7 +3,7 @@
     using System;
 
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class WebDriverTestAttribute : System.Attribute
+    public sealed class WebDriverTestAttribute : Attribute
     {
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace TodoMvcEmberJsTests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Tiver.Fowl.Core.Attributes;
     using Tiver.Fowl.TestingBase;

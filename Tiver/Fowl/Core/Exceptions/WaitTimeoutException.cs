@@ -7,7 +7,6 @@
     public class WaitTimeoutException : Exception, ISerializable
     {
         public WaitTimeoutException()
-            : base()
         {
         }
 

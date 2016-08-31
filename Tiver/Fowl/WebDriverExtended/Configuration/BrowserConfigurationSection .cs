@@ -9,7 +9,7 @@
         {
             get
             {
-                return (IResolution)this.ResolutionElement;
+                return this.ResolutionElement;
             }
         }
 

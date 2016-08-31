@@ -1,6 +1,7 @@
 ﻿namespace Tiver.Fowl.Core
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Threading;
     using Configuration;
@@ -10,7 +11,7 @@
     {
         public static TResult Until<TResult>(Func<TResult> condition)
         {
-            WaitConfigurationSection config = (WaitConfigurationSection)System.Configuration.ConfigurationManager.GetSection("waitConfigurationGroup/waitConfiguration");
+            WaitConfigurationSection config = (WaitConfigurationSection)ConfigurationManager.GetSection("waitConfigurationGroup/waitConfiguration");
             return Until(condition, config);
         }
 

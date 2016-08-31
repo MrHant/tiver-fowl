@@ -23,12 +23,12 @@
 
         public static void ClearTestContext()
         {
-            Context.Test.Clear();
+            Test.Clear();
         }
 
         public static void ClearSessionContext()
         {
-            Context.Session.Clear();
+            Session.Clear();
         }
     }
 }
