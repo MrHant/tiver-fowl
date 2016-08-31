@@ -3,13 +3,14 @@
     using Core.Context;
     using WebDriverExtended.Browsers;
 
-    public class Flow
+    public static class Flow
     {
         public static void Setup()
         {
             if (TestExecutionContext.IsWebDriverTest)
             {
                 TestExecutionContext.Browser = BrowserFactory.GetBrowser();
+                TestExecutionContext.Browser.NavigateToStartUri();
             }
         }
 

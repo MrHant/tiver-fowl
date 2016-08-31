@@ -4,6 +4,8 @@
 
     public interface IBrowser
     {
+        void NavigateToStartUri();
+
         IWebElement Find(string locator);
 
         void Quit();
