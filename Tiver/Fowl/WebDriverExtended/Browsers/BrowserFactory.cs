@@ -20,6 +20,9 @@
                 case "firefox":
                     return new FirefoxBrowserFactory();
 
+                case "chrome":
+                    return new ChromeBrowserFactory();
+
                 default:
                     throw new IncorrectBrowserConfigurationException(string.Format("Unsupported browser type: '{0}'.", browserType));
             }
