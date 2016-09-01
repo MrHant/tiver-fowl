@@ -5,10 +5,8 @@
     using Core.Context;
     using OpenQA.Selenium;
 
-    internal abstract class Element : IElement
+    public class Element : IElement
     {
-        private readonly string locator;
-
         /// <summary>
         /// Initialize an element
         /// </summary>
@@ -18,25 +16,19 @@
             this.locator = locator;
         }
 
-        private IWebElement WebElement
-        {
-            get
-            {
-                return TestExecutionContext.Browser.Find(this.locator);
-            }
-        }
-
-        /// <summary>
-        /// Process some Selenium specific actions
-        /// </summary>
-        /// <typeparam name="TResult">type of funtion's result</typeparam>
-        /// <param name="function">action to be performed</param>
-        /// <returns></returns>
         public TResult Process<TResult>(Func<IWebElement, TResult> function)
         {
-            var result = default(TResult);
-            result = function.Invoke(this.WebElement);
+            var result = function.Invoke(this.WebElement);
             return result;
         }
+
+        public void Process(Action<IWebElement> action)
+        {
+            action.Invoke(this.WebElement);
+        }
+
+        private IWebElement WebElement => TestExecutionContext.Browser.Find(this.locator);
+
+        private readonly string locator;
     }
 }

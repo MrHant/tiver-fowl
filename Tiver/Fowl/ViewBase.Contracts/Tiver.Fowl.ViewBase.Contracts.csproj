@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Namespace.cs" />
     <Compile Include="IElement.cs" />
-    <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

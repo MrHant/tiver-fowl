@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="SmokeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="views\MainPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -78,8 +79,16 @@
       <Project>{b1fb4583-bba4-420b-85bf-c55959005d54}</Project>
       <Name>Tiver.Fowl.TestingBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tiver\Fowl\ViewBase.Contracts\Tiver.Fowl.ViewBase.Contracts.csproj">
+      <Project>{a24887fa-06a7-45ff-ab5b-b7c247bc2ca2}</Project>
+      <Name>Tiver.Fowl.ViewBase.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tiver\Fowl\ViewBase\Tiver.Fowl.ViewBase.csproj">
+      <Project>{FAC33B29-E159-483F-9A62-B3CDCFE4910F}</Project>
+      <Name>Tiver.Fowl.ViewBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tiver\Fowl\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">
-      <Project>{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}</Project>
+      <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>
       <Name>Tiver.Fowl.WebDriverExtended.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
