@@ -77,6 +77,10 @@
       <Project>{159787a4-c5b9-4fa8-b3d5-1a9ecc976c35}</Project>
       <Name>Tiver.Fowl.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Reporting\Tiver.Fowl.Reporting.csproj">
+      <Project>{5bd27428-94de-496a-8c7a-b6b6d6bfb48a}</Project>
+      <Name>Tiver.Fowl.Reporting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestingBase.Contracts\Tiver.Fowl.TestingBase.Contracts.csproj">
       <Project>{e3095a2a-e817-4aee-be96-ef83d397cda2}</Project>
       <Name>Tiver.Fowl.TestingBase.Contracts</Name>

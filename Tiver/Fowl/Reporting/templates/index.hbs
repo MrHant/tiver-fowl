@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
+</head>
+<body>
+    <div class="callout large primary">
+        <div class="row column text-center">
+            <h1>{{application_title}}</h1>
+            <h2 class="subheader">Test Report for automated tests</h2>
+        </div>
+    </div>
+
+    <div class="row large-7 columns">
+        <h3>Test results</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Test name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#test_results}}
+                    {{> test_result}}
+                {{/test_results}}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+</body>
+</html>

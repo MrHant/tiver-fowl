@@ -28,12 +28,12 @@
         {
             get
             {
-                return (string)this["timeout"];
+                return (string)this["title"];
             }
 
             set
             {
-                this["timeout"] = value;
+                this["title"] = value;
             }
         }
 
