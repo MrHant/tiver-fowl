@@ -23,7 +23,13 @@
         {
             get
             {
-                return (IBrowser)Context.Test.Read("Browser");
+                var value = Context.Test.Read("Browser");
+                if (value.GetType() == typeof (NullContextItem))
+                {
+                    return null;
+                }
+
+                return (IBrowser) value;
             }
 
             set

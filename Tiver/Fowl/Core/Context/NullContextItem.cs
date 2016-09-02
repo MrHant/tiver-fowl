@@ -16,10 +16,10 @@
 
         public override string ToString()
         {
-            string message = "Context item not found.";
+            var message = "Context item not found.";
             if (this.key != null)
             {
-                message = string.Format("Context item not found. for key '{0}'.", this.key);
+                message = $"Context item not found. for key '{this.key}'.";
             }
 
             return message;

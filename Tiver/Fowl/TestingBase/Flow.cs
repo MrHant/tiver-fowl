@@ -1,12 +1,15 @@
 ﻿namespace Tiver.Fowl.TestingBase
 {
     using Core.Context;
+    using Logging;
     using WebDriverExtended.Browsers;
 
     public static class Flow
     {
         public static void Setup()
         {
+            Logger.Configure();
+
             if (TestExecutionContext.IsWebDriverTest)
             {
                 TestExecutionContext.Browser = BrowserFactory.GetBrowser();

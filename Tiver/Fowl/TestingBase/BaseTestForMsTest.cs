@@ -2,6 +2,7 @@
 {
     using Core.Context;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Serilog;
 
     public class BaseTestForMSTest : BaseTest
     {
@@ -16,6 +17,7 @@
         {
             Flow.Teardown();
             Context.ClearTestContext();
+            Log.Information("Test outcome - '{outcome}'", TestContext.CurrentTestOutcome);
         }
 
         [AssemblyCleanup]
@@ -23,5 +25,7 @@
         {
             Context.ClearSessionContext();
         }
+
+        public TestContext TestContext { get; set; }
     }
 }

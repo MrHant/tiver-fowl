@@ -3,47 +3,65 @@
     using System;
     using System.Configuration;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading;
     using Configuration;
     using Exceptions;
+    using Serilog;
 
     public static class Wait
     {
-        public static TResult Until<TResult>(Func<TResult> condition)
+        public static TResult Until<TResult>(Func<TResult> condition, params Type[] ignoredExceptions)
         {
-            WaitConfigurationSection config = (WaitConfigurationSection)ConfigurationManager.GetSection("waitConfigurationGroup/waitConfiguration");
-            return Until(condition, config);
+            IWaitConfiguration config = (WaitConfigurationSection)ConfigurationManager.GetSection("waitConfigurationGroup/waitConfiguration");
+            return Until(condition, config, ignoredExceptions);
         }
 
-        public static TResult Until<TResult>(Func<TResult> condition, IWaitConfiguration configuration)
+        public static TResult Until<TResult>(Func<TResult> condition, IWaitConfiguration configuration, params Type[] ignoredExceptions)
         {
-            return Until(condition, configuration.Timeout, configuration.PollingInterval);
+            return Until(condition, configuration.Timeout, configuration.PollingInterval, ignoredExceptions);
         }
 
-        private static TResult Until<TResult>(Func<TResult> condition, int timeout, int pollingInterval)
+        private static TResult Until<TResult>(Func<TResult> condition, int timeout, int pollingInterval, params Type[] ignoredExceptions)
         {
             // Start continious checking
             var stopwatch = Stopwatch.StartNew();
             while (true)
             {
-                var result = condition.Invoke();
-
-                // Exit condition - some non-default result
-                if (!result.Equals(default(TResult)))
+                try
                 {
-                    return result;
-                }
+                    var result = condition.Invoke();
 
-                // Exit condition - timeout is reached
-                var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-                if (elapsedMilliseconds > timeout)
+                    // Exit condition - some non-default result
+                    if (!result.Equals(default(TResult)))
+                    {
+                        Log.ForContext("LogType", "Wait").Debug("Waiting completed in {ms}ms", stopwatch.ElapsedMilliseconds);
+                        return result;
+                    }
+                }
+                catch (Exception ex)
                 {
-                    stopwatch.Stop();
-                    throw new WaitTimeoutException(string.Format("Wait timeout reached after {0} milliseconds waiting.", elapsedMilliseconds));
+                    var ignored = ignoredExceptions.Any(type => type.IsInstanceOfType(ex));
+                    if (!ignored)
+                    {
+                        throw;
+                    }
                 }
+                finally
+                {
+                    // Exit condition - timeout is reached
+                    var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
+                    if (elapsedMilliseconds > timeout)
+                    {
+                        Log.ForContext("LogType", "Wait").Debug("Waiting failed after {ms}ms", elapsedMilliseconds);
+                        stopwatch.Stop();
+                        throw new WaitTimeoutException(
+                            $"Wait timeout reached after {elapsedMilliseconds} milliseconds waiting.");
+                    }
 
-                // No exit conditions met - Sleep for polling interval
-                Thread.Sleep(pollingInterval);
+                    // No exit conditions met - Sleep for polling interval
+                    Thread.Sleep(pollingInterval);
+                }
             }
         }
     }

@@ -4,11 +4,14 @@
     using Configuration;
     using Contracts.Configuration;
     using Exceptions;
+    using Serilog;
 
     public abstract class BrowserFactory
     {
         public static BrowserFactory GetFactory(string browserType)
         {
+            Log.Information("Building instance of browser type '{browserType}'", browserType);
+
             switch (browserType)
             {
                 // default browser type
@@ -30,7 +33,7 @@
 
         public static Browser GetBrowser()
         {
-            BrowserConfigurationSection config = (BrowserConfigurationSection)ConfigurationManager.GetSection("browserConfigurationGroup/browserConfiguration");
+            IBrowserConfiguration config = (BrowserConfigurationSection)ConfigurationManager.GetSection("browserConfigurationGroup/browserConfiguration");
             var factory = GetFactory(config.BrowserType);
             return factory.Build(config);
         }

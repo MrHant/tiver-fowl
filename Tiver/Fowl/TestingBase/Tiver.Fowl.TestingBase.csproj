@@ -47,6 +47,10 @@
     <AssemblyOriginatorKeyFile>..\..\..\Tiver.Fowl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Serilog.2.2.1\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -69,6 +73,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logging\Tiver.Fowl.Logging.csproj">
+      <Project>{159787a4-c5b9-4fa8-b3d5-1a9ecc976c35}</Project>
+      <Name>Tiver.Fowl.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestingBase.Contracts\Tiver.Fowl.TestingBase.Contracts.csproj">
       <Project>{e3095a2a-e817-4aee-be96-ef83d397cda2}</Project>
       <Name>Tiver.Fowl.TestingBase.Contracts</Name>
@@ -92,6 +100,7 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Tiver.Fowl.TestingBase.ruleset" />
   </ItemGroup>
   <Choose>
