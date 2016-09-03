@@ -77,6 +77,10 @@
       <Project>{a1aee3fe-937b-4b20-a335-266490872764}</Project>
       <Name>Tiver.Fowl.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tiver\Fowl\Reporting\Tiver.Fowl.Reporting.csproj">
+      <Project>{5bd27428-94de-496a-8c7a-b6b6d6bfb48a}</Project>
+      <Name>Tiver.Fowl.Reporting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tiver\Fowl\TestingBase.Contracts\Tiver.Fowl.TestingBase.Contracts.csproj">
       <Project>{e3095a2a-e817-4aee-be96-ef83d397cda2}</Project>
       <Name>Tiver.Fowl.TestingBase.Contracts</Name>
@@ -99,10 +103,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="lib\chromedriver.exe" />
-    <Content Include="lib\geckodriver.exe" />
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -131,8 +131,8 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y $(ProjectDir)lib\geckodriver.exe $(ProjectDir)$(OutDir)
-xcopy /y $(ProjectDir)lib\chromedriver.exe $(ProjectDir)$(OutDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

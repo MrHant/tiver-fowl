@@ -5,19 +5,20 @@
     using Reporting;
     using Serilog;
 
+    [TestClass]
     public class BaseTestForMSTest : BaseTest
     {
         [TestInitialize]
         public override void Setup()
         {
-            Flow.Setup();
             TestExecutionContext.TestContext = TestContext;
+            Flow.Setup();
         }
 
         [TestCleanup]
         public override void Teardown()
         {
-            Log.ForContext("LogType", "Outcome").Information("Test outcome - '{outcome}'", TestContext.CurrentTestOutcome);
+            Log.ForContext("LogType", "Outcome").Information("Test outcome - '{Outcome}'", TestContext.CurrentTestOutcome);
             Flow.Teardown();
             Context.ClearTestContext();
         }
