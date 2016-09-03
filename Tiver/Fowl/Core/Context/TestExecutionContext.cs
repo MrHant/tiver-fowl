@@ -2,6 +2,7 @@
 {
     using System;
     using Attributes;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using WebDriverExtended.Contracts.Browsers;
 
     public static class TestExecutionContext
@@ -50,6 +51,19 @@
 
                 var attribute = Attribute.GetCustomAttribute(TestType, typeof(WebDriverTestAttribute));
                 return attribute != null;
+            }
+        }
+
+        public static TestContext TestContext
+        {
+            get
+            {
+                return (TestContext)Context.Test.Read("TestContext");
+            }
+
+            set
+            {
+                Context.Test.Write("TestContext", value);
             }
         }
     }

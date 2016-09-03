@@ -36,6 +36,18 @@
             return Process(e => e.Displayed);
         }
 
+        public void Click()
+        {
+            LogAction("Clicking");
+            Process(e => e.Click());
+        }
+
+        public void SendKeys(string value)
+        {
+            LogAction($"Sending keys '{value}'");
+            Process(e => e.SendKeys(value));
+        }
+
         public TResult Process<TResult>(Func<IWebElement, TResult> function)
         {
             var result = default(TResult);

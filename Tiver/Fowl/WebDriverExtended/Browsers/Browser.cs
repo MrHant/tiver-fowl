@@ -46,5 +46,10 @@
             IApplicationConfiguration config = (ApplicationConfigurationSection)ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
             webDriver.Navigate().GoToUrl(config.StartUrl);
         }
+
+        public object ExecuteScript(string script, params object[] arguments)
+        {
+            return ((IJavaScriptExecutor) webDriver).ExecuteScript(script, arguments);
+        }
     }
 }

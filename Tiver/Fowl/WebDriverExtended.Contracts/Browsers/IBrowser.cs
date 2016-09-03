@@ -8,6 +8,8 @@
 
         IWebElement Find(string locator);
 
+        object ExecuteScript(string script, params object[] arguments);
+
         void Quit();
     }
 }

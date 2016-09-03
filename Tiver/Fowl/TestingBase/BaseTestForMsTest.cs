@@ -11,6 +11,7 @@
         public override void Setup()
         {
             Flow.Setup();
+            TestExecutionContext.TestContext = TestContext;
         }
 
         [TestCleanup]
