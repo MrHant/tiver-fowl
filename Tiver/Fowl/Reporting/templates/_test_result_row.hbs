@@ -7,16 +7,28 @@
     </div>
 </div>
 <div id="actions-{{test_report_id}}">
-    {{#actions}}
-    <div class="row test-actions-row">
-        <div class="large-2 columns">
-            <span class="test-name">{{element}}</span>
-        </div>
-        <div class="large-10 columns">
-            <span class="test-status">{{action}}</span>
-        </div>
-    </div>
-    {{/actions}}
+    {{#details}}
+        {{#if is_action}}
+            <div class="row test-actions-row">
+                <div class="large-2 columns">
+                    <span class="test-name">{{element}}</span>
+                </div>
+                <div class="large-10 columns">
+                    <span class="test-status">{{action}}</span>
+                </div>
+            </div>
+        {{/if}}
+        {{#if is_step}}
+            <div class="row test-steps-row">
+                <div class="large-1 columns">
+                    <span class="test-step-number">Step #{{step}}</span>
+                </div>
+                <div class="large-11 columns">
+                    <span class="test-step-text">{{text}}</span>
+                </div>
+            </div>
+        {{/if}}
+    {{/details}}
     <div class="row test-screenshots-row">
         <div class="large-12 columns">
             {{#screenshots}}

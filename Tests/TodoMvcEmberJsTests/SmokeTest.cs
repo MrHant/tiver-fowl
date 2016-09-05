@@ -14,9 +14,11 @@
         [TestMethod]
         public void AddTaskTest()
         {
+            LogStep("Create task");
             MainPage.NewTaskField.Type("Join me");
             MainPage.NewTaskField.PressEnter();
             Thread.Sleep(TimeSpan.FromSeconds(15));
+            LogStep("Verify created task details");
             // TODO: Add assertions
         }
     }

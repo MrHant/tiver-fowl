@@ -46,16 +46,33 @@
             {
                 var outcome = testResult.Single(d => d["Properties"]["LogType"]?.Value<string>() == "Outcome");
 
-                var tempActions = new List<dynamic>();
+                var tempDetails = new List<dynamic>();
 
                 foreach (var detail in testResult.Where(d => d["Properties"]["LogType"]?.Value<string>() == "ElementAction" ||
-                                                             d["Properties"]["LogType"]?.Value<string>() == "Screenshot"))
+                                                             d["Properties"]["LogType"]?.Value<string>() == "Screenshot" ||
+                                                             d["Properties"]["LogType"]?.Value<string>() == "TestStep"))
                 {
-                    tempActions.Add(new
+                    switch (detail["Properties"]["LogType"]?.Value<string>())
                     {
-                        element = detail["Properties"]["Name"].Value<string>(),
-                        action = detail["Properties"]["Action"].Value<string>(),
-                    });
+                        case "ElementAction":
+                            tempDetails.Add(new
+                            {
+                                is_action = true,
+                                element = detail["Properties"]["Name"].Value<string>(),
+                                action = detail["Properties"]["Action"].Value<string>(),
+                            });
+                            break;
+                        case "TestStep":
+                            tempDetails.Add(new
+                            {
+                                is_step = true,
+                                step = detail["Properties"]["Step"].Value<string>(),
+                                text = detail["Properties"]["Text"].Value<string>(),
+                            });
+                            break;
+                        default:
+                            continue;
+                    }
                 }
 
                 var tempScreenshots = new List<dynamic>();
@@ -75,7 +92,7 @@
                     test_name = testResult.Key.Value<string>(),
                     status = outcome["Properties"]["Outcome"].Value<string>(),
                     status_color = (outcome["Properties"]["Outcome"].Value<string>() == "Passed") ? "green" : "red",
-                    actions = tempActions.ToArray(),
+                    details = tempDetails.ToArray(),
                     screenshots = tempScreenshots.ToArray()
                 };
 
