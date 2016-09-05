@@ -8,6 +8,9 @@
     {{> report_style}}
 </head>
 <body>
+    {{> jquery_javascript}}
+    {{> foundation_javascript}}
+
     <div class="callout large primary report-header">
         <div class="row column text-center">
             <h1>{{application_title}}</h1>
@@ -15,25 +18,23 @@
         </div>
     </div>
 
-    <div class="row large-7 columns">
-        <h3>Test results</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Test name</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#test_results}}
-                    {{> test_result_row}}
-                {{/test_results}}
-            </tbody>
-        </table>
+    <div id="test-results">
+        <div class="row large-12 columns">
+            <h3>Test results</h3>
+            <div class="row header-row">
+                <div class="large-10 columns">
+                    <span class="header">Test name</span>
+                </div>
+                <div class="large-2 columns">
+                    <span class="header">Status</span>
+                </div>
+            </div>
+            {{#test_results}}
+              {{> test_result_row}}
+            {{/test_results}}
+        </div>
     </div>
 
-    {{> jquery_javascript}}
-    {{> foundation_javascript}}
     <script type="text/javascript">
         $(document).foundation();
     </script>

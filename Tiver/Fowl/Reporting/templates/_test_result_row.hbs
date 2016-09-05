@@ -1,4 +1,28 @@
-﻿<tr>
-    <td>{{test_name}}</td>
-    <td style="color: {{status_color}};">{{status}}</td>
-</tr>
+﻿<div class="row test-row" id="{{test_report_id}}">
+    <div class="large-10 columns">
+        <span class="test-name">{{test_name}}</span>
+    </div>
+    <div class="large-2 columns">
+        <span class="test-status" style="color: {{status_color}};">{{status}}</span>
+    </div>
+</div>
+<div id="actions-{{test_report_id}}">
+    {{#actions}}
+        <div class="row test-actions-row">
+            <div class="large-2 columns">
+                <span class="test-name">{{element}}</span>
+            </div>
+            <div class="large-10 columns">
+                <span class="test-status">{{action}}</span>
+            </div>
+        </div>
+    {{/actions}}
+</div>
+<script type="text/javascript">
+    $(function() {
+        $("#{{test_report_id}}").click(function () {
+            $("#actions-{{test_report_id}}").slideToggle();
+        });
+        $("#actions-{{test_report_id}}").hide();
+    });
+</script>

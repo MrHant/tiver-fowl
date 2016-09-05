@@ -69,9 +69,9 @@
             });
         }
 
-        public void LogAction(string message)
+        public void LogAction(string action)
         {
-            Log.ForContext("LogType", "ElementAction").Information($"{{name}} :: {message}", name);
+            Log.ForContext("LogType", "ElementAction").Information($"{{Name}} :: {{Action}}", name, action);
         }
 
         private IWebElement WebElement => TestExecutionContext.Browser.Find(this.locator);

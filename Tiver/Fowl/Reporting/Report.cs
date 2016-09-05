@@ -1,5 +1,6 @@
 ﻿namespace Tiver.Fowl.Reporting
 {
+    using System;
     using System.Collections.Generic;
     using System.Configuration;
     using System.IO;
@@ -24,7 +25,7 @@
                     lines.Add(JObject.Parse(line));
                 }
             }
-            var testResults = lines.Where(l => l["Properties"]["LogType"]?.Value<string>() == "Outcome");
+            var testResults = lines.GroupBy(l => l["Properties"]["TestName"]);
 
 
             // Render report
@@ -38,17 +39,40 @@
             CompilePartial("foundation_javascript");
 
             IApplicationConfiguration config = (ApplicationConfigurationSection) ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
+
+            var testResultsData = new List<dynamic>();
+
+            foreach (var testResult in testResults)
+            {
+                var outcome = testResult.Single(d => d["Properties"]["LogType"]?.Value<string>() == "Outcome");
+
+                var tempActions = new List<dynamic>();
+
+                foreach (var detail in testResult.Where(d => d["Properties"]["LogType"]?.Value<string>() == "ElementAction"))
+                {
+                    tempActions.Add(new
+                    {
+                        element = detail["Properties"]["Name"].Value<string>(),
+                        action = detail["Properties"]["Action"].Value<string>(),
+                    });
+                }
+
+                var temp = new
+                {
+                    test_report_id = Guid.NewGuid().ToString("D"),
+                    test_name = testResult.Key.Value<string>(),
+                    status = outcome["Properties"]["Outcome"].Value<string>(),
+                    status_color = (outcome["Properties"]["Outcome"].Value<string>() == "Passed") ? "green" : "red",
+                    actions = tempActions.ToArray()
+                };
+
+                testResultsData.Add(temp);
+            }
+
             var data = new
             {
                 application_title = config.Title,
-                test_results =
-                    testResults.Select(t =>
-                        new
-                        {
-                            test_name = t["Properties"]["TestName"],
-                            status = t["Properties"]["Outcome"],
-                            status_color = (t["Properties"]["Outcome"].Value<string>() == "Passed") ? "green" : "red"
-                        })
+                test_results = testResultsData.ToArray()
             };
 
             var resultRaw = indexTemplate(data);
