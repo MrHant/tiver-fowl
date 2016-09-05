@@ -48,12 +48,24 @@
 
                 var tempActions = new List<dynamic>();
 
-                foreach (var detail in testResult.Where(d => d["Properties"]["LogType"]?.Value<string>() == "ElementAction"))
+                foreach (var detail in testResult.Where(d => d["Properties"]["LogType"]?.Value<string>() == "ElementAction" ||
+                                                             d["Properties"]["LogType"]?.Value<string>() == "Screenshot"))
                 {
                     tempActions.Add(new
                     {
                         element = detail["Properties"]["Name"].Value<string>(),
                         action = detail["Properties"]["Action"].Value<string>(),
+                    });
+                }
+
+                var tempScreenshots = new List<dynamic>();
+
+                foreach (var detail in testResult.Where(d => d["Properties"]["LogType"]?.Value<string>() == "Screenshot"))
+                {
+                    tempScreenshots.Add(new
+                    {
+                        base64 = detail["Properties"]["Base64"].Value<string>(),
+                        screenshot_id = Guid.NewGuid().ToString("D")
                     });
                 }
 
@@ -63,7 +75,8 @@
                     test_name = testResult.Key.Value<string>(),
                     status = outcome["Properties"]["Outcome"].Value<string>(),
                     status_color = (outcome["Properties"]["Outcome"].Value<string>() == "Passed") ? "green" : "red",
-                    actions = tempActions.ToArray()
+                    actions = tempActions.ToArray(),
+                    screenshots = tempScreenshots.ToArray()
                 };
 
                 testResultsData.Add(temp);

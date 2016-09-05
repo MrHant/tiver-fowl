@@ -2,6 +2,7 @@
 {
     using Core.Context;
     using Logging;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using WebDriverExtended.Browsers;
 
     public static class Flow
@@ -21,6 +22,11 @@
         {
             if (TestExecutionContext.IsWebDriverTest)
             {
+                if (TestExecutionContext.TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
+                {
+                    TestExecutionContext.Browser.TakeScreenshot();
+                }
+
                 TestExecutionContext.Browser.Quit();
             }
         }

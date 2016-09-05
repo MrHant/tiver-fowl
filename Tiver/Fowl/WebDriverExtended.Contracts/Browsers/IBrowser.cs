@@ -10,6 +10,8 @@
 
         object ExecuteScript(string script, params object[] arguments);
 
+        void TakeScreenshot();
+
         void Quit();
     }
 }

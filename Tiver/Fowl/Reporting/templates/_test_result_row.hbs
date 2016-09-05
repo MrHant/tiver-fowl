@@ -8,15 +8,33 @@
 </div>
 <div id="actions-{{test_report_id}}">
     {{#actions}}
-        <div class="row test-actions-row">
-            <div class="large-2 columns">
-                <span class="test-name">{{element}}</span>
-            </div>
-            <div class="large-10 columns">
-                <span class="test-status">{{action}}</span>
-            </div>
+    <div class="row test-actions-row">
+        <div class="large-2 columns">
+            <span class="test-name">{{element}}</span>
         </div>
+        <div class="large-10 columns">
+            <span class="test-status">{{action}}</span>
+        </div>
+    </div>
     {{/actions}}
+    <div class="row test-screenshots-row">
+        <div class="large-12 columns">
+            {{#screenshots}}
+                <img id="{{screenshot_id}}" src="data:image/png;base64,{{base64}}" />
+                <script type="text/javascript">
+                    $(function () {
+                        $("#{{screenshot_id}}").click(function () {
+                            if ($("#{{screenshot_id}}").css("max-width") == "100%") {
+                                $("#{{screenshot_id}}").css("max-width", "24em");
+                            } else {
+                                $("#{{screenshot_id}}").css("max-width", "100%");
+                            }
+                        });
+                    });
+                </script>
+            {{/screenshots}}
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     $(function() {

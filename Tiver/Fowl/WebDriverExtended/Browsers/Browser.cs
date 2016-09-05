@@ -5,6 +5,7 @@
     using Contracts.Browsers;
     using Core.Configuration;
     using OpenQA.Selenium;
+    using Serilog;
 
     public abstract class Browser : IBrowser
     {
@@ -45,6 +46,16 @@
         {
             IApplicationConfiguration config = (ApplicationConfigurationSection)ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
             webDriver.Navigate().GoToUrl(config.StartUrl);
+        }
+
+        /// <summary>
+        /// Takes screenshot and logs it as base64
+        /// </summary>
+        public void TakeScreenshot()
+        {
+            var ss = ((ITakesScreenshot) webDriver).GetScreenshot();
+            var base64 = ss.AsBase64EncodedString;
+            Log.ForContext("LogType", "Screenshot").ForContext("Base64", base64).Information($"{{Name}} :: {{Action}}", "Browser", "Screenshot taken");
         }
 
         public object ExecuteScript(string script, params object[] arguments)
