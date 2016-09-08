@@ -4,6 +4,7 @@
     using Contracts;
     using Core;
     using Core.Context;
+    using Core.Exceptions;
     using OpenQA.Selenium;
     using Serilog;
 
@@ -30,10 +31,25 @@
             this.name = name;
         }
 
+        /// <summary>
+        /// Checks whether element is displayed
+        /// </summary>
+        /// <remarks>
+        /// Waits till timeout before returning false
+        /// </remarks>
+        /// <returns>true if element is displayed, false otherwise</returns>
         public bool Displayed()
         {
             LogAction("Check whether element is displayed");
-            return Process(e => e.Displayed);
+            try
+            {
+                return Process(e => e.Displayed);
+            }
+            catch (WaitTimeoutException)
+            {
+                // If not found within timeout => not displayed
+                return false;
+            }
         }
 
         public void Click()
