@@ -26,6 +26,8 @@
         {
             // Start continious checking
             var stopwatch = Stopwatch.StartNew();
+            Exception lastException = null;
+
             while (true)
             {
                 try
@@ -42,6 +44,8 @@
                 catch (Exception ex)
                 {
                     var ignored = ignoredExceptions.Any(type => type.IsInstanceOfType(ex));
+                    lastException = ex;
+
                     if (!ignored)
                     {
                         throw;
@@ -56,7 +60,8 @@
                         Log.ForContext("LogType", "Wait").Debug("Waiting failed after {ms}ms", elapsedMilliseconds);
                         stopwatch.Stop();
                         throw new WaitTimeoutException(
-                            $"Wait timeout reached after {elapsedMilliseconds} milliseconds waiting.");
+                            $"Wait timeout reached after {elapsedMilliseconds} milliseconds waiting.",
+                            lastException);
                     }
 
                     // No exit conditions met - Sleep for polling interval
