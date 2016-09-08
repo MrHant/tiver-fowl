@@ -22,7 +22,14 @@
 
         public void Write(object key, object value)
         {
-            this.Items.Add(key, value);
+            if (this.Items.ContainsKey(key))
+            {
+                this.Items[key] = value;
+            }
+            else
+            {
+                this.Items.Add(key, value);
+            }
         }
 
         public object Read(object key)
