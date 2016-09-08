@@ -23,7 +23,7 @@
         public void SetValue(string value)
         {
             this.Process(
-                e => TestExecutionContext.Browser.ExecuteScript($"arguments[0].setAttribute('value', '{value}')", e));
+                e => TestExecutionContext.Browser.BrowserActions.ExecuteScript($"arguments[0].setAttribute('value', '{value}')", e));
         }
 
         public void PressEnter()

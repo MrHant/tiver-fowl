@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Browsers\IBrowser.cs" />
+    <Compile Include="Browsers\IBrowserActions.cs" />
+    <Compile Include="Browsers\IWebElementActions.cs" />
     <Compile Include="Configuration\IBrowserConfiguration.cs" />
     <Compile Include="Configuration\IResolution.cs" />
     <Compile Include="Namespace.cs" />

@@ -4,14 +4,14 @@
 
     public interface IBrowser
     {
-        void NavigateToStartUri();
+        IBrowserActions BrowserActions
+        {
+            get;
+        }
 
-        IWebElement Find(string locator);
-
-        object ExecuteScript(string script, params object[] arguments);
-
-        void TakeScreenshot();
-
-        void Quit();
+        IWebElementActions WebElementActions
+        {
+            get;
+        }
     }
 }

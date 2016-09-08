@@ -90,7 +90,7 @@
             Log.ForContext("LogType", "ElementAction").Information($"{{Name}} :: {{Action}}", name, action);
         }
 
-        private IWebElement WebElement => TestExecutionContext.Browser.Find(this.locator);
+        private IWebElement WebElement => TestExecutionContext.Browser.WebElementActions.Find(this.locator);
 
         private readonly string locator;
         private readonly string name;

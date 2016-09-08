@@ -7,13 +7,29 @@
     using OpenQA.Selenium;
     using Serilog;
 
-    public abstract class Browser : IBrowser
+    public abstract class Browser : IBrowser, IWebElementActions, IBrowserActions
     {
-        private IWebDriver webDriver;
+        public IBrowserActions BrowserActions => this;
 
-        internal Browser(IWebDriver webDriver)
+        public IWebElementActions WebElementActions => this;
+
+        #region IBrowserActionsImplementation
+
+        public void NavigateToStartUri()
         {
-            this.webDriver = webDriver;
+            IApplicationConfiguration config =
+                (ApplicationConfigurationSection)
+                    ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
+            webDriver.Navigate().GoToUrl(config.StartUrl);
+        }
+
+        public void TakeScreenshot()
+        {
+            var ss = ((ITakesScreenshot) webDriver).GetScreenshot();
+            var base64 = ss.AsBase64EncodedString;
+            Log.ForContext("LogType", "Screenshot")
+                .ForContext("Base64", base64)
+                .Information($"{{Name}} :: {{Action}}", "Browser", "Screenshot taken");
         }
 
         public void Quit()
@@ -21,14 +37,15 @@
             this.webDriver?.Quit();
         }
 
-        /// <summary>
-        /// Find an element on page
-        /// </summary>
-        /// <remarks>
-        /// It's different from original Selenium method - it will fail in case more than one element found
-        /// </remarks>
-        /// <param name="locator"></param>
-        /// <returns></returns>
+        public object ExecuteScript(string script, params object[] arguments)
+        {
+            return ((IJavaScriptExecutor) webDriver).ExecuteScript(script, arguments);
+        }
+
+        #endregion
+
+        #region IWebElementActions implementation
+
         public IWebElement Find(string locator)
         {
             var elements = this.webDriver.FindElements(By.XPath(locator));
@@ -39,28 +56,13 @@
             throw new NoSuchElementException();
         }
 
-        /// <summary>
-        /// Navigates to Start Uri defined in configuration
-        /// </summary>
-        public void NavigateToStartUri()
+        #endregion
+
+        internal Browser(IWebDriver webDriver)
         {
-            IApplicationConfiguration config = (ApplicationConfigurationSection)ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
-            webDriver.Navigate().GoToUrl(config.StartUrl);
+            this.webDriver = webDriver;
         }
 
-        /// <summary>
-        /// Takes screenshot and logs it as base64
-        /// </summary>
-        public void TakeScreenshot()
-        {
-            var ss = ((ITakesScreenshot) webDriver).GetScreenshot();
-            var base64 = ss.AsBase64EncodedString;
-            Log.ForContext("LogType", "Screenshot").ForContext("Base64", base64).Information($"{{Name}} :: {{Action}}", "Browser", "Screenshot taken");
-        }
-
-        public object ExecuteScript(string script, params object[] arguments)
-        {
-            return ((IJavaScriptExecutor) webDriver).ExecuteScript(script, arguments);
-        }
+        private readonly IWebDriver webDriver;
     }
 }
