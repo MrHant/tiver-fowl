@@ -1,4 +1,4 @@
-﻿namespace TodoMvcEmberJsTests
+﻿namespace $rootnamespace$
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Tiver.Fowl.TestingBase;

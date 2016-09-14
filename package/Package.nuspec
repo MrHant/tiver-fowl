@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Tiver.Fowl</id>
+    <version>0.1.0</version>
+    <authors>a.silivonchik</authors>
+    <owners>Artyom Silivonchik</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A framework for writing Automated Integration tests (including tests via Selenium).</description>
+    <dependencies>
+      <dependency id="Serilog.Sinks.Literate" version="2.0.0" />
+      <dependency id="Selenium.WebDriver" version="2.53.1" />
+      <dependency id="Handlebars.Net" version="1.7.1" />
+      <dependency id="Newtonsoft.Json" version="9.0.1" />
+      <dependency id="Serilog.Sinks.File" version="3.0.1" />
+      <dependency id="Serilog" version="2.2.1" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.VisualStudio.QualityTools.UnitTestFramework" targetFramework="net45" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="..\bin\Release\Tiver.*" target="lib\net45" />
+    <file src="..\bin\Release\templates\*.*" target="content\templates" />
+    <file src="..\bin\Release\Lib\*.*" target="content/lib" />
+    <file src="AssemblyCleanup.cs.pp" target="content" />
+    <file src="..\Default.runsettings" target="content" />
+    <file src="..\Default.testsettings" target="content" />
+    <file src="App.config.tiver.fowl.sample" target="content" />
+  </files>
+</package>

@@ -41,7 +41,7 @@
   </waitConfigurationGroup>
   <applicationConfigurationGroup>
     <applicationConfiguration
-      title="Todo MVC - Ember JS"
-      startUrl="http://todomvc.com/examples/emberjs/index.html" />
+      title="System Under Test Title"
+      startUrl="http://localhost/" />
   </applicationConfigurationGroup>
 </configuration>
