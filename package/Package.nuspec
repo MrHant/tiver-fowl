@@ -2,9 +2,11 @@
 <package >
   <metadata>
     <id>Tiver.Fowl</id>
-    <version>0.1.0</version>
-    <authors>a.silivonchik</authors>
+    <version>0.1.2</version>
+    <authors>Artyom Silivonchik</authors>
     <owners>Artyom Silivonchik</owners>
+    <licenseUrl>https://github.com/MrHant/tiver-fowl/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/MrHant/tiver-fowl</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A framework for writing Automated Integration tests (including tests via Selenium).</description>
     <dependencies>
