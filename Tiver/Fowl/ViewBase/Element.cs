@@ -1,14 +1,12 @@
 ﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
-    using Contracts;
     using Core;
     using Core.Context;
-    using Core.Exceptions;
+    using Logging;
     using OpenQA.Selenium;
-    using Serilog;
 
-    public class Element : IElement
+    public class Element : IElement, INamed, IVisible, IClickable
     {
         /// <summary>
         /// Initialize an element
@@ -17,7 +15,7 @@
         public Element(string locator)
         {
             this.locator = locator;
-            this.name = "Unnamed";
+            this.Name = "Unnamed";
         }
 
         /// <summary>
@@ -28,40 +26,7 @@
         public Element(string locator, string name)
         {
             this.locator = locator;
-            this.name = name;
-        }
-
-        /// <summary>
-        /// Checks whether element is displayed
-        /// </summary>
-        /// <remarks>
-        /// Waits till timeout before returning false
-        /// </remarks>
-        /// <returns>true if element is displayed, false otherwise</returns>
-        public bool Displayed()
-        {
-            LogAction("Check whether element is displayed");
-            try
-            {
-                return Process(e => e.Displayed);
-            }
-            catch (WaitTimeoutException)
-            {
-                // If not found within timeout => not displayed
-                return false;
-            }
-        }
-
-        public void Click()
-        {
-            LogAction("Clicking");
-            Process(e => e.Click());
-        }
-
-        public void SendKeys(string value)
-        {
-            LogAction($"Sending keys '{value}'");
-            Process(e => e.SendKeys(value));
+            this.Name = name;
         }
 
         public TResult Process<TResult>(Func<IWebElement, TResult> function)
@@ -85,14 +50,13 @@
             });
         }
 
-        public void LogAction(string action)
+        public string Name
         {
-            Log.ForContext("LogType", "ElementAction").Information($"{{Name}} :: {{Action}}", name, action);
+            get;
         }
 
         private IWebElement WebElement => TestExecutionContext.Browser.WebElementActions.Find(this.locator);
 
         private readonly string locator;
-        private readonly string name;
     }
 }

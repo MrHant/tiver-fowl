@@ -55,16 +55,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\Extensions\IClickableExtensions.cs" />
+    <Compile Include="Behaviors\Extensions\IVisibleExtensions.cs" />
+    <Compile Include="Behaviors\IClickable.cs" />
+    <Compile Include="Behaviors\IVisible.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="IElement.cs" />
+    <Compile Include="Behaviors\ITypeable.cs" />
+    <Compile Include="Behaviors\Extensions\ITypeableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Textbox.cs" />
     <Compile Include="View.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ViewBase.Contracts\Tiver.Fowl.ViewBase.Contracts.csproj">
-      <Project>{a24887fa-06a7-45ff-ab5b-b7c247bc2ca2}</Project>
-      <Name>Tiver.Fowl.ViewBase.Contracts</Name>
+    <ProjectReference Include="..\Logging\Tiver.Fowl.Logging.csproj">
+      <Project>{159787A4-C5B9-4FA8-B3D5-1A9ECC976C35}</Project>
+      <Name>Tiver.Fowl.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">
       <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>
@@ -88,6 +95,7 @@
       <Link>CustomCodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

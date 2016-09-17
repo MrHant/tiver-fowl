@@ -1,4 +1,4 @@
-﻿namespace Tiver.Fowl.ViewBase.Contracts
+﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
     using OpenQA.Selenium;
