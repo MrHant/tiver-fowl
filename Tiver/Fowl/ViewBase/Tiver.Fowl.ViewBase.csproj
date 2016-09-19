@@ -55,9 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\Extensions\IHasAttributesExtensions.cs" />
     <Compile Include="Behaviors\Extensions\IClickableExtensions.cs" />
     <Compile Include="Behaviors\Extensions\IVisibleExtensions.cs" />
     <Compile Include="Behaviors\IClickable.cs" />
+    <Compile Include="Behaviors\IHasAttributes.cs" />
     <Compile Include="Behaviors\IVisible.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="IElement.cs" />

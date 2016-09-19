@@ -1,6 +1,7 @@
 ﻿namespace Tiver.Fowl.ViewBase.Behaviors.Extensions
 {
     using Core.Context;
+    using Core.Exceptions;
     using Logging;
     using OpenQA.Selenium;
 
@@ -22,6 +23,12 @@
         {
             element.LogAction($"Press key 'Enter'");
             element.Process(e => e.SendKeys(Keys.Enter));
+        }
+
+        public static bool Enabled(this ITypeable element)
+        {
+            element.LogAction("Check whether element is enabled");
+            return element.Process(e => e.Enabled);
         }
     }
 }

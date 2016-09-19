@@ -7,7 +7,7 @@
     using Logging;
     using OpenQA.Selenium;
 
-    public class Element : IElement, INamed, IVisible, IClickable
+    public class Element : IElement, INamed, IVisible, IClickable, IHasAttributes
     {
         /// <summary>
         /// Initialize an element
