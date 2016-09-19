@@ -1,6 +1,7 @@
 namespace $rootnamespace$.Elements
 {
-    using Behaviors;
+    using Tiver.Fowl.ViewBase;
+    using Tiver.Fowl.ViewBase.Behaviors;
 
     public class Textbox : Element, ITypeable
     {
