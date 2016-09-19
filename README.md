@@ -4,6 +4,8 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 
 ## Installation
 
+### Clean package install
+
 * Add [Tiver.Fowl nuget package](https://www.nuget.org/packages/Tiver.Fowl/) to your project with tests, following changes will be done:
  * Project libraries referenced, as well as MSTest and other project dependencies (via NuGet packages)
  * Sample config file ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample) created
@@ -13,6 +15,12 @@ A framework for writing Automated Integration tests (including tests via Seleniu
  * Report templates copied to 'templates' folder
 * Add needed configuration options to 'App.config' (refer to ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample))
 * Write up some tests and you are ready to go
+
+### Package update
+
+* Please make sure to use Version Control System and commit all your changes before package update
+* Package update will recreate all package-specific files - like elements and templates
+* Please review changes and run your tests after package update
 
 ## Local execution
 
