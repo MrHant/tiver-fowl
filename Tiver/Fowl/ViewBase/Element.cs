@@ -1,6 +1,7 @@
 ﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
+    using Behaviors;
     using Core;
     using Core.Context;
     using Logging;

@@ -1,4 +1,4 @@
-﻿namespace Tiver.Fowl.ViewBase.Extensions
+﻿namespace Tiver.Fowl.ViewBase.Behaviors.Extensions
 {
     using Logging;
 

@@ -35,6 +35,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.Logging", "Tiver
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.Reporting", "Tiver\Fowl\Reporting\Tiver.Fowl.Reporting.csproj", "{5BD27428-94DE-496A-8C7A-B6B6D6BFB48A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{12389CBF-3549-4468-A662-D92A83543D61}"
+	ProjectSection(SolutionItems) = preProject
+		package\App.config.tiver.fowl.sample = package\App.config.tiver.fowl.sample
+		package\AssemblyCleanup.cs.pp = package\AssemblyCleanup.cs.pp
+		package\Package.nuspec = package\Package.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elements", "Elements", "{E3F9C328-892D-4D95-8D8B-2DC0CC32B695}"
+	ProjectSection(SolutionItems) = preProject
+		Textbox.cs.pp = Textbox.cs.pp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,5 +98,6 @@ Global
 		{E3095A2A-E817-4AEE-BE96-EF83D397CDA2} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{159787A4-C5B9-4FA8-B3D5-1A9ECC976C35} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{5BD27428-94DE-496A-8C7A-B6B6D6BFB48A} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
+		{E3F9C328-892D-4D95-8D8B-2DC0CC32B695} = {12389CBF-3549-4468-A662-D92A83543D61}
 	EndGlobalSection
 EndGlobal

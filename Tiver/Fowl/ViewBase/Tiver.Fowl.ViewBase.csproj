@@ -59,13 +59,11 @@
     <Compile Include="Behaviors\Extensions\IVisibleExtensions.cs" />
     <Compile Include="Behaviors\IClickable.cs" />
     <Compile Include="Behaviors\IVisible.cs" />
-    <Compile Include="Button.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="IElement.cs" />
     <Compile Include="Behaviors\ITypeable.cs" />
     <Compile Include="Behaviors\Extensions\ITypeableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Textbox.cs" />
     <Compile Include="View.cs" />
   </ItemGroup>
   <ItemGroup>

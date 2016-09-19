@@ -24,8 +24,9 @@
   <files>
     <file src="..\bin\Release\Tiver.*" target="lib\net45" />
     <file src="..\bin\Release\templates\*.*" target="content\templates" />
-    <file src="..\bin\Release\Lib\*.*" target="content/lib" />
-    <file src="AssemblyCleanup.cs.pp" target="content" />
+    <file src="..\bin\Release\Lib\*.*" target="content\lib" />
+    <file src=".\AssemblyCleanup.cs.pp" target="content" />
+    <file src=".\Elements\Textbox.cs.pp" target="content\Elements" />
     <file src="..\Default.runsettings" target="content" />
     <file src="..\Default.testsettings" target="content" />
     <file src="App.config.tiver.fowl.sample" target="content" />
