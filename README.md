@@ -8,6 +8,7 @@ A framework for writing Automated Integration tests (including tests via Seleniu
  * Project libraries referenced, as well as MSTest and other project dependencies (via NuGet packages)
  * Sample config file ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample) created
  * ['AssemblyCleanup.cs'](package/AssemblyCleanup.cs.pp) created
+ * 'Elements' folder and sample element implementations created
  * Driver executables copied to 'lib' folder
  * Report templates copied to 'templates' folder
 * Add needed configuration options to 'App.config' (refer to ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample))
