@@ -15,8 +15,8 @@
         /// <param name="locator">XPath locator of element</param>
         public Element(string locator)
         {
-            this.locator = locator;
-            this.Name = "Unnamed";
+            Locator = locator;
+            Name = "Unnamed";
         }
 
         /// <summary>
@@ -26,8 +26,8 @@
         /// <param name="name">Verbose name of element for log file</param>
         public Element(string locator, string name)
         {
-            this.locator = locator;
-            this.Name = name;
+            Locator = locator;
+            Name = name;
         }
 
         public TResult Process<TResult>(Func<IWebElement, TResult> function)
@@ -51,13 +51,16 @@
             });
         }
 
+        public string Locator
+        {
+            get;
+        }
+
         public string Name
         {
             get;
         }
 
-        private IWebElement WebElement => TestExecutionContext.Browser.WebElementActions.Find(this.locator);
-
-        private readonly string locator;
+        private IWebElement WebElement => TestExecutionContext.Browser.WebElementActions.Find(this.Locator);
     }
 }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Tiver.Fowl</id>
-    <version>0.1.4</version>
+    <version>0.1.5</version>
     <authors>Artyom Silivonchik</authors>
     <owners>Artyom Silivonchik</owners>
     <licenseUrl>https://raw.githubusercontent.com/MrHant/tiver-fowl/master/LICENSE</licenseUrl>
@@ -25,7 +25,7 @@
     <file src="..\bin\Release\Tiver.*" target="lib\net45" />
     <file src="..\bin\Release\templates\*.*" target="content\templates" />
     <file src="..\bin\Release\Lib\*.*" target="content\lib" />
-    <file src="AssemblyCleanup.cs.pp" target="content" />
+    <file src="BaseTestForMsTest.cs.pp" target="content" />
     <file src="Elements\Textbox.cs.pp" target="content\Elements" />
     <file src="..\Default.runsettings" target="content" />
     <file src="..\Default.testsettings" target="content" />

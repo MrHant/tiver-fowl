@@ -66,9 +66,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BaseTest.cs" />
-    <Compile Include="BaseTestForMsTest.cs" />
     <Compile Include="Flow.cs" />
+    <Compile Include="IBaseTest.cs" />
+    <Compile Include="IBaseTestExtensions.cs" />
     <Compile Include="Namespace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,10 +80,6 @@
     <ProjectReference Include="..\Reporting\Tiver.Fowl.Reporting.csproj">
       <Project>{5bd27428-94de-496a-8c7a-b6b6d6bfb48a}</Project>
       <Name>Tiver.Fowl.Reporting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestingBase.Contracts\Tiver.Fowl.TestingBase.Contracts.csproj">
-      <Project>{e3095a2a-e817-4aee-be96-ef83d397cda2}</Project>
-      <Name>Tiver.Fowl.TestingBase.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">
       <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>

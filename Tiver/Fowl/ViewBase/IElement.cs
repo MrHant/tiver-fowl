@@ -19,5 +19,10 @@
         /// <param name="action">action to be performed</param>
         /// <returns>Evaluation result of <paramref name="action"/></returns>
         void Process(Action<IWebElement> action);
+
+        /// <summary>
+        /// Locator of element
+        /// </summary>
+        string Locator { get; }
     }
 }

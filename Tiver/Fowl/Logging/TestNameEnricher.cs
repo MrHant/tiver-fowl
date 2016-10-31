@@ -9,7 +9,7 @@
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
             logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
-               "TestName", TestExecutionContext.TestContext.TestName));
+               "TestName", TestExecutionContext.TestName));
         }
     }
 }

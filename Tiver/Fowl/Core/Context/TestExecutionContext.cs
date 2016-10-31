@@ -11,7 +11,13 @@
         {
             get
             {
-                return (Type)Context.Test.Read("TestType");
+                var value = Context.Test.Read("TestType");
+                if (value.GetType() == typeof(NullContextItem))
+                {
+                    return null;
+                }
+
+                return (Type)value;
             }
 
             set
@@ -43,7 +49,7 @@
         {
             get
             {
-                if (TestType == typeof(NullContextItem))
+                if (TestType == null)
                 {
                     // Initialize Test.TestType before trying to get IsWebDriverTest property.
                     return false;
@@ -54,16 +60,29 @@
             }
         }
 
-        public static TestContext TestContext
+        public static string TestName
         {
             get
             {
-                return (TestContext)Context.Test.Read("TestContext");
+                return (string)Context.Test.Read("TestName");
             }
 
             set
             {
-                Context.Test.Write("TestContext", value);
+                Context.Test.Write("TestName", value);
+            }
+        }
+
+        public static UnitTestOutcome TestOutcome
+        {
+            get
+            {
+                return (UnitTestOutcome)Context.Test.Read("TestOutcome");
+            }
+
+            set
+            {
+                Context.Test.Write("TestOutcome", value);
             }
         }
     }
