@@ -13,18 +13,8 @@
         /// Initialize an element
         /// </summary>
         /// <param name="locator">XPath locator of element</param>
-        public Element(string locator)
-        {
-            Locator = locator;
-            Name = "Unnamed";
-        }
-
-        /// <summary>
-        /// Initialize an element
-        /// </summary>
-        /// <param name="locator">XPath locator of element</param>
         /// <param name="name">Verbose name of element for log file</param>
-        public Element(string locator, string name)
+        public Element(string locator, string name=null)
         {
             Locator = locator;
             Name = name;
