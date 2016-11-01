@@ -1,52 +1,54 @@
 ﻿namespace Tiver.Fowl.Core.Context
 {
+    using System;
     using System.Collections.Generic;
+    using Exceptions;
 
     public class Storage : IStorage
     {
-        private Dictionary<object, object> items;
+        private Dictionary<string, object> items;
 
         public Storage()
         {
-            this.items = new Dictionary<object, object>();
+            items = new Dictionary<string, object>();
         }
 
-        private Dictionary<object, object> Items
+        private Dictionary<string, object> Items
         {
             get
             {
-                this.items = this.items ?? new Dictionary<object, object>();
-                return this.items;
+                items = items ?? new Dictionary<string, object>();
+                return items;
             }
         }
 
-        public void Write(object key, object value)
+        public void Write(string key, object value)
         {
-            if (this.Items.ContainsKey(key))
+            if (Items.ContainsKey(key))
             {
-                this.Items[key] = value;
+                Items[key] = value;
             }
             else
             {
-                this.Items.Add(key, value);
+                Items.Add(key, value);
             }
         }
 
-        public object Read(object key)
+        public object Read(string key)
         {
-            object result = null;
-            var success = this.Items.TryGetValue(key, out result);
-            if (success)
+            try
             {
-                return result;
+                return Items[key];
             }
-
-            return new NullContextItem(key);
+            catch(Exception ex)
+            {
+                throw new StorageKeyNotFoundException($"Storage item for key '{key}' not found", ex);
+            }
         }
 
         public void Clear()
         {
-            this.Items.Clear();
+            Items.Clear();
         }
     }
 }

@@ -16,7 +16,7 @@
         public static void SetValue(this ITypeable element, string value)
         {
             element.Process(
-                e => TestExecutionContext.Browser.BrowserActions.ExecuteScript($"arguments[0].setAttribute('value', '{value}')", e));
+                e => TestExecutionContext.BrowserActions.ExecuteScript($"arguments[0].setAttribute('value', '{value}')", e));
         }
 
         public static void PressEnter(this ITypeable element)

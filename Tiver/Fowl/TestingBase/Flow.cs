@@ -20,7 +20,7 @@
             if (TestExecutionContext.IsWebDriverTest)
             {
                 TestExecutionContext.Browser = BrowserFactory.GetBrowser();
-                TestExecutionContext.Browser.BrowserActions.NavigateToStartUri();
+                TestExecutionContext.BrowserActions.NavigateToStartUri();
             }
         }
 
@@ -34,10 +34,10 @@
             {
                 if (TestExecutionContext.TestOutcome == UnitTestOutcome.Failed)
                 {
-                    TestExecutionContext.Browser.BrowserActions.TakeScreenshot();
+                    TestExecutionContext.BrowserActions.TakeScreenshot();
                 }
 
-                TestExecutionContext.Browser.BrowserActions.Quit();
+                TestExecutionContext.BrowserActions.Quit();
             }
 
             Context.ClearTestContext();

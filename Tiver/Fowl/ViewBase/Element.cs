@@ -51,6 +51,6 @@
             get;
         }
 
-        private IWebElement WebElement => TestExecutionContext.Browser.WebElementActions.Find(this.Locator);
+        private IWebElement WebElement => TestExecutionContext.WebElementActions.Find(this.Locator);
     }
 }

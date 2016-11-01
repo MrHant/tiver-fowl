@@ -9,15 +9,9 @@
     {
         public static Type TestType
         {
-            get
+            private get
             {
-                var value = Context.Test.Read("TestType");
-                if (value.GetType() == typeof(NullContextItem))
-                {
-                    return null;
-                }
-
-                return (Type)value;
+                return (Type)Context.Test.Read("TestType");
             }
 
             set
@@ -28,35 +22,14 @@
 
         public static IBrowser Browser
         {
-            get
+            private get
             {
-                var value = Context.Test.Read("Browser");
-                if (value.GetType() == typeof (NullContextItem))
-                {
-                    return null;
-                }
-
-                return (IBrowser) value;
+                return (IBrowser) Context.Test.Read("Browser");
             }
 
             set
             {
                 Context.Test.Write("Browser", value);
-            }
-        }
-
-        public static bool IsWebDriverTest
-        {
-            get
-            {
-                if (TestType == null)
-                {
-                    // Initialize Test.TestType before trying to get IsWebDriverTest property.
-                    return false;
-                }
-
-                var attribute = Attribute.GetCustomAttribute(TestType, typeof(WebDriverTestAttribute));
-                return attribute != null;
             }
         }
 
@@ -83,6 +56,19 @@
             set
             {
                 Context.Test.Write("TestOutcome", value);
+            }
+        }
+
+        public static IBrowserActions BrowserActions => Browser.BrowserActions;
+
+        public static IWebElementActions WebElementActions => Browser.WebElementActions;
+
+        public static bool IsWebDriverTest
+        {
+            get
+            {
+                var attribute = Attribute.GetCustomAttribute(TestType, typeof(WebDriverTestAttribute));
+                return attribute != null;
             }
         }
     }
