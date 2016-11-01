@@ -2,6 +2,7 @@
 {
     using System;
     using Attributes;
+    using Enums;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using WebDriverExtended.Contracts.Browsers;
 
@@ -46,16 +47,16 @@
             }
         }
 
-        public static UnitTestOutcome TestOutcome
+        public static TestResult TestResult
         {
             get
             {
-                return (UnitTestOutcome)Context.Test.Read("TestOutcome");
+                return (TestResult)Context.Test.Read("TestResult");
             }
 
-            set
+            private set
             {
-                Context.Test.Write("TestOutcome", value);
+                Context.Test.Write("TestResult", value);
             }
         }
 
@@ -70,6 +71,11 @@
                 var attribute = Attribute.GetCustomAttribute(TestType, typeof(WebDriverTestAttribute));
                 return attribute != null;
             }
+        }
+
+        public static void SetTestResult(UnitTestOutcome testOutcome)
+        {
+            TestResult = testOutcome.ConvertToTestResult();
         }
     }
 }

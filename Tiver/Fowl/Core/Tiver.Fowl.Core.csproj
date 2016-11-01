@@ -64,6 +64,8 @@
     <Compile Include="Context\IStorage.cs" />
     <Compile Include="Context\Storage.cs" />
     <Compile Include="Context\TestExecutionContext.cs" />
+    <Compile Include="Enums\TestResult.cs" />
+    <Compile Include="Enums\TestResultExtensions.cs" />
     <Compile Include="Exceptions\IncorrectApplicationConfigurationException.cs" />
     <Compile Include="Exceptions\StorageKeyNotFoundException.cs" />
     <Compile Include="Namespace.cs" />

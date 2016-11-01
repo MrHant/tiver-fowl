@@ -44,7 +44,7 @@
 
             foreach (var testResult in testResults)
             {
-                var outcome = testResult.Single(d => d["Properties"]["LogType"]?.Value<string>() == "Outcome");
+                var outcome = testResult.Single(d => d["Properties"]["LogType"]?.Value<string>() == "TestResult");
 
                 var tempDetails = new List<dynamic>();
 
@@ -90,8 +90,8 @@
                 {
                     test_report_id = Guid.NewGuid().ToString("D"),
                     test_name = testResult.Key.Value<string>(),
-                    status = outcome["Properties"]["Outcome"].Value<string>(),
-                    status_color = (outcome["Properties"]["Outcome"].Value<string>() == "Passed") ? "green" : "red",
+                    status = outcome["Properties"]["TestResult"].Value<string>(),
+                    status_color = (outcome["Properties"]["TestResult"].Value<string>() == "Passed") ? "green" : "red",
                     details = tempDetails.ToArray(),
                     screenshots = tempScreenshots.ToArray()
                 };

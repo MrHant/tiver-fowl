@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Context;
+    using Core.Enums;
     using Logging;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Reporting;
@@ -26,13 +27,23 @@
 
         public static void Teardown(UnitTestOutcome testOutcome)
         {
-            TestExecutionContext.TestOutcome = testOutcome;
+            TestExecutionContext.SetTestResult(testOutcome);
+            Teardown();
+        }
 
-            Log.ForContext("LogType", "Outcome").Information("Test outcome - '{Outcome}'", TestExecutionContext.TestOutcome);
+        public static void SessionTeardown()
+        {
+            Context.ClearSessionContext();
+            Report.Build();
+        }
+
+        private static void Teardown()
+        {
+            Log.ForContext("LogType", "TestResult").Information("Test result - '{TestResult}'", TestExecutionContext.TestResult);
 
             if (TestExecutionContext.IsWebDriverTest)
             {
-                if (TestExecutionContext.TestOutcome == UnitTestOutcome.Failed)
+                if (TestExecutionContext.TestResult == TestResult.Failed)
                 {
                     TestExecutionContext.BrowserActions.TakeScreenshot();
                 }
@@ -41,12 +52,6 @@
             }
 
             Context.ClearTestContext();
-        }
-
-        public static void SessionTeardown()
-        {
-            Context.ClearSessionContext();
-            Report.Build();
         }
     }
 }
