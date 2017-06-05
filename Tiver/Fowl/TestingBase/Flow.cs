@@ -4,7 +4,6 @@
     using Core.Context;
     using Core.Enums;
     using Logging;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Reporting;
     using Serilog;
     using WebDriverExtended.Browsers;
@@ -25,9 +24,9 @@
             }
         }
 
-        public static void Teardown(UnitTestOutcome testOutcome)
+        public static void Teardown(TestResult testResult)
         {
-            TestExecutionContext.SetTestResult(testOutcome);
+            TestExecutionContext.TestResult = testResult;
             Teardown();
         }
 

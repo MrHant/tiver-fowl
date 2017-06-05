@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{1238
 	ProjectSection(SolutionItems) = preProject
 		package\App.config.tiver.fowl.sample = package\App.config.tiver.fowl.sample
 		package\BaseTestForMsTest.cs.pp = package\BaseTestForMsTest.cs.pp
+		package\BaseTestForNUnit.cs.pp = package\BaseTestForNUnit.cs.pp
 		package\Package.nuspec = package\Package.nuspec
 	EndProjectSection
 EndProject

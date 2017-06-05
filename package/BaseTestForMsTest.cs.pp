@@ -1,7 +1,8 @@
 namespace $rootnamespace$
 {
-    using Tiver.Fowl.TestingBase;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Tiver.Fowl.Core.Enums;
+    using Tiver.Fowl.TestingBase;
 
     [TestClass]
     public class BaseTestForMsTest : IBaseTest
@@ -15,7 +16,28 @@ namespace $rootnamespace$
         [TestCleanup]
         public void Teardown()
         {
-            Flow.Teardown(TestContext.CurrentTestOutcome);
+            var testOutcome = TestContext.CurrentTestOutcome;
+            TestResult testResult;
+            switch (testOutcome)
+            {
+                case UnitTestOutcome.Passed:
+                    testResult = TestResult.Passed;
+                    break;
+                case UnitTestOutcome.Failed:
+                    testResult = TestResult.Failed;
+                    break;
+                case UnitTestOutcome.Inconclusive:
+                case UnitTestOutcome.InProgress:
+                case UnitTestOutcome.Error:
+                case UnitTestOutcome.Timeout:
+                case UnitTestOutcome.Aborted:
+                case UnitTestOutcome.Unknown:
+                default:
+                    testResult = TestResult.Unknown;
+                    break;
+            }
+
+            Flow.Teardown(testResult);
         }
 
         [AssemblyCleanup]

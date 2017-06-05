@@ -3,7 +3,6 @@
     using System;
     using Attributes;
     using Enums;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using WebDriverExtended.Contracts.Browsers;
 
     public static class TestExecutionContext
@@ -54,7 +53,7 @@
                 return (TestResult)Context.Test.Read("TestResult");
             }
 
-            private set
+            set
             {
                 Context.Test.Write("TestResult", value);
             }
@@ -71,11 +70,6 @@
                 var attribute = Attribute.GetCustomAttribute(TestType, typeof(WebDriverTestAttribute));
                 return attribute != null;
             }
-        }
-
-        public static void SetTestResult(UnitTestOutcome testOutcome)
-        {
-            TestResult = testOutcome.ConvertToTestResult();
         }
     }
 }
