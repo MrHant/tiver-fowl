@@ -23,6 +23,16 @@
             webDriver.Navigate().GoToUrl(config.StartUrl);
         }
 
+        public void SwitchToFrame(string locator)
+        {
+            webDriver.SwitchTo().Frame(Find(locator));
+        }
+
+        public void SwitchToMainFrame()
+        {
+            webDriver.SwitchTo().DefaultContent();
+        }
+
         public void TakeScreenshot()
         {
             var ss = ((ITakesScreenshot) webDriver).GetScreenshot();
