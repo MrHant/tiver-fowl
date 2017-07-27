@@ -50,15 +50,16 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="Tiver.Fowl.Waiting, Version=1.0.6415.40204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Tiver.Fowl.Waiting.0.1.0\lib\net45\Tiver.Fowl.Waiting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\WebDriverTestAttribute.cs" />
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ApplicationConfigurationSection.cs" />
     <Compile Include="Configuration\IApplicationConfiguration.cs" />
-    <Compile Include="Configuration\IWaitConfiguration.cs" />
-    <Compile Include="Configuration\WaitConfiguration.cs" />
-    <Compile Include="Configuration\WaitConfigurationSection.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Context\IStorage.cs" />
     <Compile Include="Context\Storage.cs" />
@@ -68,8 +69,6 @@
     <Compile Include="Exceptions\StorageKeyNotFoundException.cs" />
     <Compile Include="Namespace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wait.cs" />
-    <Compile Include="Exceptions\WaitTimeoutException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">

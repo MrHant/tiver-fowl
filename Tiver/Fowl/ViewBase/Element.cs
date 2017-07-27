@@ -2,10 +2,10 @@
 {
     using System;
     using Behaviors;
-    using Core;
     using Core.Context;
     using Logging;
     using OpenQA.Selenium;
+    using Waiting;
 
     public class Element : IElement, INamed, IVisible, IClickable, IHasAttributes
     {

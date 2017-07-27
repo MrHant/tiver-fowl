@@ -12,7 +12,7 @@
     <sectionGroup name="waitConfigurationGroup">
       <section
         name="waitConfiguration"
-        type="Tiver.Fowl.Core.Configuration.WaitConfigurationSection, Tiver.Fowl.Core"
+        type="Tiver.Fowl.Waiting.Configuration.WaitConfigurationSection, Tiver.Fowl.Waiting"
         allowLocation="true"
         allowDefinition="Everywhere" />
     </sectionGroup>

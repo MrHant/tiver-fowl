@@ -49,6 +49,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="Tiver.Fowl.Waiting, Version=1.0.6415.40204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Tiver.Fowl.Waiting.0.1.0\lib\net45\Tiver.Fowl.Waiting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
