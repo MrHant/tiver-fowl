@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Tiver.Fowl</id>
-    <version>0.1.6</version>
+    <version>0.1.6-dev-3</version>
     <authors>Artyom Silivonchik</authors>
     <owners>Artyom Silivonchik</owners>
     <licenseUrl>https://raw.githubusercontent.com/MrHant/tiver-fowl/master/LICENSE</licenseUrl>
@@ -17,6 +17,7 @@
       <dependency id="Serilog.Sinks.File" version="3.0.1" />
       <dependency id="Serilog" version="2.2.1" />
       <dependency id="Tiver.Fowl.Waiting" version="0.1.0" />
+      <dependency id="Tiver.Fowl.Drivers" version="0.1.1" />
     </dependencies>
   </metadata>
   <files>

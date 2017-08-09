@@ -5,48 +5,27 @@
 
     public class BrowserConfigurationSection : ConfigurationSection, IBrowserConfiguration
     {
-        public IResolution Resolution
-        {
-            get
-            {
-                return this.ResolutionElement;
-            }
-        }
+        public IResolution Resolution => ResolutionElement;
 
-        public string BrowserType
+        [ConfigurationProperty("downloadBinary", DefaultValue = false, IsRequired = false)]
+        public bool DownloadBinary
         {
-            get
-            {
-                return this.BrowserTypeElement;
-            }
-        }
-
-        [ConfigurationProperty("resolution", IsRequired = false)]
-        private ResolutionElement ResolutionElement
-        {
-            get
-            {
-                return (ResolutionElement)this["resolution"];
-            }
-
-            set
-            {
-                this["resolution"] = value;
-            }
+            get => (bool)this["downloadBinary"];
+            set => this["downloadBinary"] = value;
         }
 
         [ConfigurationProperty("browserType", DefaultValue = null, IsRequired = false)]
-        private string BrowserTypeElement
+        public string BrowserType
         {
-            get
-            {
-                return (string)this["browserType"];
-            }
+            get => (string)this["browserType"];
+            set => this["browserType"] = value;
+        }
 
-            set
-            {
-                this["browserType"] = value;
-            }
+        [ConfigurationProperty("resolution", DefaultValue = null, IsRequired = false)]
+        public ResolutionElement ResolutionElement
+        {
+            get => (ResolutionElement)this["resolution"];
+            set => this["resolution"] = value;
         }
     }
 }

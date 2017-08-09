@@ -2,6 +2,8 @@
 {
     public interface IBrowserConfiguration
     {
+        bool DownloadBinary { get; }
+
         string BrowserType { get; }
 
         IResolution Resolution { get; }

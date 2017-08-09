@@ -23,6 +23,13 @@
         allowLocation="true"
         allowDefinition="Everywhere" />
     </sectionGroup>
+    <sectionGroup name="driversConfigurationGroup">
+      <section
+        name="driversConfiguration"
+        type="Tiver.Fowl.Drivers.Configuration.DriversConfigurationSection, Tiver.Fowl.Drivers"
+        allowLocation="true"
+        allowDefinition="Everywhere" />
+    </sectionGroup>
   </configSections>
 
   <!-- Configuration section settings area. -->
@@ -34,6 +41,11 @@
         height="600" />
     </browserConfiguration>
   </browserConfigurationGroup>
+  <driversConfigurationGroup>
+    <driversConfiguration>
+      <add name="chrome" downloaderType="ChromeDriverDownloader" version="2.31" />
+    </driversConfiguration>
+  </driversConfigurationGroup>
   <waitConfigurationGroup>
     <waitConfiguration
       timeout="5000"
