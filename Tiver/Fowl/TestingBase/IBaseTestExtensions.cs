@@ -1,6 +1,6 @@
 ﻿namespace Tiver.Fowl.TestingBase
 {
-    using Serilog;
+    using Logging;
 
     public static class IBaseTestExtensions
     {
@@ -13,7 +13,12 @@
 
         public static void LogStep(this IBaseTest test, string text)
         {
-            Log.ForContext("LogType", "TestStep").Information($"Step #{{Step}} :: {{Text}}", test.GetNextStepNumber(), text);
+            using (LogProvider.OpenMappedContext("LogType", "TestStep"))
+            {
+                Logger.InfoFormat("Step #{Step} :: {Text}", test.GetNextStepNumber(), text);
+            }
         }
+
+        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
     }
 }
