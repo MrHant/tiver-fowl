@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Tiver.Fowl</id>
-    <version>0.1.6-dev-3</version>
+    <version>0.1.6-dev-4</version>
     <authors>Artyom Silivonchik</authors>
     <owners>Artyom Silivonchik</owners>
     <licenseUrl>https://raw.githubusercontent.com/MrHant/tiver-fowl/master/LICENSE</licenseUrl>
@@ -10,12 +10,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A framework for writing Automated Integration tests (including tests via Selenium).</description>
     <dependencies>
+      <dependency id="Serilog" version="2.2.1" />
+      <dependency id="Serilog.Sinks.File" version="3.0.1" />
       <dependency id="Serilog.Sinks.Literate" version="2.0.0" />
       <dependency id="Selenium.WebDriver" version="2.53.1" />
       <dependency id="Handlebars.Net" version="1.7.1" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
-      <dependency id="Serilog.Sinks.File" version="3.0.1" />
-      <dependency id="Serilog" version="2.2.1" />
       <dependency id="Tiver.Fowl.Waiting" version="0.1.0" />
       <dependency id="Tiver.Fowl.Drivers" version="0.1.1" />
     </dependencies>
@@ -40,6 +40,8 @@
     <file src="BaseTestForMsTest.cs.pp" target="content" />
     <file src="BaseTestForNUnit.cs.pp" target="content" />
     <file src="Elements\Textbox.cs.pp" target="content\Elements" />
+    <file src="Logging\TestNameEnricher.cs.pp" target="content\Logging" />
+    <file src="Logging\Logger.cs.pp" target="content\Logging" />
     <file src="..\Default.runsettings" target="content" />
     <file src="..\Default.testsettings" target="content" />
     <file src="App.config.tiver.fowl.sample" target="content" />

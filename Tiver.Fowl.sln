@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55D28FBE-FE5F-4047-8E6A-FC6A8448E9BF}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,6 +44,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elements", "Elements", "{E3F9C328-892D-4D95-8D8B-2DC0CC32B695}"
 	ProjectSection(SolutionItems) = preProject
 		package\Elements\Textbox.cs.pp = package\Elements\Textbox.cs.pp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{DF023233-F2D9-46D7-827A-895F28AD735C}"
+	ProjectSection(SolutionItems) = preProject
+		package\Logging\Logger.cs.pp = package\Logging\Logger.cs.pp
+		package\Logging\TestNameEnricher.cs.pp = package\Logging\TestNameEnricher.cs.pp
 	EndProjectSection
 EndProject
 Global
@@ -93,5 +99,6 @@ Global
 		{159787A4-C5B9-4FA8-B3D5-1A9ECC976C35} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{5BD27428-94DE-496A-8C7A-B6B6D6BFB48A} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{E3F9C328-892D-4D95-8D8B-2DC0CC32B695} = {12389CBF-3549-4468-A662-D92A83543D61}
+		{DF023233-F2D9-46D7-827A-895F28AD735C} = {12389CBF-3549-4468-A662-D92A83543D61}
 	EndGlobalSection
 EndGlobal
