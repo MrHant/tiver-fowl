@@ -1,4 +1,6 @@
 # tiver-fowl
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMrHant%2Ftiver-fowl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMrHant%2Ftiver-fowl?ref=badge_shield)
+
 
 A framework for writing Automated Integration tests (including tests via Selenium).
 
@@ -28,3 +30,7 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 * To run tests locally - Select "Default.runsettings" as configuration file for Tests
  * It contains settings for output folder
  * As well as copying driver executables
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMrHant%2Ftiver-fowl.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMrHant%2Ftiver-fowl?ref=badge_large)
