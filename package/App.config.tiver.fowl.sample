@@ -39,11 +39,9 @@
         height="600" />
     </browserConfiguration>
   </browserConfigurationGroup>
-  <driversConfigurationGroup>
-    <driversConfiguration>
-      <add name="chrome" downloaderType="ChromeDriverDownloader" version="2.31" />
-    </driversConfiguration>
-  </driversConfigurationGroup>
+  <driversConfiguration>
+    <add name="chrome" downloaderType="ChromeDriverDownloader" version="LATEST" />
+  </driversConfiguration>
   <waitConfigurationGroup>
     <waitConfiguration
       timeout="5000"
