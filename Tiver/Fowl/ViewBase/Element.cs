@@ -6,6 +6,7 @@
     using Logging;
     using OpenQA.Selenium;
     using Waiting;
+    using Waiting.Configuration;
 
     public class Element : IElement, INamed, IVisible, IClickable, IHasAttributes
     {
@@ -27,7 +28,7 @@
             {
                 result = function.Invoke(this.WebElement);
                 return true;
-            }, typeof(NoSuchElementException), typeof(StaleElementReferenceException));
+            }, new WaitConfiguration(typeof(NoSuchElementException), typeof(StaleElementReferenceException)));
 
             return result;
         }
