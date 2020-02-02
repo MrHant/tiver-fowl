@@ -17,8 +17,8 @@
       <dependency id="Selenium.WebDriver" version="2.53.1" />
       <dependency id="Handlebars.Net" version="1.7.1" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
-      <dependency id="Tiver.Fowl.Waiting" version="0.1.0" />
-      <dependency id="Tiver.Fowl.Drivers" version="0.1.1" />
+      <dependency id="Tiver.Fowl.Waiting" version="0.1.5" />
+      <dependency id="Tiver.Fowl.Drivers" version="0.3.0" />
     </dependencies>
   </metadata>
   <files>
