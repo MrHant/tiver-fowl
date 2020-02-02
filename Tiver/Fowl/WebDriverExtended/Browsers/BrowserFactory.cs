@@ -5,6 +5,7 @@
     using System.Linq;
     using Configuration;
     using Contracts.Configuration;
+    using Core.Configuration;
     using Drivers;
     using Drivers.Configuration;
     using Exceptions;
@@ -41,7 +42,7 @@
             if (config.DownloadBinary)
             {
                 var driverConfig = 
-                    ((IDriversConfiguration)ConfigurationManager.GetSection("driversConfigurationGroup/driversConfiguration"))
+                    ((IDriversConfiguration)ConfigurationManager.GetSection(ConfigurationSectionNames.Drivers))
                         .Instances.Cast<DriverElement>().Single(d => d.Name.Equals(browserType));
                 
                 var result = Downloaders.Get(browserType).DownloadBinary(driverConfig.Version);

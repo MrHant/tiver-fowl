@@ -23,13 +23,11 @@
         allowLocation="true"
         allowDefinition="Everywhere" />
     </sectionGroup>
-    <sectionGroup name="driversConfigurationGroup">
-      <section
-        name="driversConfiguration"
-        type="Tiver.Fowl.Drivers.Configuration.DriversConfigurationSection, Tiver.Fowl.Drivers"
-        allowLocation="true"
-        allowDefinition="Everywhere" />
-    </sectionGroup>
+    <section
+      name="driversConfiguration"
+      type="Tiver.Fowl.Drivers.Configuration.DriversConfigurationSection, Tiver.Fowl.Drivers"
+      allowLocation="true"
+      allowDefinition="Everywhere" />
   </configSections>
 
   <!-- Configuration section settings area. -->

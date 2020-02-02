@@ -56,6 +56,7 @@
     <Compile Include="Attributes\WebDriverTestAttribute.cs" />
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Configuration\ApplicationConfigurationSection.cs" />
+    <Compile Include="Configuration\ConfigurationSectionNames.cs" />
     <Compile Include="Configuration\IApplicationConfiguration.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Context\IStorage.cs" />
