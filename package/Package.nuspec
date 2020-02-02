@@ -14,7 +14,7 @@
       <dependency id="Serilog" version="2.2.1" />
       <dependency id="Serilog.Sinks.File" version="3.0.1" />
       <dependency id="Serilog.Sinks.Literate" version="2.0.0" />
-      <dependency id="Selenium.WebDriver" version="2.53.1" />
+      <dependency id="Selenium.WebDriver" version="3.141.0" />
       <dependency id="Handlebars.Net" version="1.7.1" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
       <dependency id="Tiver.Fowl.Waiting" version="0.1.5" />
