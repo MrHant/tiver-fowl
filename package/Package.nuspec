@@ -3,9 +3,9 @@
   <metadata>
     <id>Tiver.Fowl</id>
     <version>0.1.6-dev-4</version>
-    <authors>Artyom Silivonchik</authors>
-    <owners>Artyom Silivonchik</owners>
-    <license type="file">LICENSE</license>
+    <authors>Artsiomi Silivonchyk</authors>
+    <owners>Artsiomi SIlivonchyk</owners>
+    <license type="file">LICENSE.</license>
     <projectUrl>https://github.com/MrHant/tiver-fowl</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A framework for writing Automated Integration tests (including tests via Selenium).</description>
@@ -21,7 +21,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\LICENSE" target="content" />
     <file src="..\bin\Release\Tiver.Fowl.Core.dll" target="lib\net45" />
     <file src="..\bin\Release\Tiver.Fowl.Core.pdb" target="lib\net45" />
     <file src="..\bin\Release\Tiver.Fowl.Logging.dll" target="lib\net45" />
@@ -38,6 +37,7 @@
     <file src="..\bin\Release\Tiver.Fowl.WebDriverExtended.Contracts.pdb" target="lib\net45" />
     <file src="..\bin\Release\templates\*.*" target="content\templates" />
     <file src="..\bin\Release\Lib\*.*" target="content\lib" />
+    <file src="..\LICENSE" target="LICENSE." />
     <file src="BaseTestForMsTest.cs.pp" target="content" />
     <file src="BaseTestForNUnit.cs.pp" target="content" />
     <file src="Elements\Textbox.cs.pp" target="content\Elements" />
