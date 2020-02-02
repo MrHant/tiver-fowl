@@ -16,6 +16,9 @@ tools/*
 # Visual Studio
 .vs/
 
+# Rider IDE
+.idea/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
