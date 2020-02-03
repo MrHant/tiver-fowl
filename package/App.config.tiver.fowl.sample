@@ -41,7 +41,7 @@
     </browserConfiguration>
   </browserConfigurationGroup>
   <driversConfiguration>
-    <add name="chrome" downloaderType="ChromeDriverDownloader" version="LATEST" />
+    <add name="chrome" downloaderType="ChromeDriverDownloader" version="LATEST_RELEASE" />
   </driversConfiguration>
   <waitConfigurationGroup>
     <waitConfiguration
