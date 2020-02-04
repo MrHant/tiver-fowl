@@ -9,13 +9,11 @@
         allowLocation="true"
         allowDefinition="Everywhere" />
     </sectionGroup>
-    <sectionGroup name="waitConfigurationGroup">
-      <section
-        name="waitConfiguration"
-        type="Tiver.Fowl.Waiting.Configuration.WaitConfigurationSection, Tiver.Fowl.Waiting"
-        allowLocation="true"
-        allowDefinition="Everywhere" />
-    </sectionGroup>
+    <section
+      name="waitConfiguration"
+      type="Tiver.Fowl.Waiting.Configuration.WaitConfigurationSection, Tiver.Fowl.Waiting"
+      allowLocation="true"
+      allowDefinition="Everywhere" />
     <sectionGroup name="applicationConfigurationGroup">
       <section
         name="applicationConfiguration"
@@ -43,11 +41,14 @@
   <driversConfiguration>
     <add name="chrome" downloaderType="ChromeDriverDownloader" version="LATEST_RELEASE" />
   </driversConfiguration>
-  <waitConfigurationGroup>
-    <waitConfiguration
-      timeout="5000"
-      pollingInterval="250" />
-  </waitConfigurationGroup>
+  <waitConfiguration
+    timeout="5000"
+    pollingInterval="250">
+      <IgnoredExceptions>
+          <Exception type="OpenQA.Selenium.NoSuchElementException, WebDriver" />
+          <Exception type="OpenQA.Selenium.StaleElementReferenceException, WebDriver" />
+      </IgnoredExceptions>
+  </waitConfiguration>
   <applicationConfigurationGroup>
     <applicationConfiguration
       title="System Under Test Title"

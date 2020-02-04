@@ -1,7 +1,9 @@
 ﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
+    using System.Configuration;
     using Behaviors;
+    using Core.Configuration;
     using Core.Context;
     using Logging;
     using OpenQA.Selenium;
@@ -28,7 +30,7 @@
             {
                 result = function.Invoke(this.WebElement);
                 return true;
-            }, new WaitConfiguration(typeof(NoSuchElementException), typeof(StaleElementReferenceException)));
+            }, (WaitConfigurationSection)ConfigurationManager.GetSection(ConfigurationSectionNames.Wait));
 
             return result;
         }
