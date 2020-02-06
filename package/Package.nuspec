@@ -17,7 +17,7 @@
       <dependency id="Handlebars.Net" version="1.7.1" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
       <dependency id="Tiver.Fowl.Waiting" version="0.1.5" />
-      <dependency id="Tiver.Fowl.Drivers" version="0.3.0" />
+      <dependency id="Tiver.Fowl.Drivers" version="0.3.2" />
     </dependencies>
   </metadata>
   <files>
