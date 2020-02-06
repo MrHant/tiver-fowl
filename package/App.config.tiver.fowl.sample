@@ -2,13 +2,11 @@
 <configuration>
   <!-- Configuration section-handler declaration area. -->
   <configSections>
-    <sectionGroup name="browserConfigurationGroup">
-      <section
-        name="browserConfiguration"
-        type="Tiver.Fowl.WebDriverExtended.Configuration.BrowserConfigurationSection, Tiver.Fowl.WebDriverExtended"
-        allowLocation="true"
-        allowDefinition="Everywhere" />
-    </sectionGroup>
+    <section
+      name="browserConfiguration"
+      type="Tiver.Fowl.WebDriverExtended.Configuration.BrowserConfigurationSection, Tiver.Fowl.WebDriverExtended"
+      allowLocation="true"
+      allowDefinition="Everywhere" />
     <section
       name="waitConfiguration"
       type="Tiver.Fowl.Waiting.Configuration.WaitConfigurationSection, Tiver.Fowl.Waiting"
@@ -27,15 +25,13 @@
   </configSections>
 
   <!-- Configuration section settings area. -->
-  <browserConfigurationGroup>
-    <browserConfiguration
-      browserType="chrome"
-      downloadBinary="true">
-      <resolution
-        width="800"
-        height="600" />
-    </browserConfiguration>
-  </browserConfigurationGroup>
+  <browserConfiguration
+    browserType="chrome"
+    downloadBinary="true">
+    <resolution
+      width="800"
+      height="600" />
+  </browserConfiguration>
   <driversConfiguration>
     <add name="chrome" downloaderType="ChromeDriverDownloader" version="LATEST_RELEASE" />
   </driversConfiguration>
