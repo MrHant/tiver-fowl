@@ -1,7 +1,7 @@
 ﻿namespace Tiver.Fowl.ViewBase.Behaviors.Extensions
 {
-    using Core.Exceptions;
     using Logging;
+    using Waiting.Exceptions;
 
     public static class IVisibleExtensions
     {

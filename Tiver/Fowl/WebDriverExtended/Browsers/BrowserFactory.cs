@@ -1,8 +1,13 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
+    using System;
     using System.Configuration;
+    using System.Linq;
     using Configuration;
     using Contracts.Configuration;
+    using Core.Configuration;
+    using Drivers;
+    using Drivers.Configuration;
     using Exceptions;
     using Serilog;
 
@@ -19,7 +24,6 @@
                 case "":
 
                 // other specific values
-                case "ff":
                 case "firefox":
                     return new FirefoxBrowserFactory();
 
@@ -33,7 +37,18 @@
 
         public static Browser GetBrowser()
         {
-            IBrowserConfiguration config = (BrowserConfigurationSection)ConfigurationManager.GetSection("browserConfigurationGroup/browserConfiguration");
+            IBrowserConfiguration config =
+                (BrowserConfigurationSection) ConfigurationManager.GetSection(ConfigurationSectionNames.Browser);
+            var browserType = config.BrowserType;
+            if (config.DownloadBinary)
+            {
+                var result = Downloaders.DownloadBinaryFor(browserType, ConfigurationSectionNames.Drivers);
+                if (!result.Successful)
+                {
+                    throw new Exception("Browser was not downloaded");
+                }
+            }
+
             var factory = GetFactory(config.BrowserType);
             return factory.Build(config);
         }

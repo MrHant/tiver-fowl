@@ -3,6 +3,7 @@ namespace $rootnamespace$
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
+    using $rootnamespace$.Logging;
 
     [TestClass]
     public class BaseTestForMsTest : IBaseTest
@@ -38,6 +39,12 @@ namespace $rootnamespace$
             }
 
             Flow.Teardown(testResult);
+        }
+
+        [AssemblyInitialize]
+        public static void Initialize(TestContext context)
+        {
+            Logger.Configure();
         }
 
         [AssemblyCleanup]

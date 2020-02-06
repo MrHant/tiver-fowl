@@ -1,6 +1,6 @@
 ﻿namespace Tiver.Fowl.Logging
 {
-    using Serilog;
+    using Logging;
 
     public static class ILoggableElementExtensions
     {
@@ -19,7 +19,12 @@
                 return;
             }
 
-            Log.ForContext("LogType", "ElementAction").Information($"{{Name}} :: {{Action}}", instance.Name, action);
+            using (LogProvider.OpenMappedContext("LogType", "ElementAction"))
+            {
+                Logger.InfoFormat("{Name} :: {Action}", instance.Name, action);
+            }
         }
+
+        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
     }
 }

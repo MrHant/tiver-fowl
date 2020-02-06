@@ -4,6 +4,7 @@ namespace $rootnamespace$
     using NUnit.Framework.Interfaces;
     using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
+    using $rootnamespace$.Logging;
 
     [TestFixture]
     public class BaseTestForNUnit : IBaseTest
@@ -48,6 +49,12 @@ namespace $rootnamespace$
     [SetUpFixture]
     public class SetupFixtureForNUnit
     {
+        [OneTimeSetUp]
+        public static void Initialize()
+        {
+            Logger.Configure();
+        }
+
         [OneTimeTearDown]
         public static void Cleanup()
         {

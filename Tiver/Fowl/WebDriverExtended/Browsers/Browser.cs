@@ -19,7 +19,7 @@
         {
             IApplicationConfiguration config =
                 (ApplicationConfigurationSection)
-                    ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
+                ConfigurationManager.GetSection(ConfigurationSectionNames.Application);
             webDriver.Navigate().GoToUrl(config.StartUrl);
         }
 

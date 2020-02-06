@@ -1,11 +1,14 @@
 ﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
+    using System.Configuration;
     using Behaviors;
-    using Core;
+    using Core.Configuration;
     using Core.Context;
     using Logging;
     using OpenQA.Selenium;
+    using Waiting;
+    using Waiting.Configuration;
 
     public class Element : IElement, INamed, IVisible, IClickable, IHasAttributes
     {
@@ -27,7 +30,7 @@
             {
                 result = function.Invoke(this.WebElement);
                 return true;
-            }, typeof(NoSuchElementException), typeof(StaleElementReferenceException));
+            }, (WaitConfigurationSection)ConfigurationManager.GetSection(ConfigurationSectionNames.Wait));
 
             return result;
         }
