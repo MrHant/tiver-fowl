@@ -14,13 +14,11 @@
       type="Tiver.Fowl.Waiting.Configuration.WaitConfigurationSection, Tiver.Fowl.Waiting"
       allowLocation="true"
       allowDefinition="Everywhere" />
-    <sectionGroup name="applicationConfigurationGroup">
-      <section
-        name="applicationConfiguration"
-        type="Tiver.Fowl.Core.Configuration.ApplicationConfigurationSection, Tiver.Fowl.Core"
-        allowLocation="true"
-        allowDefinition="Everywhere" />
-    </sectionGroup>
+    <section
+      name="applicationConfiguration"
+      type="Tiver.Fowl.Core.Configuration.ApplicationConfigurationSection, Tiver.Fowl.Core"
+      allowLocation="true"
+      allowDefinition="Everywhere" />
     <section
       name="driversConfiguration"
       type="Tiver.Fowl.Drivers.Configuration.DriversConfigurationSection, Tiver.Fowl.Drivers"
@@ -49,9 +47,7 @@
           <Exception type="OpenQA.Selenium.StaleElementReferenceException, WebDriver" />
       </IgnoredExceptions>
   </waitConfiguration>
-  <applicationConfigurationGroup>
-    <applicationConfiguration
-      title="System Under Test Title"
-      startUrl="http://localhost/" />
-  </applicationConfigurationGroup>
+  <applicationConfiguration
+    title="System Under Test Title"
+    startUrl="http://localhost/" />
 </configuration>

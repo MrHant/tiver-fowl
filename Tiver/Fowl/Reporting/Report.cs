@@ -38,7 +38,9 @@
             CompilePartial("jquery_javascript");
             CompilePartial("foundation_javascript");
 
-            IApplicationConfiguration config = (ApplicationConfigurationSection) ConfigurationManager.GetSection("applicationConfigurationGroup/applicationConfiguration");
+            IApplicationConfiguration config =
+                (ApplicationConfigurationSection)
+                ConfigurationManager.GetSection(ConfigurationSectionNames.Application);
 
             var testResultsData = new List<dynamic>();
 

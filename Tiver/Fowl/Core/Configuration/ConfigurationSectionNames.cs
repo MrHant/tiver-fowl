@@ -4,5 +4,6 @@ namespace Tiver.Fowl.Core.Configuration
     {
         public const string Drivers = "driversConfiguration";
         public const string Wait = "waitConfiguration";
+        public const string Application = "applicationConfiguration";
     }
 }
