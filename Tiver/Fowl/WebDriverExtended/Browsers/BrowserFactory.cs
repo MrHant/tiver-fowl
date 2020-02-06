@@ -41,11 +41,7 @@
             var browserType = config.BrowserType;
             if (config.DownloadBinary)
             {
-                var driverConfig = 
-                    ((IDriversConfiguration)ConfigurationManager.GetSection(ConfigurationSectionNames.Drivers))
-                        .Instances.Cast<DriverElement>().Single(d => d.Name.Equals(browserType));
-                
-                var result = Downloaders.Get(browserType).DownloadBinary(driverConfig.Version);
+                var result = Downloaders.DownloadBinaryFor(browserType, ConfigurationSectionNames.Drivers);
                 if (!result.Successful)
                 {
                     throw new Exception("Browser was not downloaded");
