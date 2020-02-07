@@ -5,12 +5,22 @@
     using Contracts.Configuration;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.Remote;
 
     public class FirefoxBrowserFactory : BrowserFactory
     {
         public override Browser Build(IBrowserConfiguration configuration)
         {
-            IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver;
+            if (configuration.RemoteAddress != null)
+            {
+                var options = new FirefoxOptions();
+                driver = new RemoteWebDriver(configuration.RemoteAddress, options);
+            }
+            else
+            {
+                driver = new FirefoxDriver();
+            }
 
             if (configuration.Resolution.Width != null || configuration.Resolution.Height != null)
             {

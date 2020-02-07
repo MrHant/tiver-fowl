@@ -1,5 +1,6 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Configuration
 {
+    using System;
     using System.Configuration;
     using Contracts.Configuration;
 
@@ -19,6 +20,13 @@
         {
             get => (string)this["browserType"];
             set => this["browserType"] = value;
+        }
+
+        [ConfigurationProperty("remoteAddress", DefaultValue = null, IsRequired = false)]
+        public Uri RemoteAddress
+        {
+            get => (Uri)this["remoteAddress"];
+            set => this["remoteAddress"] = value;
         }
 
         [ConfigurationProperty("resolution", DefaultValue = null, IsRequired = false)]
