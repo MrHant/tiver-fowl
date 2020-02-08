@@ -94,7 +94,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Tiver.Fowl.TestingBase.ruleset" />
   </ItemGroup>
   <Choose>
