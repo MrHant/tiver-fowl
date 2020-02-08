@@ -2,6 +2,7 @@ namespace $rootnamespace$.Logging
 {
     using Serilog;
     using Serilog.Formatting.Json;
+    using Tiver.Fowl.Logging;
 
     public class Logger
     {

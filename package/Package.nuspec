@@ -41,7 +41,6 @@
     <file src="BaseTestForMsTest.cs.pp" target="content" />
     <file src="BaseTestForNUnit.cs.pp" target="content" />
     <file src="Elements\Textbox.cs.pp" target="content\Elements" />
-    <file src="Logging\TestNameEnricher.cs.pp" target="content\Logging" />
     <file src="Logging\Logger.cs.pp" target="content\Logging" />
     <file src="..\Default.runsettings" target="content" />
     <file src="..\Default.testsettings" target="content" />
