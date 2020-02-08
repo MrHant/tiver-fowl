@@ -1,5 +1,7 @@
 namespace Tests.Logging
 {
+    using System.IO;
+    using NUnit.Framework;
     using Serilog;
     using Serilog.Formatting.Json;
 
@@ -16,7 +18,7 @@ namespace Tests.Logging
                 .MinimumLevel.Information()
                 .Enrich.With(new TestNameEnricher())
                 .WriteTo.LiterateConsole()
-                .WriteTo.File(new JsonFormatter(), "./log.txt")
+                .WriteTo.File(new JsonFormatter(), Path.Combine(TestContext.CurrentContext.TestDirectory, "./log.txt"))
                 .CreateLogger();
             configured = true;
         }
