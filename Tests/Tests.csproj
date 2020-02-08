@@ -78,6 +78,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BaseTestForNUnit.cs" />
+        <Compile Include="Elements\Button.cs" />
+        <Compile Include="HomePage.cs" />
         <Compile Include="YaRuTests.cs" />
         <Compile Include="Elements\Textbox.cs" />
         <Compile Include="Logging\Logger.cs" />

@@ -2,18 +2,22 @@
 {
     using NUnit.Framework;
     using Tiver.Fowl.Core.Attributes;
+    using Tiver.Fowl.TestingBase;
     using Tiver.Fowl.ViewBase;
-
+    using Tiver.Fowl.ViewBase.Behaviors.Extensions;
+    
     [WebDriverTest]
     public class YaRuTests : BaseTestForNUnit
     {
         [Test]
         public void Test1()
         {
-            new Element("//input[@id='text']").Process(e => e.SendKeys("example.com"));
-            new Element("//button[@type='submit']").Process(e => e.Click());
-            Assert.IsTrue(new Element("//div[.='Example Domain']").Process(e => e.Displayed));
-            
+            this.LogStep("Search for something");
+            HomePage.SearchBox.Type("example.com");
+            HomePage.SearchButton.Click();
+
+            this.LogStep("Results are displayed");
+            Assert.IsTrue(new Element("//div[.='Example Domain']").Displayed());
         }
     }
 }
