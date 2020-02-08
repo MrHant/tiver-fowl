@@ -83,7 +83,6 @@
         <Compile Include="YaRuTests.cs" />
         <Compile Include="Elements\Textbox.cs" />
         <Compile Include="Logging\Logger.cs" />
-        <Compile Include="Logging\TestNameEnricher.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
