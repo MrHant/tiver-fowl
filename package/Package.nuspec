@@ -2,9 +2,9 @@
 <package >
   <metadata>
     <id>Tiver.Fowl</id>
-    <version>0.1.6-dev-4</version>
+    <version>0.1.7</version>
     <authors>Artsiomi Silivonchyk</authors>
-    <owners>Artsiomi SIlivonchyk</owners>
+    <owners>Artsiomi Silivonchyk</owners>
     <license type="file">LICENSE.</license>
     <projectUrl>https://github.com/MrHant/tiver-fowl</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
