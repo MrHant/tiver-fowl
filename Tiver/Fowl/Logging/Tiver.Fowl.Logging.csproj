@@ -49,6 +49,7 @@
     <Compile Include="ILoggableElementExtensions.cs" />
     <Compile Include="INamed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestNameEnricher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

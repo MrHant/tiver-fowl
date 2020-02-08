@@ -4,6 +4,7 @@ namespace Tests.Logging
     using NUnit.Framework;
     using Serilog;
     using Serilog.Formatting.Json;
+    using Tiver.Fowl.Logging;
 
     public class Logger
     {

@@ -1,8 +1,8 @@
-namespace Tests.Logging
+namespace Tiver.Fowl.Logging
 {
     using Serilog.Core;
     using Serilog.Events;
-    using Tiver.Fowl.Core.Context;
+    using Core.Context;
 
     public class TestNameEnricher : ILogEventEnricher
     {
