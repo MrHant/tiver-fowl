@@ -18,7 +18,7 @@ namespace Tests.Logging
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .Enrich.With(new TestNameEnricher())
-                .WriteTo.LiterateConsole()
+                .WriteTo.Console()
                 .WriteTo.File(new JsonFormatter(), Path.Combine(TestContext.CurrentContext.TestDirectory, "./log.txt"))
                 .CreateLogger();
             configured = true;
