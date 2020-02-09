@@ -3,8 +3,8 @@
     using System;
     using Core.Context;
     using Core.Enums;
-    using Logging;
     using Reporting;
+    using Serilog;
     using WebDriverExtended.Browsers;
 
     public static class Flow
@@ -35,10 +35,8 @@
 
         private static void Teardown()
         {
-            using (LogProvider.OpenMappedContext("LogType", "TestResult"))
-            {
-                Logger.InfoFormat("Test result - '{TestResult}'", TestExecutionContext.TestResult);
-            }
+            var logResult = Log.ForContext("LogType", "TestResult");
+            logResult.Information("Test result - '{TestResult}'", TestExecutionContext.TestResult);
 
             if (TestExecutionContext.IsWebDriverTest)
             {
@@ -52,7 +50,5 @@
 
             Context.ClearTestContext();
         }
-
-        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
     }
 }
