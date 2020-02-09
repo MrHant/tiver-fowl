@@ -33,10 +33,6 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Handlebars, Version=1.0.0.0, Culture=neutral, PublicKeyToken=22225d0bf33cd661">
-          <HintPath>..\packages\Handlebars.Net.1.7.1\lib\Handlebars.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
         <Reference Include="Microsoft.CSharp" />
         <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
           <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -95,10 +91,6 @@
         <Project>{159787a4-c5b9-4fa8-b3d5-1a9ecc976c35}</Project>
         <Name>Tiver.Fowl.Logging</Name>
       </ProjectReference>
-      <ProjectReference Include="..\Tiver\Fowl\Reporting\Tiver.Fowl.Reporting.csproj">
-        <Project>{5bd27428-94de-496a-8c7a-b6b6d6bfb48a}</Project>
-        <Name>Tiver.Fowl.Reporting</Name>
-      </ProjectReference>
       <ProjectReference Include="..\Tiver\Fowl\TestingBase\Tiver.Fowl.TestingBase.csproj">
         <Project>{b1fb4583-bba4-420b-85bf-c55959005d54}</Project>
         <Name>Tiver.Fowl.TestingBase</Name>
@@ -119,14 +111,6 @@
     <ItemGroup>
       <None Include="App.config" />
       <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="templates\index.hbs" />
-      <Content Include="templates\_foundation_javascript.hbs" />
-      <Content Include="templates\_foundation_style.hbs" />
-      <Content Include="templates\_jquery_javascript.hbs" />
-      <Content Include="templates\_report_style.hbs" />
-      <Content Include="templates\_test_result_row.hbs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
