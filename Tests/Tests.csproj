@@ -37,6 +37,7 @@
           <HintPath>..\packages\Handlebars.Net.1.7.1\lib\Handlebars.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="Microsoft.CSharp" />
         <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
           <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
@@ -46,15 +47,15 @@
           <Private>True</Private>
         </Reference>
         <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
-          <HintPath>..\packages\Serilog.2.2.1\lib\net45\Serilog.dll</HintPath>
+          <HintPath>..\packages\Serilog.2.9.0\lib\net45\Serilog.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+          <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
-          <HintPath>..\packages\Serilog.Sinks.File.3.0.1\lib\net45\Serilog.Sinks.File.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="Serilog.Sinks.Literate, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
-          <HintPath>..\packages\Serilog.Sinks.Literate.2.0.0\lib\net45\Serilog.Sinks.Literate.dll</HintPath>
+          <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="System" />
@@ -78,10 +79,11 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BaseTestForNUnit.cs" />
+        <Compile Include="Elements\Button.cs" />
+        <Compile Include="HomePage.cs" />
         <Compile Include="YaRuTests.cs" />
         <Compile Include="Elements\Textbox.cs" />
         <Compile Include="Logging\Logger.cs" />
-        <Compile Include="Logging\TestNameEnricher.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>

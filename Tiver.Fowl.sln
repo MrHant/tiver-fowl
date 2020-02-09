@@ -49,7 +49,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{DF023233-F2D9-46D7-827A-895F28AD735C}"
 	ProjectSection(SolutionItems) = preProject
 		package\Logging\Logger.cs.pp = package\Logging\Logger.cs.pp
-		package\Logging\TestNameEnricher.cs.pp = package\Logging\TestNameEnricher.cs.pp
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BAAAB0CA-33D2-4BFA-A525-9B840671FF58}"

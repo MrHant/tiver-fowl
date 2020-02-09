@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\..\..\packages\Serilog.2.9.0\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
     <Compile Include="ILoggableElement.cs" />
     <Compile Include="ILoggableElementExtensions.cs" />
     <Compile Include="INamed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestNameEnricher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

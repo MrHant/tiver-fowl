@@ -5,12 +5,22 @@
     using Contracts.Configuration;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Remote;
 
     public class ChromeBrowserFactory : BrowserFactory
     {
         public override Browser Build(IBrowserConfiguration configuration)
         {
-            IWebDriver driver = new ChromeDriver();
+            IWebDriver driver;
+            if (configuration.RemoteAddress != null)
+            {
+                var options = new ChromeOptions();
+                driver = new RemoteWebDriver(configuration.RemoteAddress, options);
+            }
+            else
+            {
+                driver = new ChromeDriver();
+            }
 
             if (configuration.Resolution.Width != null || configuration.Resolution.Height != null)
             {

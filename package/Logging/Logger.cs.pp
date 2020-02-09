@@ -2,6 +2,7 @@ namespace $rootnamespace$.Logging
 {
     using Serilog;
     using Serilog.Formatting.Json;
+    using Tiver.Fowl.Logging;
 
     public class Logger
     {
@@ -15,7 +16,7 @@ namespace $rootnamespace$.Logging
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .Enrich.With(new TestNameEnricher())
-                .WriteTo.LiterateConsole()
+                .WriteTo.Console()
                 .WriteTo.File(new JsonFormatter(), "./log.txt")
                 .CreateLogger();
             configured = true;

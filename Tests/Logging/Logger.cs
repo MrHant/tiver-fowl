@@ -1,7 +1,10 @@
 namespace Tests.Logging
 {
+    using System.IO;
+    using NUnit.Framework;
     using Serilog;
     using Serilog.Formatting.Json;
+    using Tiver.Fowl.Logging;
 
     public class Logger
     {
@@ -15,8 +18,8 @@ namespace Tests.Logging
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .Enrich.With(new TestNameEnricher())
-                .WriteTo.LiterateConsole()
-                .WriteTo.File(new JsonFormatter(), "./log.txt")
+                .WriteTo.Console()
+                .WriteTo.File(new JsonFormatter(), Path.Combine(TestContext.CurrentContext.TestDirectory, "./log.txt"))
                 .CreateLogger();
             configured = true;
         }
