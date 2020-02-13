@@ -2,63 +2,59 @@ namespace Tests
 {
     using Logging;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tiver.Fowl.TestingBase;
-using TestResult = Tiver.Fowl.Core.Enums.TestResult;
+    using Tiver.Fowl.TestingBase;
+    using TestResult = Tiver.Fowl.Core.Enums.TestResult;
 
-[TestClass]
-public class BaseTestForMsTest : IBaseTest
-{
-    [TestInitialize]
-    public void Setup()
+    [TestClass]
+    public class BaseTestForMsTest : IBaseTest
     {
-        Flow.Setup(GetType(), TestContext.TestName);
-    }
-
-    [TestCleanup]
-    public void Teardown()
-    {
-        var testOutcome = TestContext.CurrentTestOutcome;
-        TestResult testResult;
-        switch (testOutcome)
+        [TestInitialize]
+        public void Setup()
         {
-            case UnitTestOutcome.Passed:
-                testResult = TestResult.Passed;
-                break;
-            case UnitTestOutcome.Failed:
-                testResult = TestResult.Failed;
-                break;
-            case UnitTestOutcome.Inconclusive:
-            case UnitTestOutcome.InProgress:
-            case UnitTestOutcome.Error:
-            case UnitTestOutcome.Timeout:
-            case UnitTestOutcome.Aborted:
-            case UnitTestOutcome.Unknown:
-            default:
-                testResult = TestResult.Unknown;
-                break;
+            Flow.Setup(GetType(), TestContext.TestName);
         }
 
-        Flow.Teardown(testResult);
-    }
+        [TestCleanup]
+        public void Teardown()
+        {
+            var testOutcome = TestContext.CurrentTestOutcome;
+            TestResult testResult;
+            switch (testOutcome)
+            {
+                case UnitTestOutcome.Passed:
+                    testResult = TestResult.Passed;
+                    break;
+                case UnitTestOutcome.Failed:
+                    testResult = TestResult.Failed;
+                    break;
+                case UnitTestOutcome.Inconclusive:
+                case UnitTestOutcome.InProgress:
+                case UnitTestOutcome.Error:
+                case UnitTestOutcome.Timeout:
+                case UnitTestOutcome.Aborted:
+                case UnitTestOutcome.Unknown:
+                default:
+                    testResult = TestResult.Unknown;
+                    break;
+            }
 
-    [AssemblyInitialize]
-    public static void Initialize(TestContext context)
-    {
-        Logger.Configure();
-    }
+            Flow.Teardown(testResult);
+        }
 
-    [AssemblyCleanup]
-    public static void Cleanup()
-    {
-        Flow.SessionTeardown();
-    }
+        [AssemblyInitialize]
+        public static void Initialize(TestContext context)
+        {
+            Logger.Configure();
+        }
 
-    public int? Step
-    {
-        get;
-        set;
-    }
+        [AssemblyCleanup]
+        public static void Cleanup()
+        {
+            Flow.SessionTeardown();
+        }
 
-    public TestContext TestContext { get; set; }
-}
+        public int? Step { get; set; }
+
+        public TestContext TestContext { get; set; }
+    }
 }
