@@ -1,9 +1,9 @@
 namespace $rootnamespace$
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
     using $rootnamespace$.Logging;
+    using TestResult = Tiver.Fowl.Core.Enums.TestResult;
 
     [TestClass]
     public class BaseTestForMsTest : IBaseTest
