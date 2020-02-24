@@ -1,4 +1,7 @@
-﻿namespace Tests
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[assembly: Parallelize(Workers = 0, Scope = ExecutionScope.MethodLevel)]
+namespace Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Tiver.Fowl.Core.Attributes;
@@ -13,8 +16,29 @@
         [TestMethod]
         [DataRow(1)]
         [DataRow(2)]
-        [DataRow(3)]
-        public void Test1(int parallel)
+        public void Test1(int testCase)
+        {
+            this.LogStep("Search for something");
+            HomePage.SearchBox.Type("example.com");
+            HomePage.SearchButton.Click();
+
+            this.LogStep("Results are displayed");
+            Assert.IsTrue(new Element("//div[.='Example Domain']").Displayed());
+        }
+        
+        [TestMethod]
+        public void Test2()
+        {
+            this.LogStep("Search for something");
+            HomePage.SearchBox.Type("example.com");
+            HomePage.SearchButton.Click();
+
+            this.LogStep("Results are displayed");
+            Assert.IsTrue(new Element("//div[.='Example Domain']").Displayed());
+        }
+        
+        [TestMethod]
+        public void Test3()
         {
             this.LogStep("Search for something");
             HomePage.SearchBox.Type("example.com");
