@@ -1,8 +1,8 @@
-namespace $rootnamespace$
+namespace Tests
 {
+    using Logging;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Tiver.Fowl.TestingBase;
-    using $rootnamespace$.Logging;
     using TestResult = Tiver.Fowl.Core.Enums.TestResult;
 
     [TestClass]
@@ -53,11 +53,7 @@ namespace $rootnamespace$
             Flow.SessionTeardown();
         }
 
-        public int? Step
-        {
-            get;
-            set;
-        }
+        public int? Step { get; set; }
 
         public TestContext TestContext { get; set; }
     }

@@ -3,7 +3,6 @@
     using System;
     using Core.Context;
     using Core.Enums;
-    using Reporting;
     using Serilog;
     using WebDriverExtended.Browsers;
 
@@ -30,7 +29,6 @@
         public static void SessionTeardown()
         {
             Context.ClearSessionContext();
-            Report.Build();
         }
 
         private static void Teardown()
