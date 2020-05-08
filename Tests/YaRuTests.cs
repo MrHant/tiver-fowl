@@ -21,7 +21,7 @@
             HomePage.SearchButton.Click();
 
             this.LogStep("Results are displayed");
-            Assert.IsTrue(new Element("//div[.='Example Domain']").Displayed());
+            Assert.IsTrue(new Element("//div[contains(@class,'serp-list')]/div[@class='serp-adv__found']").Displayed());
         }
     }
 }
