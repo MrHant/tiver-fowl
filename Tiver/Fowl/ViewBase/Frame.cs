@@ -3,7 +3,7 @@
     using System;
     using Core.Context;
 
-    public class Frame : View, IDisposable
+    public class Frame : IDisposable
     {
         public Frame(string frameLocator)
         {

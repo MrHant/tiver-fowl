@@ -73,7 +73,6 @@
     <Compile Include="Behaviors\Extensions\ITypeableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Frame.cs" />
-    <Compile Include="View.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logging\Tiver.Fowl.Logging.csproj">
