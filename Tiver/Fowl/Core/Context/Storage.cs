@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Exceptions;
 
     public class Storage : IStorage
@@ -44,6 +45,16 @@
             {
                 throw new StorageKeyNotFoundException($"Storage item for key '{key}' not found", ex);
             }
+        }
+
+        public object ReadOrAdd(string key, object defaultValue)
+        {
+            if (!Items.Keys.Contains(key))
+            {
+                Items.Add(key, defaultValue);
+            }
+
+            return Items[key];
         }
 
         public void Clear()

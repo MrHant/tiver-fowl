@@ -8,10 +8,11 @@
 
     public static class Flow
     {
-        public static void Setup(Type testType, string testName)
+        public static void Setup(Type testType, string testName, Func<string> testKey)
         {
-            TestExecutionContext.TestType = testType;
+            Context.SetTestKey(testKey);
             TestExecutionContext.TestName = testName;
+            TestExecutionContext.TestType = testType;
 
             if (TestExecutionContext.IsWebDriverTest)
             {
