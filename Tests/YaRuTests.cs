@@ -16,12 +16,11 @@
         [TestCase(3)]
         public void Test1(int parallel)
         {
-            this.LogStep("Search for something");
-            HomePage.SearchBox.Type("example.com");
-            HomePage.SearchButton.Click();
+            this.LogStep("Open 'Quick View' for first displaying item");
+            NavigationView.Dresses.Click();
 
-            this.LogStep("Results are displayed");
-            Assert.IsTrue(new Element("//div[contains(@class,'serp-list')]/div[@class='serp-adv__found']").Displayed());
+            this.LogStep("Count of items displayed");
+            Assert.IsTrue(new Element("//h1[contains(@class, 'page-heading')]/span[@class='heading-counter']").Displayed());
         }
     }
 }
