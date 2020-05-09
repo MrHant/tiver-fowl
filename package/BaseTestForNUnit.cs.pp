@@ -12,7 +12,10 @@ namespace $rootnamespace$
         [SetUp]
         public void Setup()
         {
-            Flow.Setup(GetType(), TestContext.CurrentContext.Test.Name);
+            Flow.Setup(
+                GetType(), 
+                TestContext.CurrentContext.Test.Name,
+                () => TestContext.CurrentContext.WorkerId);
         }
 
         [TearDown]
@@ -37,12 +40,6 @@ namespace $rootnamespace$
             }
 
             Flow.Teardown(testResult);
-        }
-
-        public int? Step
-        {
-            get;
-            set;
         }
     }
 

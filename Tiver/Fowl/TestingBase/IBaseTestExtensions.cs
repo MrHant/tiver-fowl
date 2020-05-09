@@ -1,15 +1,14 @@
 ﻿namespace Tiver.Fowl.TestingBase
 {
+    using Core.Context;
     using Serilog;
-    using Serilog.Core;
 
     public static class IBaseTestExtensions
     {
         public static int GetNextStepNumber(this IBaseTest test)
         {
-            test.Step = test.Step ?? 0;
-            test.Step++;
-            return test.Step.Value;
+            TestExecutionContext.TestStep++;
+            return TestExecutionContext.TestStep;
         }
 
         public static void LogStep(this IBaseTest test, string text)

@@ -85,7 +85,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseTestForMsTest.cs" />
     <Compile Include="BaseTestForNUnit.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="HomePage.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Elements\Textbox.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YaRuTestsMSTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tiver\Fowl\Core\Tiver.Fowl.Core.csproj">

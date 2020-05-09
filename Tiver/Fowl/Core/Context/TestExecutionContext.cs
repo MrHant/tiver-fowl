@@ -59,6 +59,20 @@
             }
         }
 
+        public static int TestStep
+        {
+            get
+            {
+                return (int)Context.Test.ReadOrAdd("TestStep", 0);
+            }
+
+            set
+            {
+                Context.Test.Write("TestStep", value);
+            }
+        }
+
+        
         public static IBrowserActions BrowserActions => Browser.BrowserActions;
 
         public static IWebElementActions WebElementActions => Browser.WebElementActions;

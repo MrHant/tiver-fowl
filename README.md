@@ -14,7 +14,7 @@ A framework for writing Automated Integration tests (including tests via Seleniu
   * Driver executables copied to 'lib' folder
   * Report templates copied to 'templates' folder
 * Add needed configuration options to 'App.config' (refer to ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample))
-* Add unit-testing framework like MSTest or NUnit and add a BaseClass (refer to ['BaseTestForMsTest.cs.pp'](package/BaseTestForMsTest.cs.pp) or ['BaseTestForNUnit.cs.pp'](package/BaseTestForNUnit.cs.pp))
+* Add unit-testing framework (preferably NUnit) and add a BaseClass (refer to ['BaseTestForNUnit.cs.pp'](package/BaseTestForNUnit.cs.pp))
 * Write up some tests and you are ready to go
 
 ### Package update
@@ -22,9 +22,3 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 * Please make sure to use Version Control System and commit all your changes before package update
 * Package update will recreate all package-specific files - like elements and templates
 * Please review changes and run your tests after package update
-
-## Local execution
-
-* To run tests locally - Select "Default.runsettings" as configuration file for Tests
- * It contains settings for output folder
- * As well as copying driver executables
