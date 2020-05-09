@@ -5,11 +5,5 @@
         void Setup();
 
         void Teardown();
-
-        int? Step
-        {
-            get;
-            set;
-        }
     }
 }
