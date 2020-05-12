@@ -25,19 +25,19 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.Core.dll" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.Core.pdb" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.Logging.dll" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.Logging.pdb" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.TestingBase.dll" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.TestingBase.pdb" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.ViewBase.dll" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.ViewBase.pdb" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.WebDriverExtended.dll" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.WebDriverExtended.pdb" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.WebDriverExtended.Contracts.dll" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Tiver.Fowl.WebDriverExtended.Contracts.pdb" target="lib\netcoreapp3.1" />
-    <file src="..\bin\Release\netcoreapp3.1\Lib\*.*" target="content\lib" />
+    <file src="..\artifacts\Tiver.Fowl.Core.dll" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.Core.pdb" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.Logging.dll" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.Logging.pdb" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.TestingBase.dll" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.TestingBase.pdb" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.ViewBase.dll" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.ViewBase.pdb" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.dll" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.pdb" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.Contracts.dll" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.Contracts.pdb" target="lib\netcoreapp3.1" />
+    <file src="..\artifacts\Lib\*.*" target="content\lib" />
     <file src="BaseTestForNUnit.cs.pp" target="content" />
     <file src="Elements\Textbox.cs.pp" target="content\Elements" />
     <file src="Logging\Logger.cs.pp" target="content\Logging" />
