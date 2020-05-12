@@ -1,57 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{22283771-8AFB-47B7-ACE1-70DBE2397E02}</ProjectGuid>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tiver.Fowl.WebDriverExtended</RootNamespace>
-    <AssemblyName>Tiver.Fowl.WebDriverExtended</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>$(SolutionDir)\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Tiver.Fowl.WebDriverExtended.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <OutputPath>$(SolutionDir)\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Tiver.Fowl.WebDriverExtended.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\..\Tiver.Fowl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -62,30 +29,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Browsers\Browser.cs" />
-    <Compile Include="Browsers\BrowserFactory.cs" />
-    <Compile Include="Browsers\ChromeBrowser.cs" />
-    <Compile Include="Browsers\FirefoxBrowser.cs" />
-    <Compile Include="Browsers\ChromeBrowserFactory.cs" />
-    <Compile Include="Browsers\FirefoxBrowserFactory.cs" />
-    <Compile Include="Exceptions\IncorrectBrowserConfigurationException.cs" />
-    <Compile Include="Configuration\BrowserConfigurationSection .cs" />
-    <Compile Include="Configuration\ResolutionElement.cs" />
-    <Compile Include="Namespace.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Tiver.Fowl.WebDriverExtended.ruleset" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj">
-      <Project>{57d6d3da-14ee-40c1-affa-7d61cd9fddb8}</Project>
-      <Name>Tiver.Fowl.WebDriverExtended.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core\Tiver.Fowl.Core.csproj">
-      <Project>{a1aee3fe-937b-4b20-a335-266490872764}</Project>
-      <Name>Tiver.Fowl.Core</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj" />
+    <ProjectReference Include="..\Core\Tiver.Fowl.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\CustomCodeAnalysisDictionary.xml">
@@ -100,7 +45,7 @@
       <Version>2.9.0</Version>
     </PackageReference>
     <PackageReference Include="Tiver.Fowl.Drivers">
-      <Version>0.3.2</Version>
+      <Version>0.4.0</Version>
     </PackageReference>
   </ItemGroup>
   <Choose>
@@ -121,20 +66,4 @@
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -3,20 +3,10 @@
     using System.Configuration;
     using Contracts.Configuration;
 
-    public class ResolutionElement : ConfigurationElement, IResolution
+    public class ResolutionElement : IResolution
     {
-        [ConfigurationProperty("width", IsRequired = false)]
-        public int? Width
-        {
-            get => (int?)this["width"];
-            set => this["width"] = value;
-        }
+        public int? Width { get; set; } = null;
 
-        [ConfigurationProperty("height", IsRequired = false)]
-        public int? Height
-        {
-            get => (int?)this["height"];
-            set => this["height"] = value;
-        }
+        public int? Height { get; set; } = null;
     }
 }

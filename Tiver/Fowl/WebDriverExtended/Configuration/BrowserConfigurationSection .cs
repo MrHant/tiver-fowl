@@ -4,36 +4,15 @@
     using System.Configuration;
     using Contracts.Configuration;
 
-    public class BrowserConfigurationSection : ConfigurationSection, IBrowserConfiguration
+    public class BrowserConfigurationSection : IBrowserConfiguration
     {
-        public IResolution Resolution => ResolutionElement;
 
-        [ConfigurationProperty("downloadBinary", DefaultValue = false, IsRequired = false)]
-        public bool DownloadBinary
-        {
-            get => (bool)this["downloadBinary"];
-            set => this["downloadBinary"] = value;
-        }
+        public bool DownloadBinary { get; set; }
 
-        [ConfigurationProperty("browserType", DefaultValue = null, IsRequired = false)]
-        public string BrowserType
-        {
-            get => (string)this["browserType"];
-            set => this["browserType"] = value;
-        }
+        public string BrowserType { get; set; }
 
-        [ConfigurationProperty("remoteAddress", DefaultValue = null, IsRequired = false)]
-        public Uri RemoteAddress
-        {
-            get => (Uri)this["remoteAddress"];
-            set => this["remoteAddress"] = value;
-        }
+        public Uri RemoteAddress { get; set; }
 
-        [ConfigurationProperty("resolution", DefaultValue = null, IsRequired = false)]
-        public ResolutionElement ResolutionElement
-        {
-            get => (ResolutionElement)this["resolution"];
-            set => this["resolution"] = value;
-        }
+        public IResolution Resolution { get; set; }
     }
 }
