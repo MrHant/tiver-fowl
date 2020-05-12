@@ -33,9 +33,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.Logging", "Tiver
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{12389CBF-3549-4468-A662-D92A83543D61}"
 	ProjectSection(SolutionItems) = preProject
-		package\App.config.tiver.fowl.sample = package\App.config.tiver.fowl.sample
 		package\BaseTestForNUnit.cs.pp = package\BaseTestForNUnit.cs.pp
 		package\Package.nuspec = package\Package.nuspec
+		package\Tiver_config.json.sample = package\Tiver_config.json.sample
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elements", "Elements", "{E3F9C328-892D-4D95-8D8B-2DC0CC32B695}"
