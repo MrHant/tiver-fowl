@@ -2,14 +2,14 @@
 {
     using System;
     using System.Drawing;
-    using Contracts.Configuration;
+    using Core.Configuration;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.Remote;
 
     public class FirefoxBrowserFactory : BrowserFactory
     {
-        public override Browser Build(IBrowserConfiguration configuration)
+        public override Browser Build(BrowserConfiguration configuration)
         {
             IWebDriver driver;
             if (configuration.RemoteAddress != null)
