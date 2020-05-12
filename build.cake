@@ -1,23 +1,16 @@
 const string project = "Tiver.Fowl";
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var solutionFilename = Argument("solutionFilename", project + ".sln");
 var projects = Argument(
-    "projects", 
-    "Tiver/Fowl/Core;" 
-    + "Tiver/Fowl/Logging;" 
-    + "Tiver/Fowl/Reporting;" 
-    + "Tiver/Fowl/TestingBase;" 
-    + "Tiver/Fowl/ViewBase;" 
-    + "Tiver/Fowl/WebDriverExtended;" 
+    "projects",
+    "Tiver/Fowl/Core;"
+    + "Tiver/Fowl/Logging;"
+    + "Tiver/Fowl/TestingBase;"
+    + "Tiver/Fowl/ViewBase;"
+    + "Tiver/Fowl/WebDriverExtended;"
     + "Tiver/Fowl/WebDriverExtended.Contracts");
 
 var projectDirectories = projects.Split(';');
-
-DirectoryPath vsLatest  = VSWhereLatest();
-var msBuildPath = (vsLatest==null)
-                            ? null
-                            : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
 
 GitVersion versionInfo;
 string version;
@@ -43,8 +36,8 @@ Teardown(_ =>
 Task("RestoreNuGetPackages")
     .Does(() =>
 {
-    Information("Restoring nuget packages for {0}", solutionFilename);
-    NuGetRestore("./" + solutionFilename);
+    Information("Restoring nuget packages");
+    DotNetCoreRestore();
 });
 
 Task("Clean")
@@ -52,8 +45,9 @@ Task("Clean")
     .Does(() =>
 {
     Information("Cleaning project directories");
+    CleanDirectories("./artifacts");
     foreach (var dir in projectDirectories) {
-        CleanDirectories("./bin");
+        CleanDirectories("./" + dir + "/bin");
         CleanDirectories("./" + dir + "/obj");
     }
 });
@@ -63,28 +57,33 @@ Task("Build")
     .IsDependentOn("Version")
     .Does(() =>
 {
-    Information("Building {0} with configuration {1}", solutionFilename, configuration);
-    MSBuild("./" + solutionFilename, new MSBuildSettings {
-        ToolVersion = MSBuildToolVersion.VS2017,
-        Configuration = configuration,
-        ToolPath = msBuildPath
-    });
+    Information("Building with configuration {0}", configuration);
+    var settings = new DotNetCoreBuildSettings
+     {
+         Framework = "netcoreapp3.1",
+         Configuration = configuration,
+         OutputDirectory = "./artifacts/"
+     };
+
+     foreach (var dir in projectDirectories) {
+       DotNetCoreBuild("./"+dir, settings);
+     }
 });
 
 Task("Version")
-    .Does(() => 
+    .Does(() =>
 {
     GitVersion(new GitVersionSettings{
         UpdateAssemblyInfo = true,
         OutputType = GitVersionOutput.BuildServer,
     });
 
-    versionInfo = GitVersion(new GitVersionSettings{ 
+    versionInfo = GitVersion(new GitVersionSettings{
         OutputType = GitVersionOutput.Json,
     });
     version = versionInfo.LegacySemVerPadded;
 });
-   
+
 Task("CreateNuGetPackage")
     .IsDependentOn("Build")
     .Does(() =>

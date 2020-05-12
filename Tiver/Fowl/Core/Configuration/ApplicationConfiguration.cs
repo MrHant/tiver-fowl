@@ -2,16 +2,10 @@
 {
     using System;
 
-    public class ApplicationConfiguration : IApplicationConfiguration
+    public class ApplicationConfiguration
     {
-        public ApplicationConfiguration(string title, Uri startUrl)
-        {
-            this.Title = title;
-            this.StartUrl = startUrl;   
-        }
+        public string Title { get; set; }
 
-        public string Title { get; private set; }
-
-        public Uri StartUrl { get; private set; }
+        public Uri StartUrl { get; set; }
     }
 }

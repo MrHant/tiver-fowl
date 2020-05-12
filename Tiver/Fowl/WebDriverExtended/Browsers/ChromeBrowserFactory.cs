@@ -2,14 +2,14 @@
 {
     using System;
     using System.Drawing;
-    using Contracts.Configuration;
+    using Core.Configuration;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Remote;
 
     public class ChromeBrowserFactory : BrowserFactory
     {
-        public override Browser Build(IBrowserConfiguration configuration)
+        public override Browser Build(BrowserConfiguration configuration)
         {
             IWebDriver driver;
             if (configuration.RemoteAddress != null)

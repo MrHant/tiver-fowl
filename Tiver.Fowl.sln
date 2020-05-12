@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55D28FBE-FE5F-4047-8E6A-FC6A8448E9BF}"
 	ProjectSection(SolutionItems) = preProject
 		CustomCodeAnalysisDictionary.xml = CustomCodeAnalysisDictionary.xml
-		Default.runsettings = Default.runsettings
-		Default.testsettings = Default.testsettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E424E86C-0085-4C3E-8142-8C57F29D1052}"
@@ -19,23 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E424E8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tiver.Fowl", "Tiver.Fowl", "{64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.Core", "Tiver\Fowl\Core\Tiver.Fowl.Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiver.Fowl.Core", "Tiver\Fowl\Core\Tiver.Fowl.Core.csproj", "{A1AEE3FE-937B-4B20-A335-266490872764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.TestingBase", "Tiver\Fowl\TestingBase\Tiver.Fowl.TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiver.Fowl.TestingBase", "Tiver\Fowl\TestingBase\Tiver.Fowl.TestingBase.csproj", "{B1FB4583-BBA4-420B-85BF-C55959005D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.WebDriverExtended", "Tiver\Fowl\WebDriverExtended\Tiver.Fowl.WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiver.Fowl.WebDriverExtended", "Tiver\Fowl\WebDriverExtended\Tiver.Fowl.WebDriverExtended.csproj", "{22283771-8AFB-47B7-ACE1-70DBE2397E02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.ViewBase", "Tiver\Fowl\ViewBase\Tiver.Fowl.ViewBase.csproj", "{FAC33B29-E159-483F-9A62-B3CDCFE4910F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiver.Fowl.ViewBase", "Tiver\Fowl\ViewBase\Tiver.Fowl.ViewBase.csproj", "{FAC33B29-E159-483F-9A62-B3CDCFE4910F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.WebDriverExtended.Contracts", "Tiver\Fowl\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj", "{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiver.Fowl.WebDriverExtended.Contracts", "Tiver\Fowl\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj", "{57D6D3DA-14EE-40C1-AFFA-7D61CD9FDDB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiver.Fowl.Logging", "Tiver\Fowl\Logging\Tiver.Fowl.Logging.csproj", "{159787A4-C5B9-4FA8-B3D5-1A9ECC976C35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiver.Fowl.Logging", "Tiver\Fowl\Logging\Tiver.Fowl.Logging.csproj", "{159787A4-C5B9-4FA8-B3D5-1A9ECC976C35}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{12389CBF-3549-4468-A662-D92A83543D61}"
 	ProjectSection(SolutionItems) = preProject
-		package\App.config.tiver.fowl.sample = package\App.config.tiver.fowl.sample
 		package\BaseTestForNUnit.cs.pp = package\BaseTestForNUnit.cs.pp
 		package\Package.nuspec = package\Package.nuspec
+		package\Tiver_config.json.sample = package\Tiver_config.json.sample
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elements", "Elements", "{E3F9C328-892D-4D95-8D8B-2DC0CC32B695}"
@@ -48,7 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{DF02
 		package\Logging\Logger.cs.pp = package\Logging\Logger.cs.pp
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BAAAB0CA-33D2-4BFA-A525-9B840671FF58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{BAAAB0CA-33D2-4BFA-A525-9B840671FF58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,5 +95,8 @@ Global
 		{159787A4-C5B9-4FA8-B3D5-1A9ECC976C35} = {64A1491E-9ACC-4BD6-B393-A891D4ED2CCF}
 		{E3F9C328-892D-4D95-8D8B-2DC0CC32B695} = {12389CBF-3549-4468-A662-D92A83543D61}
 		{DF023233-F2D9-46D7-827A-895F28AD735C} = {12389CBF-3549-4468-A662-D92A83543D61}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00ED1E4C-AD50-4C47-BA44-3B8CBBC36EA2}
 	EndGlobalSection
 EndGlobal

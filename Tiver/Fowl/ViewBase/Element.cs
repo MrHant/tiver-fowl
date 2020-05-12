@@ -30,7 +30,7 @@
             {
                 result = function.Invoke(this.WebElement);
                 return true;
-            }, (WaitConfigurationSection)ConfigurationManager.GetSection(ConfigurationSectionNames.Wait));
+            });
 
             return result;
         }

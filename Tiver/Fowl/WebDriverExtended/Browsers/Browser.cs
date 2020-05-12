@@ -1,6 +1,5 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
-    using System.Configuration;
     using System.Linq;
     using Contracts.Browsers;
     using Core.Configuration;
@@ -17,9 +16,7 @@
 
         public void NavigateToStartUri()
         {
-            IApplicationConfiguration config =
-                (ApplicationConfigurationSection)
-                ConfigurationManager.GetSection(ConfigurationSectionNames.Application);
+            var config = ConfigurationMapper.Application;
             webDriver.Navigate().GoToUrl(config.StartUrl);
         }
 

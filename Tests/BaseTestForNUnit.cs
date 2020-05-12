@@ -15,7 +15,7 @@ namespace Tests
             Flow.Setup(
                 GetType(), 
                 TestContext.CurrentContext.Test.Name,
-                () => TestContext.CurrentContext.WorkerId);
+                () => TestContext.CurrentContext.Test.Name);
         }
 
         [TearDown]

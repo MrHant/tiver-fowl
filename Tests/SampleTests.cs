@@ -8,7 +8,7 @@
     
     [WebDriverTest]
     [Parallelizable(ParallelScope.All)]
-    public class YaRuTests : BaseTestForNUnit
+    public class SampleTests : BaseTestForNUnit
     {
         [Test]
         [TestCase(1)]
