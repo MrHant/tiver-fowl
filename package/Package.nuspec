@@ -23,11 +23,6 @@
         <dependency id="Tiver.Fowl.Drivers" version="0.4.0" />
       </group>
     </dependencies>
-    <contentFiles>
-      <files include="lib/*.*" buildAction="Content" copyToOutput="true" />
-      <files include="Tiver_config.json.sample" buildAction="None" />
-      <files include="cs/**/*.*" buildAction="Compile" />
-    </contentFiles>
   </metadata>
   <files>
     <file src="..\artifacts\Tiver.Fowl.Core.dll" target="lib\netcoreapp3.1" />
@@ -42,11 +37,5 @@
     <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.pdb" target="lib\netcoreapp3.1" />
     <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.Contracts.dll" target="lib\netcoreapp3.1" />
     <file src="..\artifacts\Tiver.Fowl.WebDriverExtended.Contracts.pdb" target="lib\netcoreapp3.1" />
-    <!-- Content files -->
-    <file src="..\artifacts\Lib\*.*" target="contentFiles\lib" />
-    <file src="BaseTestForNUnit.cs.pp" target="contentFiles\cs\netcoreapp3.1" />
-    <file src="Elements\Textbox.cs.pp" target="contentFiles\cs\netcoreapp3.1\Elements" />
-    <file src="Logging\Logger.cs.pp" target="contentFiles\cs\netcoreapp3.1\Logging" />
-    <file src="Tiver_config.json.sample" target="contentFiles" />
   </files>
 </package>
