@@ -8,6 +8,8 @@
 
         public string BrowserType { get; set; }
 
+        public bool Headless { get; set; }
+        
         public Uri RemoteAddress { get; set; }
 
         public Resolution Resolution { get; set; }

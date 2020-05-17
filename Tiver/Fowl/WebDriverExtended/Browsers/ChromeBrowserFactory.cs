@@ -19,7 +19,12 @@
             }
             else
             {
-                driver = new ChromeDriver();
+                var options = new ChromeOptions();
+                if (configuration.Headless)
+                {
+                    options.AddArgument("--headless");
+                }
+                driver = new ChromeDriver(options);
             }
 
             if (configuration.Resolution.Width != null || configuration.Resolution.Height != null)

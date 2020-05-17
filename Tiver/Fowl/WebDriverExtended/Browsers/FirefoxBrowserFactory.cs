@@ -19,7 +19,12 @@
             }
             else
             {
-                driver = new FirefoxDriver();
+                var options = new FirefoxOptions();
+                if (configuration.Headless)
+                {
+                    options.AddArgument("-headless");
+                }
+                driver = new FirefoxDriver(options);
             }
 
             if (configuration.Resolution.Width != null || configuration.Resolution.Height != null)
