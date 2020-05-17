@@ -1,8 +1,10 @@
 namespace XXXXX.Logging
 {
     using Serilog;
+    using Serilog.Extensions.Logging;
     using Serilog.Formatting.Json;
     using Tiver.Fowl.Logging;
+    using Tiver.Fowl.Waiting;
 
     public class Logger
     {
@@ -20,6 +22,9 @@ namespace XXXXX.Logging
                 .WriteTo.File(new JsonFormatter(), "./log.txt")
                 .CreateLogger();
             configured = true;
+            
+			//// Add package 'Serilog.Extensions.Logging' and uncomment line below to enable logging for Tiver.Fowl.Wait package
+            // Wait.SetLogger(new SerilogLoggerProvider(Log.Logger, false).CreateLogger("Wait"));
         }
 
         private static bool configured;
