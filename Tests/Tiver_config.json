@@ -24,7 +24,7 @@
     ]
   },
   "Tiver.Fowl.Waiting": {
-    "Timeout": 5000,
+    "Timeout": 10000,
     "PollingInterval": 250,
     "IgnoredExceptionsTypeNames": [
       "OpenQA.Selenium.NoSuchElementException, WebDriver",

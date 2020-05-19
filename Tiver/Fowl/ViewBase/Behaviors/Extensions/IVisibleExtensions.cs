@@ -8,22 +8,18 @@
         /// <summary>
         /// Checks whether element is displayed
         /// </summary>
-        /// <remarks>
-        /// Waits till timeout before returning false
-        /// </remarks>
+        /// <exception cref="WaitTimeoutException">Thrown in case not able to get Displayed result in within timeout</exception>
         /// <returns>true if element is displayed, false otherwise</returns>
         public static bool Displayed(this IVisible element)
         {
             element.LogAction("Check whether element is displayed");
-            try
+            var result = false;    
+            element.Process(e =>
             {
-                return element.Process(e => e.Displayed);
-            }
-            catch (WaitTimeoutException)
-            {
-                // If not found within timeout => not displayed
-                return false;
-            }
+                result = e.Displayed;
+                return true;
+            });
+            return result;
         }
     }
 }

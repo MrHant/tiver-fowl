@@ -4,10 +4,16 @@
 
     public static class IHasAttrbutesExtensions
     {
-        public static void GetAttribute(this IHasAttributes element, string attributeName)
+        public static string GetAttribute(this IHasAttributes element, string attributeName)
         {
             element.LogAction($"Getting attribute value for '{attributeName}'");
-            element.Process(e => e.GetAttribute(attributeName));
+            var result = string.Empty;
+            element.Process(e =>
+            {
+                result = e.GetAttribute(attributeName);
+                return true;
+            });
+            return result;
         }
     }
 }
