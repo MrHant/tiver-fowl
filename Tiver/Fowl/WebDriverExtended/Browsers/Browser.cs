@@ -1,5 +1,6 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
+    using System;
     using System.Linq;
     using Contracts.Browsers;
     using Core.Configuration;
@@ -32,11 +33,18 @@
 
         public void TakeScreenshot()
         {
-            var ss = ((ITakesScreenshot) webDriver).GetScreenshot();
-            var base64 = ss.AsBase64EncodedString;
-            Log.ForContext("LogType", "Screenshot")
-                .ForContext("Base64", base64)
-                .Information($"{{Name}} :: {{Action}}", "Browser", "Screenshot taken");
+            try
+            {
+                var ss = ((ITakesScreenshot) webDriver).GetScreenshot();
+                var base64 = ss.AsBase64EncodedString;
+                Log.ForContext("LogType", "Screenshot")
+                    .ForContext("Base64", base64)
+                    .Information($"{{Name}} :: {{Action}}", "Browser", "Screenshot taken");
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Can't take screenshot");
+            }
         }
 
         public void Quit()
