@@ -4,6 +4,6 @@ namespace Tests
 
     public static class NavigationView
     {
-        public static readonly Button Dresses = new Button("//div[@id='block_top_menu']/ul/li/a[text()='Dresses']", "'Dresses' menu item");
+        public static readonly Button Dresses = new Button("//div[@id='block_top_menu']/ul/li/a[text()='Dresses']");
     }
 }

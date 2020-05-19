@@ -1,14 +1,11 @@
 ﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
-    using System.Configuration;
     using Behaviors;
-    using Core.Configuration;
     using Core.Context;
     using Logging;
     using OpenQA.Selenium;
     using Waiting;
-    using Waiting.Configuration;
 
     public class Element : IElement, INamed, IVisible, IClickable, IHasAttributes
     {
