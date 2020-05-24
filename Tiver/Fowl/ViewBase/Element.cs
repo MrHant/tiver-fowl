@@ -12,33 +12,38 @@
         /// <summary>
         /// Initialize an element
         /// </summary>
+        /// <remarks>
+        /// <paramref name="locator"/> can include formatting places, to be later replaced with arguments passed
+        /// to <see cref="Process"/> and <see cref="Process{TResult}"/> methods
+        /// </remarks>
         /// <param name="locator">XPath locator of element</param>
         /// <param name="name">Verbose name of element for log file</param>
-        public Element(string locator, string name=null)
+        public Element(string locator, string name = null)
         {
             Locator = locator;
             Name = name;
         }
 
-        public TResult Process<TResult>(Func<IWebElement, TResult> function)
+        public TResult Process<TResult>(Func<IWebElement, TResult> function, params object[] locatorFormattingArguments)
         {
             var result = default(TResult);
             Wait.Until(() =>
             {
-                result = function.Invoke(this.WebElement);
+                result = function.Invoke(GetWebElement(locatorFormattingArguments));
                 return true;
             });
 
             return result;
         }
 
-        public void Process(Action<IWebElement> action)
+        public void Process(Action<IWebElement> action, params object[] locatorFormattingArguments)
         {
             Process(e =>
-            {
-                action.Invoke(e);
-                return true;
-            });
+                {
+                    action.Invoke(e);
+                    return true;
+                },
+                locatorFormattingArguments);
         }
 
         public string Locator
@@ -51,6 +56,9 @@
             get;
         }
 
-        private IWebElement WebElement => TestExecutionContext.WebElementActions.Find(this.Locator);
+        private IWebElement GetWebElement(params object[] locatorFormattingArguments)
+        {
+            return TestExecutionContext.WebElementActions.Find(string.Format(this.Locator, locatorFormattingArguments));
+        }
     }
 }

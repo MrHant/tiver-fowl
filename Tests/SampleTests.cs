@@ -17,7 +17,7 @@
         public void Test1(int parallel)
         {
             this.LogStep("Open 'Quick View' for first displaying item");
-            NavigationView.Dresses.Click();
+            NavigationView.TopMenuItem.Click("Dresses");
 
             this.LogStep("Count of items displayed");
             Assert.IsTrue(new Element("//h1[contains(@class, 'page-heading')]/span[@class='heading-counter']").Displayed());

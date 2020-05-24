@@ -4,10 +4,13 @@
 
     public static class IClickableExtensions
     {
-        public static void Click(this IClickable element)
+        public static void Click(this IClickable element, params object[] locatorFormattingArguments)
         {
             element.LogAction("Clicking");
-            element.Process(e => e.Click());
+            element.Process(
+                e => e.Click(),
+                locatorFormattingArguments
+            );
         }
     }
 }
