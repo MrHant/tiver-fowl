@@ -3,7 +3,7 @@
     using System;
     using Attributes;
     using Enums;
-    using WebDriverExtended.Contracts.Browsers;
+    using WebDriverExtended.Browsers;
 
     public static class TestExecutionContext
     {

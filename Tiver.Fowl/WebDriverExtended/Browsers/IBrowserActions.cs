@@ -1,4 +1,4 @@
-﻿namespace Tiver.Fowl.WebDriverExtended.Contracts.Browsers
+﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
     public interface IBrowserActions
     {

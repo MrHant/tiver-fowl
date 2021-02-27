@@ -93,7 +93,7 @@ class Build : NukeBuild
                 .EnableNoBuild()
                 .EnableNoCache()
                 .EnableNoRestore()
-                .SetProject(OutputDirectory)
+                .SetProject(Solution)
                 .SetConfiguration(Configuration)
                 .SetOutputDirectory(ArtifactsDirectory)
                 .SetVersion(GitVersion.NuGetVersionV2)
