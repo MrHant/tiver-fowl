@@ -36,12 +36,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{1238
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{BAAAB0CA-33D2-4BFA-A525-9B840671FF58}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{866A80D1-18EC-4AF5-893A-4E12224D9239}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{866A80D1-18EC-4AF5-893A-4E12224D9239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{866A80D1-18EC-4AF5-893A-4E12224D9239}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1AEE3FE-937B-4B20-A335-266490872764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1AEE3FE-937B-4B20-A335-266490872764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1AEE3FE-937B-4B20-A335-266490872764}.Release|Any CPU.ActiveCfg = Release|Any CPU
