@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using Contracts.Browsers;
     using Core.Configuration;
     using OpenQA.Selenium;
     using Serilog;
