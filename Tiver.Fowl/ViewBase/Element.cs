@@ -3,6 +3,7 @@
     using System;
     using Behaviors;
     using Core.Context;
+    using Exceptions;
     using Logging;
     using OpenQA.Selenium;
     using Waiting;
@@ -58,7 +59,21 @@
 
         private IWebElement GetWebElement(params object[] locatorFormattingArguments)
         {
-            return TestExecutionContext.WebElementActions.Find(string.Format(this.Locator, locatorFormattingArguments));
+            string locator = null;
+            try
+            {
+                locator = string.Format(this.Locator, locatorFormattingArguments);
+            }
+            catch (FormatException formatException)
+            {
+                throw new LocatorFormattingException(
+                    $"Error during locator formatting. Please ensure all required arguments are passed " +
+                    $"for formatting. Locator: [{this.Locator}], Arguments: [{locatorFormattingArguments}]",
+                    formatException
+                );
+            }
+            
+            return TestExecutionContext.WebElementActions.Find(locator);
         }
     }
 }
