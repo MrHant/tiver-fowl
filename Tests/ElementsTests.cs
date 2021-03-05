@@ -4,6 +4,7 @@ namespace Tests
     using Tiver.Fowl.Core.Attributes;
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
     using Tiver.Fowl.ViewBase.Exceptions;
+    using Tiver.Fowl.Waiting.Exceptions;
 
     [WebDriverTest]
     public class ElementsTests : BaseTestForNUnit
@@ -21,7 +22,10 @@ namespace Tests
             
             // IVisible
             Assert.IsTrue(NavigationView.TopMenuItem.Displayed("Dresses"));
-            Assert.IsFalse(NavigationView.TopMenuItem.Displayed("xxxxx"));
+            Assert.Throws<WaitTimeoutException>(() =>
+            {
+                Assert.IsFalse(NavigationView.TopMenuItem.Displayed("xxxxx"));
+            });
         }
 
         [Test]
