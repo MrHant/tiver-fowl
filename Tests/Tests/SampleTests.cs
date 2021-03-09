@@ -1,11 +1,12 @@
-﻿namespace Tests
+﻿namespace Tests.Tests
 {
+    using Views;
     using NUnit.Framework;
     using Tiver.Fowl.Core.Attributes;
     using Tiver.Fowl.TestingBase;
     using Tiver.Fowl.ViewBase;
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
-    
+
     [WebDriverTest]
     [Parallelizable(ParallelScope.All)]
     public class SampleTests : BaseTestForNUnit

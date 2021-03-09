@@ -1,5 +1,6 @@
-namespace Tests
+namespace Tests.Tests
 {
+    using Views;
     using NUnit.Framework;
     using Tiver.Fowl.Core.Attributes;
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
