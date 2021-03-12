@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using Core.Configuration;
     using OpenQA.Selenium;
     using Serilog;
 
@@ -14,10 +13,24 @@
 
         #region IBrowserActionsImplementation
 
-        public void NavigateToStartUri()
+        public void NavigateToUrl(Uri url)
         {
-            var config = ConfigurationMapper.Application;
-            webDriver.Navigate().GoToUrl(config.StartUrl);
+            webDriver.Navigate().GoToUrl(url);
+        }
+
+        public void Refresh()
+        {
+            webDriver.Navigate().Refresh();
+        }
+
+        public void Back()
+        {
+            webDriver.Navigate().Back();
+        }
+
+        public void Forward()
+        {
+            webDriver.Navigate().Forward();
         }
 
         public void SwitchToFrame(string locator)
@@ -44,6 +57,11 @@
             {
                 Log.Error(e, "Can't take screenshot");
             }
+        }
+
+        public void CloseWindow()
+        {
+            webDriver.Close();
         }
 
         public void Quit()

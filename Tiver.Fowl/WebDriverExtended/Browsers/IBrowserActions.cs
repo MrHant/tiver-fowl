@@ -1,12 +1,17 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
+    using System;
+
     public interface IBrowserActions
     {
-        /// <summary>
-        /// Navigates to Start Uri defined in configuration
-        /// </summary>
-        void NavigateToStartUri();
+        void NavigateToUrl(Uri url);
 
+        void Refresh();
+
+        void Back();
+
+        void Forward();
+        
         /// <summary>
         /// Switches to frame found by locator
         /// </summary>
@@ -24,6 +29,8 @@
         /// Takes screenshot and logs it as base64
         /// </summary>
         void TakeScreenshot();
+
+        void CloseWindow();
 
         void Quit();
     }
