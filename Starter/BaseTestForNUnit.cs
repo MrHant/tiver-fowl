@@ -2,6 +2,8 @@ namespace XXXXX
 {
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;
+    using Tiver.Fowl.Core.Configuration;
+    using Tiver.Fowl.Core.Context;
     using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
     using XXXXX.Logging;
@@ -16,6 +18,8 @@ namespace XXXXX
                 GetType(), 
                 TestContext.CurrentContext.Test.Name,
                 () => TestContext.CurrentContext.Test.Name);
+
+            TestExecutionContext.BrowserActions.NavigateToUrl(ConfigurationMapper.Application.StartUrl);
         }
 
         [TearDown]

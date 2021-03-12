@@ -17,7 +17,6 @@
             if (TestExecutionContext.IsWebDriverTest)
             {
                 TestExecutionContext.Browser = BrowserFactory.GetBrowser();
-                TestExecutionContext.BrowserActions.NavigateToStartUri();
             }
         }
 
