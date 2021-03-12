@@ -1,8 +1,8 @@
 namespace Tests
 {
+    using Configuration;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;
-    using Tiver.Fowl.Core.Configuration;
     using Tiver.Fowl.Core.Context;
     using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
@@ -19,7 +19,7 @@ namespace Tests
                 TestContext.CurrentContext.Test.Name,
                 () => TestContext.CurrentContext.Test.Name);
             
-            TestExecutionContext.BrowserActions.NavigateToUrl(ConfigurationMapper.Application.StartUrl);
+            TestExecutionContext.BrowserActions.NavigateToUrl(ActiveConfiguration.StartUrl);
         }
 
         [TearDown]

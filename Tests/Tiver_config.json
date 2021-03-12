@@ -1,7 +1,6 @@
 {
   "ApplicationConfiguration": {
     "Title": "System Under Test Title",
-    "StartUrl": "http://automationpractice.com/"
   },
   "BrowserConfiguration": {
     "BrowserType": "chrome",
