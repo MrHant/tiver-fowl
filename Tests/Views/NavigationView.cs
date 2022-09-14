@@ -4,6 +4,6 @@ namespace Tests.Views
 
     public static class NavigationView
     {
-        public static readonly Button TopMenuItem = new Button("//div[@id='block_top_menu']/ul/li/a[text()='{0}']");
+        public static readonly Button TopMenuItem = new Button("//div[@id='menu-primary']/nav/ul/li/a[contains(text(), '{0}')]");
     }
 }
