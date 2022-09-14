@@ -17,11 +17,14 @@
         [TestCase(3)]
         public void Test1(int parallel)
         {
-            this.LogStep("Open 'Quick View' for first displaying item");
-            NavigationView.TopMenuItem.Click("Dresses");
+            using (new Frame("//iframe[@id='iframe']"))
+            {
+                this.LogStep("Open 'Women' catalog section");
+                NavigationView.TopMenuItem.Click("Women");
 
-            this.LogStep("Count of items displayed");
-            Assert.IsTrue(new Element("//h1[contains(@class, 'page-heading')]/span[@class='heading-counter']").Displayed());
+                this.LogStep("Count of items displayed");
+                Assert.IsTrue(new Element("//p[@class='woocommerce-result-count']").Displayed());
+            }
         }
     }
 }
