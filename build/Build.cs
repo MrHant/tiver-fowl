@@ -40,7 +40,6 @@ class Build : NukeBuild
     [GitVersion(Framework = "net6.0", NoFetch = true)] readonly GitVersion GitVersion;
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
-    AbsolutePath OutputDirectory => RootDirectory / "output";
 
     Target Clean => _ => _
         .Before(Restore)
@@ -66,7 +65,6 @@ class Build : NukeBuild
                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
                 .SetInformationalVersion(GitVersion.InformationalVersion)
-                .SetOutputDirectory(OutputDirectory)
                 .EnableNoRestore()
             );
         });
