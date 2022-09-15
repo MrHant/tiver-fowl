@@ -5,7 +5,7 @@
   "BrowserConfiguration": {
     "BrowserType": "chrome",
     "DownloadBinary": true,
-    "Headless": false,
+    "Headless": true,
     "Resolution": {
       "Width": 1200,
       "Height": 800

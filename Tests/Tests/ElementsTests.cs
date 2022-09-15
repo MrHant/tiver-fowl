@@ -3,7 +3,6 @@ namespace Tests.Tests
     using Views;
     using NUnit.Framework;
     using Tiver.Fowl.Core.Attributes;
-    using Tiver.Fowl.ViewBase;
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
     using Tiver.Fowl.ViewBase.Exceptions;
     using Tiver.Fowl.Waiting.Exceptions;
@@ -14,23 +13,20 @@ namespace Tests.Tests
         [Test]
         public void BasicElementsMethods()
         {
-            using (new Frame("//iframe[@id='iframe']"))
+            // Element
+            Assert.IsNotEmpty(CatalogView.CategoryMenuItem.Locator);
+            Assert.IsNotEmpty(CatalogView.CategoryMenuItem.Name);
+
+            // IHasAttributes
+            Assert.IsNotNull(CatalogView.CategoryMenuItem.GetAttribute("title", "Laptops"));
+            Assert.IsNull(CatalogView.CategoryMenuItem.GetAttribute("xxxxx", "Laptops"));
+
+            // IVisible
+            Assert.IsTrue(CatalogView.CategoryMenuItem.Displayed("Laptops"));
+            Assert.Throws<WaitTimeoutException>(() =>
             {
-                // Element
-                Assert.IsNotEmpty(NavigationView.TopMenuItem.Locator);
-                Assert.IsNotEmpty(NavigationView.TopMenuItem.Name);
-
-                // IHasAttributes
-                Assert.IsNotNull(NavigationView.TopMenuItem.GetAttribute("title", "Women"));
-                Assert.IsNull(NavigationView.TopMenuItem.GetAttribute("xxxxx", "Women"));
-
-                // IVisible
-                Assert.IsTrue(NavigationView.TopMenuItem.Displayed("Women"));
-                Assert.Throws<WaitTimeoutException>(() =>
-                {
-                    Assert.IsFalse(NavigationView.TopMenuItem.Displayed("xxxxx"));
-                });
-            }
+                Assert.IsFalse(CatalogView.CategoryMenuItem.Displayed("xxxxx"));
+            });
         }
 
         [Test]
@@ -38,7 +34,7 @@ namespace Tests.Tests
         {
             Assert.Throws<LocatorFormattingException>(() =>
             {
-                NavigationView.TopMenuItem.GetAttribute("title");
+                CatalogView.CategoryMenuItem.GetAttribute("title");
             });
         }
     }

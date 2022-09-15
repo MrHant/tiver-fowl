@@ -17,14 +17,11 @@
         [TestCase(3)]
         public void Test1(int parallel)
         {
-            using (new Frame("//iframe[@id='iframe']"))
-            {
-                this.LogStep("Open 'Women' catalog section");
-                NavigationView.TopMenuItem.Click("Women");
+            this.LogStep("Open 'Laptops' catalog section");
+            CatalogView.CategoryMenuItem.Click("Laptops");
 
-                this.LogStep("Count of items displayed");
-                Assert.IsTrue(new Element("//p[@class='woocommerce-result-count']").Displayed());
-            }
+            this.LogStep("Specific item from catalog is displayed");
+            Assert.IsTrue(new Element("//div[contains(@class,'card-block')]/h4[contains(.,'MacBook air')]/a").Displayed());
         }
     }
 }
