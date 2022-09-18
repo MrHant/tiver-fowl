@@ -1,8 +1,10 @@
 namespace Tests.Tests
 {
+    using Elements;
     using Views;
     using NUnit.Framework;
     using Tiver.Fowl.Core.Attributes;
+    using Tiver.Fowl.ViewBase;
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
     using Tiver.Fowl.ViewBase.Exceptions;
     using Tiver.Fowl.Waiting.Exceptions;
@@ -36,6 +38,20 @@ namespace Tests.Tests
             {
                 CatalogView.CategoryMenuItem.GetAttribute("title");
             });
+        }
+
+        [Test]
+        public void ElementLocatorFormatting()
+        {
+            var el = new Element("//p[text()='{0}']");
+            var derivedElement = new Element(el, locatorFormattingArguments: "Hello");
+            Assert.IsTrue(derivedElement.LocatorFormattingArguments.Length == 1);
+            Assert.IsTrue((string)derivedElement.LocatorFormattingArguments[0] == "Hello");
+            Assert.IsTrue(el.LocatorFormattingArguments.Length == 0);
+
+            var derivedButton = new Button(el, locatorFormattingArguments: "Hello");
+            Assert.IsTrue(derivedButton.LocatorFormattingArguments.Length == 1);
+            Assert.IsTrue((string)derivedButton.LocatorFormattingArguments[0] == "Hello");
         }
     }
 }

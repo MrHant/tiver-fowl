@@ -10,5 +10,9 @@ namespace Tests.Elements
             : base(locator, $"{nameof(Button)} {name}")
         {
         }
+
+        public Button(Element source, [CallerMemberName]string name = null, params object[] locatorFormattingArguments) : base(source, name, locatorFormattingArguments)
+        {
+        }
     }
 }

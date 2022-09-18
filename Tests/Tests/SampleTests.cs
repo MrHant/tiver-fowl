@@ -18,7 +18,7 @@
         public void Test1(int parallel)
         {
             this.LogStep("Open 'Laptops' catalog section");
-            CatalogView.CategoryMenuItem.Click("Laptops");
+            CatalogView.LaptopsMenuItem.Click();
 
             this.LogStep("Specific item from catalog is displayed");
             Assert.IsTrue(new Element("//div[contains(@class,'card-block')]/h4[contains(.,'MacBook air')]/a").Displayed());

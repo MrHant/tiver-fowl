@@ -10,5 +10,9 @@ namespace Tests.Elements
             : base(locator, $"{nameof(Textbox)} {name}")
         {
         }
+        
+        public Textbox(Element source, [CallerMemberName]string name = null, params object[] locatorFormattingArguments) : base(source, name, locatorFormattingArguments)
+        {
+        }
     }
 }

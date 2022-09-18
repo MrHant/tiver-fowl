@@ -19,12 +19,20 @@
         /// </remarks>
         /// <param name="locator">XPath locator of element</param>
         /// <param name="name">Verbose name of element for log file</param>
-        public Element(string locator, string name = null)
+        public Element(string locator, string name = null, params object[] locatorFormattingArguments)
         {
             Locator = locator;
             Name = name;
+            LocatorFormattingArguments = locatorFormattingArguments;
         }
 
+        public Element(Element source, string name = null, params object[] locatorFormattingArguments)
+        {
+            Locator = source.Locator;
+            Name = name ?? source.Name;
+            LocatorFormattingArguments = locatorFormattingArguments;
+        }
+        
         public TResult Process<TResult>(Func<IWebElement, TResult> function, params object[] locatorFormattingArguments)
         {
             var result = default(TResult);
@@ -52,6 +60,12 @@
             get;
         }
 
+        public object[] LocatorFormattingArguments
+        {
+            get;
+            set;
+        } = Array.Empty<object>();
+
         public string Name
         {
             get;
@@ -62,7 +76,10 @@
             string locator = null;
             try
             {
-                locator = string.Format(this.Locator, locatorFormattingArguments);
+                var arguments = locatorFormattingArguments.Length > 0
+                    ? locatorFormattingArguments
+                    : LocatorFormattingArguments;
+                locator = string.Format(this.Locator, arguments);
             }
             catch (FormatException formatException)
             {
