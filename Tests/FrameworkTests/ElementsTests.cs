@@ -1,13 +1,13 @@
-namespace Tests.Tests
+namespace Tests.FrameworkTests
 {
     using Elements;
-    using Views;
     using NUnit.Framework;
     using Tiver.Fowl.Core.Attributes;
     using Tiver.Fowl.ViewBase;
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
     using Tiver.Fowl.ViewBase.Exceptions;
     using Tiver.Fowl.Waiting.Exceptions;
+    using Views;
 
     [WebDriverTest]
     public class ElementsTests : BaseTestForNUnit
