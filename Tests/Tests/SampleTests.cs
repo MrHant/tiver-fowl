@@ -8,14 +8,10 @@
     using Tiver.Fowl.ViewBase.Behaviors.Extensions;
 
     [WebDriverTest]
-    [Parallelizable(ParallelScope.All)]
     public class SampleTests : BaseTestForNUnit
     {
         [Test]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        public void Test1(int parallel)
+        public void SelectCategory()
         {
             this.LogStep("Open 'Laptops' catalog section");
             CatalogView.LaptopsMenuItem.Click();
