@@ -20,7 +20,11 @@
             }
 
             var logAction = Log.ForContext("LogType", "ElementAction");
-            logAction.Information("{Name} :: {Action}", instance.Name, action);
+            logAction.Information(
+                "{Type}.{Name} :: {Action}",
+                instance.GetType().Name,
+                instance.Name,
+                action);
         }
     }
 }

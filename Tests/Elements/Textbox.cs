@@ -6,8 +6,7 @@ namespace Tests.Elements
 
     public class Textbox : Element, ITypeable
     {
-        public Textbox(string locator, [CallerMemberName]string name = null)
-            : base(locator, $"{nameof(Textbox)} {name}")
+        public Textbox(string locator, [CallerMemberName]string name = null) : base(locator, name)
         {
         }
         

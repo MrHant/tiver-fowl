@@ -6,8 +6,7 @@ namespace Tests.Elements
 
     public class Button: Element, IClickable
     {
-        public Button(string locator, [CallerMemberName]string name = null) 
-            : base(locator, $"{nameof(Button)} {name}")
+        public Button(string locator, [CallerMemberName]string name = null) : base(locator, name)
         {
         }
 

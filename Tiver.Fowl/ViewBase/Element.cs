@@ -1,6 +1,7 @@
 ﻿namespace Tiver.Fowl.ViewBase
 {
     using System;
+    using System.Runtime.CompilerServices;
     using Behaviors;
     using Core.Context;
     using Exceptions;
@@ -19,14 +20,14 @@
         /// </remarks>
         /// <param name="locator">XPath locator of element</param>
         /// <param name="name">Verbose name of element for log file</param>
-        public Element(string locator, string name = null, params object[] locatorFormattingArguments)
+        public Element(string locator, string name = "unnamed",  params object[] locatorFormattingArguments)
         {
             Locator = locator;
             Name = name;
             LocatorFormattingArguments = locatorFormattingArguments;
         }
 
-        public Element(Element source, string name = null, params object[] locatorFormattingArguments)
+        public Element(Element source, string name = "unnamed", params object[] locatorFormattingArguments)
         {
             Locator = source.Locator;
             Name = name ?? source.Name;
