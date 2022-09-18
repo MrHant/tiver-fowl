@@ -16,10 +16,12 @@
         /// </summary>
         /// <remarks>
         /// <paramref name="locator"/> can include formatting places, to be later replaced with arguments passed
-        /// to <see cref="Process"/> and <see cref="Process{TResult}"/> methods
+        /// to <see cref="Process"/> and <see cref="Process{TResult}"/> methods.
+        /// Formatting can be also applied via <paramref name="locatorFormattingArguments"/>
         /// </remarks>
         /// <param name="locator">XPath locator of element</param>
-        /// <param name="name">Verbose name of element for log file</param>
+        /// <param name="name">Verbose name of element for logging. </param>
+        /// <param name="locatorFormattingArguments">Parameters which will be used for formatting locator</param>
         public Element(string locator, string name = "unnamed",  params object[] locatorFormattingArguments)
         {
             Locator = locator;
@@ -27,11 +29,15 @@
             LocatorFormattingArguments = locatorFormattingArguments;
         }
 
-        public Element(Element source, string name = "unnamed", params object[] locatorFormattingArguments)
+        /// <summary>
+        /// Initialize an element from another element (copies locator)
+        /// </summary>
+        /// <param name="source">Source element to copy locator from</param>
+        /// <param name="name"></param>
+        /// <param name="locatorFormattingArguments"></param>
+        public Element(IElement source, string name = "unnamed", params object[] locatorFormattingArguments)
+        : this(source.Locator, name, locatorFormattingArguments)
         {
-            Locator = source.Locator;
-            Name = name ?? source.Name;
-            LocatorFormattingArguments = locatorFormattingArguments;
         }
         
         public TResult Process<TResult>(Func<IWebElement, TResult> function, params object[] locatorFormattingArguments)
