@@ -1,5 +1,6 @@
 namespace Tests.Views
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Elements;
@@ -16,20 +17,16 @@ namespace Tests.Views
         
         public static IEnumerable<CatalogItem> GetAllItems(int expectedCount = -1)
         {
-            var getItemNames = () => TestExecutionContext.WebElementActions.FindSeveral(CatalogItem.ItemLocator)
-                .Select(e => e.FindElement(By.XPath("./h4")).Text);
-            
+            IEnumerable<string> GetItemNames() =>
+                TestExecutionContext.WebElementActions.FindSeveral(CatalogItem.ItemLocator)
+                    .Select(e => e.FindElement(By.XPath("./h4")).Text);
+
+            bool ExitCondition(dynamic result) => expectedCount == -1 || result.Count == expectedCount;
+
             var itemNames = Wait.Until(() =>
             {
-                if (expectedCount != -1)
-                {
-                    var names = getItemNames().ToList();
-                    return names.Count != expectedCount ? null : names;
-                }
-                else
-                {
-                    return getItemNames();
-                }
+                var names = GetItemNames().ToList();
+                return ExitCondition(names) ? names : null;
             });
             return itemNames.Select(name => new CatalogItem(name));
         }
