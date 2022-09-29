@@ -17,17 +17,11 @@ namespace Tests.Views
         
         public static IEnumerable<CatalogItem> GetAllItems(int expectedCount = -1)
         {
-            IEnumerable<string> GetItemNames() =>
-                TestExecutionContext.WebElementActions.FindSeveral(CatalogItem.ItemLocator)
-                    .Select(e => e.FindElement(By.XPath("./h4")).Text);
-
-            bool ExitCondition(dynamic result) => expectedCount == -1 || result.Count == expectedCount;
-
-            var itemNames = Wait.Until(() =>
-            {
-                var names = GetItemNames().ToList();
-                return ExitCondition(names) ? names : null;
-            });
+            var itemNames = Wait.Until(
+                () => TestExecutionContext.WebElementActions.FindSeveral(CatalogItem.ItemLocator)
+                    .Select(e => e.FindElement(By.XPath("./h4")).Text),
+                r => expectedCount == -1 || r.Count() == expectedCount);
+            
             return itemNames.Select(name => new CatalogItem(name));
         }
     }
