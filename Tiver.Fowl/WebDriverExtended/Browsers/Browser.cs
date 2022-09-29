@@ -81,6 +81,7 @@
 
         public IWebElement Find(string locator)
         {
+            Log.Debug("Find element by locator: {Locator}", locator);
             var elements = this.webDriver.FindElements(By.XPath(locator));
             if (elements.Count == 1)
             {
@@ -91,6 +92,7 @@
 
         public IEnumerable<IWebElement> FindSeveral(string locator)
         {
+            Log.Debug("Find several elements by locator: {Locator}", locator);
             return this.webDriver.FindElements(By.XPath(locator));
         }
 
