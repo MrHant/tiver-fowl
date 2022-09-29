@@ -1,6 +1,7 @@
 ﻿namespace Tiver.Fowl.WebDriverExtended.Browsers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using OpenQA.Selenium;
     using Serilog;
@@ -86,6 +87,11 @@
                 return elements.Single();
             }
             throw new NoSuchElementException();
+        }
+
+        public IEnumerable<IWebElement> FindSeveral(string locator)
+        {
+            return this.webDriver.FindElements(By.XPath(locator));
         }
 
         #endregion

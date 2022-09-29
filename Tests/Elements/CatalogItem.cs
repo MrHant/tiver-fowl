@@ -6,9 +6,10 @@ using Tiver.Fowl.ViewBase;
 
 public class CatalogItem : Element
 {
-    private static readonly Element Card = new Element("//div[contains(@class,'card-block')]/h4[contains(.,'{0}')]/../..");
+    public const string ItemLocator = "//div[contains(@class,'card-block')]";
+    private static readonly Element Item = new Element($"{ItemLocator}/h4[contains(.,'{{0}}')]/../..");
     
-    public CatalogItem(string itemName) : base(Card, itemName, itemName)
+    public CatalogItem(string itemName) : base(Item, itemName, itemName)
     {
     }
 
@@ -25,5 +26,4 @@ public class CatalogItem : Element
         return Process(e =>
             e.FindElement(By.XPath("./div/p")).Text);
     }
-
 }
