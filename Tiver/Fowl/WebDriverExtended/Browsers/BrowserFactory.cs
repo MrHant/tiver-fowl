@@ -42,7 +42,7 @@
             var browserType = config.BrowserType;
             if (config.DownloadBinary)
             {
-                var result = Downloaders.DownloadBinaryFor(browserType, ConfigurationSectionNames.Drivers);
+                var result = Downloaders.DownloadBinaryFor(browserType);
                 if (!result.Successful)
                 {
                     throw new Exception("Browser was not downloaded");

@@ -1,0 +1,20 @@
+{
+  "Tiver.Fowl.Drivers": {
+    "Drivers": [
+      {
+        "Name": "chrome",
+        "DownloaderType": "ChromeDriverDownloader",
+        "Version": "LATEST_RELEASE",
+        "Platform": "win32"
+      }
+    ]
+  },
+  "Tiver.Fowl.Waiting": {
+    "Timeout": 5000,
+    "PollingInterval": 250,
+    "IgnoredExceptionsTypeNames": [
+      "OpenQA.Selenium.NoSuchElementException, WebDriver",
+      "OpenQA.Selenium.StaleElementReferenceException, WebDriver"
+    ]
+  }
+}
