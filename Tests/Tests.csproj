@@ -44,7 +44,4 @@
     <PackageReference Include="Tiver.Fowl.Drivers" Version="0.5.3" />
     <PackageReference Include="Tiver.Fowl.Waiting" Version="0.4.2" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
 </Project>
