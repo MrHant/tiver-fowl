@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -19,9 +19,6 @@
     <AssemblyOriginatorKeyFile>..\..\..\Tiver.Fowl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\WebDriverExtended.Contracts\Tiver.Fowl.WebDriverExtended.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -35,7 +32,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Tiver.Fowl.Waiting" Version="0.4.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Tiver.Fowl.Waiting" Version="0.1.5" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 </Project>
