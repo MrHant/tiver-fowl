@@ -15,8 +15,7 @@
             if (configuration.RemoteAddress != null)
             {
                 var options = new FirefoxOptions();
-                var remoteUri = new Uri(configuration.RemoteAddress);
-                driver = new RemoteWebDriver(remoteUri, options);
+                driver = new RemoteWebDriver(configuration.RemoteAddress, options);
             }
             else
             {

@@ -1,6 +1,7 @@
 namespace Tests.FrameworkTests;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using Tiver.Fowl.Core.Attributes;
 using Tiver.Fowl.TestingBase;
 using Tiver.Fowl.ViewBase;
@@ -21,6 +22,6 @@ public class ParallelizationTests : BaseTestForNUnit
         CatalogView.CategoryMenuItem.Click(menuItemText);
 
         this.LogStep("Specific item from catalog is displayed");
-        Assert.IsTrue(new Element("//div[contains(@class,'card-block')]/h4[contains(.,'{0}')]/a").Displayed(expectedItemName));
+        ClassicAssert.IsTrue(new Element("//div[contains(@class,'card-block')]/h4[contains(.,'{0}')]/a").Displayed(expectedItemName));
     }
 }
