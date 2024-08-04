@@ -17,10 +17,8 @@
 
         public void NavigateToStartUri()
         {
-            IApplicationConfiguration config =
-                (ApplicationConfigurationSection)
-                ConfigurationManager.GetSection(ConfigurationSectionNames.Application);
-            webDriver.Navigate().GoToUrl(config.StartUrl);
+            var config = new ConfigurationResolver().GetConfigurationFromFile();
+            webDriver.Navigate().GoToUrl(config.Application.StartUrl);
         }
 
         public void SwitchToFrame(string locator)

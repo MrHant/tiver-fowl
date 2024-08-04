@@ -37,8 +37,8 @@
 
         public static Browser GetBrowser()
         {
-            IBrowserConfiguration config =
-                (BrowserConfigurationSection) ConfigurationManager.GetSection(ConfigurationSectionNames.Browser);
+            var config = new ConfigurationResolver().GetBrowserConfigurationFromFile();
+
             var browserType = config.BrowserType;
             if (config.DownloadBinary)
             {
@@ -53,6 +53,6 @@
             return factory.Build(config);
         }
 
-        public abstract Browser Build(IBrowserConfiguration configuration);
+        public abstract Browser Build(BrowserConfiguration configuration);
     }
 }

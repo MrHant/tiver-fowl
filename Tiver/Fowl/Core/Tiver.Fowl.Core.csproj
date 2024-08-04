@@ -34,6 +34,5 @@
   <ItemGroup>
     <PackageReference Include="Tiver.Fowl.Waiting" Version="0.4.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 </Project>

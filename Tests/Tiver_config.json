@@ -1,4 +1,18 @@
 {
+  "Tiver.Fowl": {
+    "Application": {
+      "Title": "System Under Test Title",
+      "StartUrl": "http://ya.ru/"
+    },
+    "Browser": {
+      "BrowserType": "chrome",
+      "DownloadBinary": true,
+      "Resolution": {
+        "Width": 800,
+        "Height": 600
+      }
+    }
+  },
   "Tiver.Fowl.Drivers": {
     "Drivers": [
       {

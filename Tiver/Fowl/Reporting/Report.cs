@@ -38,9 +38,7 @@
             CompilePartial("jquery_javascript");
             CompilePartial("foundation_javascript");
 
-            IApplicationConfiguration config =
-                (ApplicationConfigurationSection)
-                ConfigurationManager.GetSection(ConfigurationSectionNames.Application);
+            var config = new ConfigurationResolver().GetConfigurationFromFile();
 
             var testResultsData = new List<dynamic>();
 
@@ -103,7 +101,7 @@
 
             var data = new
             {
-                application_title = config.Title,
+                application_title = config.Application.Title,
                 test_results = testResultsData.ToArray()
             };
 

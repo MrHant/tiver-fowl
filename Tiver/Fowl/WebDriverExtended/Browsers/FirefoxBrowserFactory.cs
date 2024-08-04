@@ -9,13 +9,14 @@
 
     public class FirefoxBrowserFactory : BrowserFactory
     {
-        public override Browser Build(IBrowserConfiguration configuration)
+        public override Browser Build(BrowserConfiguration configuration)
         {
             IWebDriver driver;
             if (configuration.RemoteAddress != null)
             {
                 var options = new FirefoxOptions();
-                driver = new RemoteWebDriver(configuration.RemoteAddress, options);
+                var remoteUri = new Uri(configuration.RemoteAddress);
+                driver = new RemoteWebDriver(remoteUri, options);
             }
             else
             {
