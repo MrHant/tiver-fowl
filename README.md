@@ -23,7 +23,7 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 * Package update will recreate all package-specific files - like elements and templates
 * Please review changes and run your tests after package update
 
-## Local execution
+## [Obsolete] Local execution
 
 * To run tests locally - Select "Default.runsettings" as configuration file for Tests
  * It contains settings for output folder
