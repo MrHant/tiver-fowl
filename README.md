@@ -31,6 +31,12 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 * Package update will recreate all package-specific files - like elements and templates
 * Please review changes and run your tests after package update
 
-### .NET support
+### [Obsolete] .NET support
 * Targeting .NET 6, .NET Standard 2.0
 * Tested with .NET 6, .NET Framework 4.8, .NET Framework 4.7.2, .NET Framework 4.6.2
+
+## [Obsolete] Local execution
+
+* To run tests locally - Select "Default.runsettings" as configuration file for Tests
+ * It contains settings for output folder
+ * As well as copying driver executables
