@@ -37,9 +37,9 @@
     <ProjectReference Include="..\Core\Tiver.Fowl.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Handlebars.Net" Version="1.7.1" />
+    <PackageReference Include="Handlebars.Net" Version="2.1.6" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
 </Project>

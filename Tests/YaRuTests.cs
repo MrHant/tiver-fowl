@@ -1,6 +1,7 @@
 ﻿namespace Tests
 {
     using NUnit.Framework;
+    using NUnit.Framework.Legacy;
     using Tiver.Fowl.Core.Attributes;
     using Tiver.Fowl.TestingBase;
     using Tiver.Fowl.ViewBase;
@@ -17,7 +18,7 @@
             HomePage.SearchButton.Click();
 
             this.LogStep("Results are displayed");
-            Assert.IsTrue(new Element("//div[.='Example Domain']").Displayed());
+            ClassicAssert.IsTrue(new Element("//div[.='Example Domain']").Displayed());
         }
     }
 }

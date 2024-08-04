@@ -40,7 +40,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog" Version="4.0.1" />
     <PackageReference Include="Tiver.Fowl.Drivers" Version="0.5.3" />
   </ItemGroup>
   <Choose>
