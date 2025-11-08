@@ -3,7 +3,7 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>10</LangVersion>
-    <TargetFrameworks>net462;net472;net48;net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tiver.Fowl\Tiver.Fowl.csproj" />
