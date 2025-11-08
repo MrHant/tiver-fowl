@@ -2,6 +2,7 @@
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using Core.Configuration;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
@@ -9,6 +10,17 @@
 
     public class ChromeBrowserFactory : BrowserFactory
     {
+        private static bool IsRunningInDocker()
+        {
+            // Check for .dockerenv file (most common indicator)
+            if (File.Exists("/.dockerenv"))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public override Browser Build(BrowserConfiguration configuration)
         {
             IWebDriver driver;
@@ -24,6 +36,14 @@
                 {
                     options.AddArgument("--headless");
                 }
+
+                bool useDockerMode = configuration.RunningInDocker || IsRunningInDocker();
+                if (useDockerMode)
+                {
+                    options.AddArgument("--no-sandbox");
+                    options.AddArgument("--disable-dev-shm-usage");
+                }
+
                 driver = new ChromeDriver(options);
             }
 

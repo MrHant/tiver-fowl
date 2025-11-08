@@ -1,6 +1,6 @@
 {
   "ApplicationConfiguration": {
-    "Title": "System Under Test Title",
+    "Title": "System Under Test Title"
   },
   "BrowserConfiguration": {
     "BrowserType": "chrome",
@@ -18,7 +18,7 @@
         "Name": "chrome",
         "DownloaderType": "ChromeDriverDownloader",
         "Version": "LATEST_RELEASE_104",
-        "Platform": "win32"
+        "Platform": "linux64"
       }
     ]
   },

@@ -2,14 +2,16 @@
 {
     using System;
 
-    public class BrowserConfiguration 
+    public class BrowserConfiguration
     {
         public bool DownloadBinary { get; set; }
 
         public string BrowserType { get; set; }
 
         public bool Headless { get; set; }
-        
+
+        public bool RunningInDocker { get; set; } = false;
+
         public Uri RemoteAddress { get; set; }
 
         public Resolution Resolution { get; set; }
