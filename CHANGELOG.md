@@ -14,6 +14,69 @@
 - SeleniumManager is now the default driver management approach (no configuration required)
 
 
-## [0.1.x] - Previous Releases
+## [0.1.7]
 
-Initial releases with basic functionality. See git history for details.
+### Changed
+- Replaced LibLog with Serilog for logging throughout the framework
+- Updated to latest Serilog packages
+
+### Added
+- Remote WebDriver support via `remoteAddress` parameter
+- TestNameEnricher moved from package to core library
+
+
+## [0.1.6.1]
+
+### Fixed
+- Various NuGet package metadata and file path corrections
+
+
+## [0.1.6]
+### Added
+- Automatic driver download enabled by default
+- Tiver.Fowl.Drivers package integration (replaced static ChromeDriver binary)
+- Tiver.Fowl.Waiting package (extracted Wait functionality to separate package)
+- CI/CD pipeline setup with Cake, AppVeyor, and GitVersion
+- TestNameEnricher and Logger included in NuGet package
+
+### Changed
+- Simplified browser and application configuration structure
+- Updated Selenium WebDriver and other dependencies
+
+
+## [v0.1.5.5]
+
+### Added
+- Frame switching support for handling iframes
+- NUnit support with BaseTest template
+- Test framework agnostic design using TestResult enum
+
+### Changed
+- Improved element action logging (skip logging for unnamed elements)
+- Refactored TestExecutionContext and Storage
+
+
+## [v0.1.5] 
+
+### Added
+- Element behavior interfaces (IClickable, IVisible, ITypeable, IHasAttributes)
+- Interface extension methods for element behaviors (replacing inheritance model)
+- ITypeable.Enabled method for checking input field state
+
+### Changed
+- Refactored element architecture using interface extensions instead of inheritance
+- Moved concrete element implementations to NuGet package
+- Updated ChromeDriver to v2.25
+
+
+## Earlier Releases
+
+Initial framework development including:
+- Core Selenium WebDriver abstraction (IBrowser, Chrome/Firefox support)
+- Element abstraction layer with XPath locators
+- Context management for thread-safe test execution
+- Configuration system (app.config based)
+- Logging with Serilog
+- Screenshot capture on test failure
+- Wait/retry mechanism for element interactions
+- View/Page Object pattern support
