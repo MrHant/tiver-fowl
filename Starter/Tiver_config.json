@@ -1,26 +1,14 @@
 {
   "ApplicationConfiguration": {
-    "Title": "System Under Test Title",
+    "Title": "System Under Test Title"
   },
   "BrowserConfiguration": {
     "BrowserType": "chrome",
-    "DownloadBinary": true,
     "Headless": false,
     "Resolution": {
       "Width": 800,
       "Height": 600
     }
-  },
-  "Tiver.Fowl.Drivers": {
-    "HttpTimeout": 120,
-    "Drivers": [
-      {
-        "Name": "chrome",
-        "DownloaderType": "ChromeDriverDownloader",
-        "Version": "LATEST_RELEASE",
-        "Platform": "win32"
-      }
-    ]
   },
   "Tiver.Fowl.Waiting": {
     "Timeout": 5000,

@@ -4,23 +4,11 @@
   },
   "BrowserConfiguration": {
     "BrowserType": "chrome",
-    "DownloadBinary": true,
     "Headless": true,
     "Resolution": {
       "Width": 1200,
       "Height": 800
     }
-  },
-  "Tiver.Fowl.Drivers": {
-    "HttpTimeout": 120,
-    "Drivers": [
-      {
-        "Name": "chrome",
-        "DownloaderType": "ChromeDriverDownloader",
-        "Version": "LATEST_RELEASE_104",
-        "Platform": "linux64"
-      }
-    ]
   },
   "Tiver.Fowl.Waiting": {
     "Timeout": 10000,

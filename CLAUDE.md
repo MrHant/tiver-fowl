@@ -69,7 +69,7 @@ dotnet test /workspaces/tiver-fowl/Tests/Tests.csproj --verbosity detailed
    - If test has `[WebDriverTest]` attribute:
      - Reads `BrowserConfiguration` from `Tiver_config.json`
      - Creates browser via `BrowserFactory.GetBrowser()`
-     - Optionally downloads browser binary via Tiver.Fowl.Drivers
+     - Automatically downloads browser driver via Selenium Manager (default) or optionally via Tiver.Fowl.Drivers
      - Navigates to StartUrl from `config.json`
 
 3. **[Test] Test Method** - Test execution
@@ -144,14 +144,19 @@ Two configuration files required:
 {
   "BrowserConfiguration": {
     "BrowserType": "chrome",  // or "firefox"
-    "DownloadBinary": true,    // Auto-download driver
     "Headless": true,
-    "Resolution": { "Width": 1200, "Height": 800 }
+    "Resolution": { "Width": 1200, "Height": 800 },
+    "DriverManager": "SeleniumManager"  // Optional: "SeleniumManager" (default), "TiverFowlDrivers", or "None"
   },
-  "Tiver.Fowl.Drivers": { ... },
-  "Tiver.Fowl.Waiting": { ... }  // Timeout, polling, ignored exceptions
+  "Tiver.Fowl.Drivers": { ... },  // Only needed when DriverManager="TiverFowlDrivers"
+  "Tiver.Fowl.Waiting": { ... }    // Timeout, polling, ignored exceptions
 }
 ```
+
+**Driver Management Options:**
+- `"SeleniumManager"` (default) - Uses Selenium's built-in driver management. No additional configuration needed. **Recommended**.
+- `"TiverFowlDrivers"` - Uses Tiver.Fowl.Drivers package for more control over driver versions. Requires `Tiver.Fowl.Drivers` configuration section.
+- `"None"` - No automatic driver management. Assumes drivers are already in PATH.
 
 **config.json** - Test-specific configuration:
 ```json
@@ -191,10 +196,10 @@ All element interactions use `Tiver.Fowl.Waiting` package:
 - **Language version**: C# 13
 
 ### Key Dependencies
-- Selenium.WebDriver 4.38.0
+- Selenium.WebDriver 4.38.0 (includes Selenium Manager for automatic driver management)
 - Microsoft.Extensions.Configuration 9.0.10
 - Serilog 4.3.0
-- Tiver.Fowl.Drivers 0.6.0-alpha.4 (browser binary management)
+- Tiver.Fowl.Drivers 0.6.0-alpha.4 (optional - for advanced driver management)
 - Tiver.Fowl.Waiting 0.5.0-alpha (wait/retry logic)
 - NUnit 4.4.0 (test framework)
 
@@ -219,10 +224,22 @@ public static class CatalogView
 3. Add custom methods if needed
 4. Extensions automatically provide Click(), Displayed(), etc. methods
 
-### Browser Binary Management
-- Set `DownloadBinary: true` in BrowserConfiguration for auto-download
-- Tiver.Fowl.Drivers handles platform-specific driver downloads
-- Supported: Chrome, Firefox
+### Browser Driver Management
+**Default (Selenium Manager - Recommended):**
+- No configuration required - Selenium automatically downloads and manages drivers
+- Works out of the box for Chrome and Firefox
+- Automatically detects browser versions and downloads compatible drivers
+
+**Optional (Tiver.Fowl.Drivers):**
+- Set `DriverManager: "TiverFowlDrivers"` in BrowserConfiguration
+- Provides more control over driver versions and platforms
+- Requires `Tiver.Fowl.Drivers` configuration section in Tiver_config.json
+- Useful for pinning specific driver versions or custom download configurations
+
+**Manual (None):**
+- Set `DriverManager: "None"` in BrowserConfiguration
+- Assumes drivers are already available in PATH
+- Use when managing drivers through external tools or CI/CD pipelines
 
 ### Parallel Test Execution
 - Framework supports parallel tests via thread-safe context
