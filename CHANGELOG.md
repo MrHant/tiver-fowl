@@ -8,10 +8,13 @@
   - `SeleniumManager` - Uses Selenium's built-in driver management (default, recommended)
   - `TiverFowlDrivers` - Uses Tiver.Fowl.Drivers package for advanced driver control
   - `None` - Manual driver management (assumes drivers in PATH)
+- MinVer for automatic semantic versioning from Git tags
+- Package README with quick start guide and examples
 
 ### Changed
 - **BREAKING**: Removed obsolete `DownloadBinary` property from `BrowserConfiguration`. Refer to `DriverManager` instead.
 - SeleniumManager is now the default driver management approach (no configuration required)
+- Migrated NuGet package metadata from Package.nuspec into Tiver.Fowl.csproj for simplified packaging
 
 
 ## [0.1.7]

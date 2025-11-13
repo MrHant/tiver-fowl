@@ -3,12 +3,38 @@
     <PropertyGroup>
         <LangVersion>13</LangVersion>
         <TargetFrameworks>net9.0;netstandard2.0</TargetFrameworks>
+
+        <!-- NuGet Package Metadata -->
+        <Authors>Artsiomi Silivonchyk</Authors>
+        <Description>A framework for writing Automated Integration tests (including tests via Selenium).</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/MrHant/tiver-fowl</PackageProjectUrl>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
       <CodeAnalysisDictionary Include="..\CustomCodeAnalysisDictionary.xml">
         <Link>CustomCodeAnalysisDictionary.xml</Link>
       </CodeAnalysisDictionary>
+    </ItemGroup>
+
+    <!-- README for package -->
+    <ItemGroup>
+      <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <!-- Content files to be included in package (starter templates) -->
+    <ItemGroup>
+      <Content Include="contentFiles\cs\any\**\*.template">
+        <Pack>true</Pack>
+        <PackagePath>contentFiles\cs\any\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+        <BuildAction>None</BuildAction>
+        <CopyToOutput>false</CopyToOutput>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
@@ -20,6 +46,11 @@
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Configuration.Json">
         <Version>9.0.10</Version>
+      </PackageReference>
+      <PackageReference Include="MinVer">
+        <Version>6.0.0</Version>
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Selenium.WebDriver">
         <Version>4.38.0</Version>
