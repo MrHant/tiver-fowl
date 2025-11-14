@@ -13,6 +13,8 @@
 
 ### Changed
 - **BREAKING**: Removed obsolete `DownloadBinary` property from `BrowserConfiguration`. Refer to `DriverManager` instead.
+- **BREAKING**: Migrated to .NET 10.0 (dropped .NET 9.0 and .NET Standard 2.0 support)
+- **BREAKING**: Updated to C# 14 language version
 - SeleniumManager is now the default driver management approach (no configuration required)
 - Migrated NuGet package metadata from Package.nuspec into Tiver.Fowl.csproj for simplified packaging
 

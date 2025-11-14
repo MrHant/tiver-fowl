@@ -4,10 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Tiver-Fowl** is a .NET framework for writing automated integration tests, with primary focus on Selenium-based web automation. The framework provides element abstraction, configuration management, logging, and test lifecycle management. It targets .NET 9.0 and .NET Standard 2.0.
+**Tiver-Fowl** is a .NET framework for writing automated integration tests, with primary focus on Selenium-based web automation. The framework provides element abstraction, configuration management, logging, and test lifecycle management. It targets .NET 10.0.
 
 **Repository**: https://github.com/MrHant/tiver-fowl
-**Current SDK**: .NET 9.0.306
+**Current SDK**: .NET 10.0.100
 
 ## Build and Test Commands
 
@@ -41,8 +41,8 @@ dotnet test /workspaces/tiver-fowl/Tests/Tests.csproj --verbosity detailed
 ## Solution Structure
 
 ### Main Projects
-- **Tiver.Fowl/** - Core framework library (multi-targeted: net9.0 + netstandard2.0)
-- **Tests/** - Test project with examples and framework tests (net9.0 only)
+- **Tiver.Fowl/** - Core framework library (net10.0)
+- **Tests/** - Test project with examples and framework tests (net10.0)
 
 ### Key Directories in Tiver.Fowl
 - **Core/** - Configuration, context management, attributes, exceptions
@@ -191,9 +191,9 @@ All element interactions use `Tiver.Fowl.Waiting` package:
 ## Development Notes
 
 ### Target Frameworks
-- **Tiver.Fowl library**: Multi-targeted to net9.0 and netstandard2.0
-- **Tests project**: Targets net9.0 only
-- **Language version**: C# 13
+- **Tiver.Fowl library**: Targets net10.0
+- **Tests project**: Targets net10.0
+- **Language version**: C# 14
 
 ### Key Dependencies
 - Selenium.WebDriver 4.38.0 (includes Selenium Manager for automatic driver management)
@@ -253,7 +253,7 @@ public static class CatalogView
 
 ### DevContainer
 Project includes DevContainer with:
-- .NET 10.0, 9.0, and 6.0 SDKs
+- .NET 10.0 SDK (primary)
 - Node.js 1.6.3
 - Pre-configured VS Code extensions
 
