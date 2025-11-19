@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+ - xxx
+
+## [0.2.0-alpha]
 
 ### Added
 - Support for selenium-manager as the default driver management solution.
