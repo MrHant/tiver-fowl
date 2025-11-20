@@ -33,8 +33,20 @@ dotnet test /workspaces/tiver-fowl/Tests/Tests.csproj --filter "FullyQualifiedNa
 dotnet test /workspaces/tiver-fowl/Tests/Tests.csproj --verbosity detailed
 ```
 
-### Test Framework
-- Uses **NUnit 4.4.0** (not MSTest or xUnit)
+### Test Framework Support
+The framework supports both **NUnit** and **MSTest**. Base classes are shipped as source files that compile in your project. The test framework is **auto-detected** based on your package references.
+
+**For NUnit:**
+1. Add NUnit package reference to your test project
+2. Inherit tests from `BaseTestForNUnit`
+
+**For MSTest:**
+1. Add MSTest.TestFramework package reference to your test project
+2. Inherit tests from `BaseTestForMSTest`
+
+The framework automatically defines `TIVER_NUNIT` or `TIVER_MSTEST` based on which package you reference. No manual configuration needed.
+
+The Tests project in this repo uses **NUnit 4.4.0**:
 - Supports parallel test execution with `[Parallelizable(ParallelScope.All)]`
 - Tests inherit from `BaseTestForNUnit` which handles Setup/Teardown
 
@@ -189,6 +201,9 @@ All element interactions use `Tiver.Fowl.Waiting` package:
 - Configured in `Tiver_config.json` under `Tiver.Fowl.Waiting` section
 
 ## Development Notes
+
+### Changelog
+Always update `CHANGELOG.md` for meaningful changes that affect end-users. Add entries under the `[Unreleased]` section using the appropriate category (Added, Changed, Fixed, etc.).
 
 ### Target Frameworks
 - **Tiver.Fowl library**: Targets net10.0

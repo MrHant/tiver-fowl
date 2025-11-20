@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Auto-detect NUnit -->
+  <PropertyGroup Condition="'$(TIVER_NUNIT)' == '' AND '@(PackageReference->WithMetadataValue('Identity', 'NUnit'))' != ''">
+    <DefineConstants>$(DefineConstants);TIVER_NUNIT</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Auto-detect MSTest -->
+  <PropertyGroup Condition="'$(TIVER_MSTEST)' == '' AND '@(PackageReference->WithMetadataValue('Identity', 'MSTest.TestFramework'))' != ''">
+    <DefineConstants>$(DefineConstants);TIVER_MSTEST</DefineConstants>
+  </PropertyGroup>
+
+</Project>

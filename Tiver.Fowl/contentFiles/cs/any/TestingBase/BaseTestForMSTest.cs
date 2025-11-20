@@ -1,0 +1,65 @@
+#if TIVER_MSTEST
+namespace Tiver.Fowl.TestingBase
+{
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Tiver.Fowl.Core.Context;
+    using Tiver.Fowl.Core.Enums;
+
+    /// <summary>
+    /// Base test class for MSTest tests.
+    /// Requires TIVER_MSTEST to be defined in the consuming project.
+    /// </summary>
+    [TestClass]
+    public class BaseTestForMSTest : IBaseTest
+    {
+        public TestContext TestContext { get; set; }
+
+        [AssemblyInitialize]
+        public static void AssemblyInitialize(TestContext context)
+        {
+            Logging.Logger.Configure();
+        }
+
+        [AssemblyCleanup]
+        public static void AssemblyCleanup()
+        {
+            Flow.SessionTeardown();
+        }
+
+        [TestInitialize]
+        public void Setup()
+        {
+            Flow.Setup(
+                GetType(),
+                TestContext.TestName,
+                () => TestContext.TestName);
+        }
+
+        [TestCleanup]
+        public void Teardown()
+        {
+            var outcome = TestContext.CurrentTestOutcome;
+            TestResult testResult;
+            switch (outcome)
+            {
+                case UnitTestOutcome.Passed:
+                    testResult = TestResult.Passed;
+                    break;
+                case UnitTestOutcome.Failed:
+                    testResult = TestResult.Failed;
+                    break;
+                case UnitTestOutcome.Inconclusive:
+                case UnitTestOutcome.Error:
+                case UnitTestOutcome.Timeout:
+                case UnitTestOutcome.NotRunnable:
+                case UnitTestOutcome.Unknown:
+                default:
+                    testResult = TestResult.Unknown;
+                    break;
+            }
+
+            Flow.Teardown(testResult);
+        }
+    }
+}
+#endif
