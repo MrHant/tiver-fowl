@@ -50,13 +50,7 @@
     </ItemGroup>
 
     <!-- Auto-detect test framework and define constants -->
-    <!-- .props runs at evaluation time (for IDE IntelliSense) -->
-    <!-- .targets runs at build time (for transitive assembly references) -->
     <ItemGroup>
-      <Content Include="build\Tiver.Fowl.props">
-        <Pack>true</Pack>
-        <PackagePath>build\</PackagePath>
-      </Content>
       <Content Include="build\Tiver.Fowl.targets">
         <Pack>true</Pack>
         <PackagePath>build\</PackagePath>
