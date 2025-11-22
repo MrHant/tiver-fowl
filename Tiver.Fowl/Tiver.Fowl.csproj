@@ -38,10 +38,15 @@
     </ItemGroup>
 
     <!-- Source files shipped to be compiled in consumer project -->
-    <!-- Files in contentFiles/cs/ are automatically compiled by NuGet -->
+    <!-- Must use Content with BuildAction=Compile to generate contentFiles entry in nuspec -->
     <ItemGroup>
       <Compile Remove="contentFiles\cs\any\**\*.cs" />
-      <None Include="contentFiles\cs\any\**\*.cs" Pack="true" PackagePath="contentFiles\cs\any\%(RecursiveDir)%(Filename)%(Extension)" />
+      <Content Include="contentFiles\cs\any\**\*.cs">
+        <Pack>true</Pack>
+        <PackagePath>contentFiles\cs\any\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+        <BuildAction>Compile</BuildAction>
+        <CopyToOutput>false</CopyToOutput>
+      </Content>
     </ItemGroup>
 
     <!-- Auto-detect test framework and define constants -->
