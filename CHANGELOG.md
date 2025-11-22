@@ -5,7 +5,7 @@
 ### Added
 - Auto-detection of test framework based on package references
 - `BaseTestForNUnit` and `BaseTestForMSTest` base classes shipped as source files
-- MSBuild targets file for automatic `TIVER_NUNIT`/`TIVER_MSTEST` constant definition
+- MSBuild props/targets files for automatic `TIVER_NUNIT`/`TIVER_MSTEST` constant definition
 
 ## [0.2.0-alpha]
 
