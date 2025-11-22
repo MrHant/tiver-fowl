@@ -12,11 +12,21 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.8.3" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.8.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+    <PackageReference Include="Tiver.Fowl-ForTesting" Version="*-*" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tiver.Fowl\Tiver.Fowl.csproj" />
-  </ItemGroup>
+  <PropertyGroup>
+    <RestoreAdditionalProjectSources>$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)../test-packages</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+
+  <Target Name="PackTiverFowl" BeforeTargets="Restore">
+    <Exec Command="dotnet pack $(MSBuildThisFileDirectory)../Tiver.Fowl/Tiver.Fowl.csproj -o $(MSBuildThisFileDirectory)../test-packages -p:PackageId=Tiver.Fowl-ForTesting -v q" />
+    <Exec Command="dotnet nuget locals all --clear" />
+  </Target>
 
   <ItemGroup>
     <None Update="config.json">
