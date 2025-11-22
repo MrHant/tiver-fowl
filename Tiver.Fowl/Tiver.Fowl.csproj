@@ -41,7 +41,7 @@
     <!-- Files in contentFiles/cs/ are automatically compiled by NuGet -->
     <ItemGroup>
       <Compile Remove="contentFiles\cs\any\**\*.cs" />
-      <None Include="contentFiles\cs\any\**\*.cs" Pack="true" PackagePath="contentFiles\cs\any\%(RecursiveDir)" />
+      <None Include="contentFiles\cs\any\**\*.cs" Pack="true" PackagePath="contentFiles\cs\any\%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
     <!-- Auto-detect test framework and define constants -->
