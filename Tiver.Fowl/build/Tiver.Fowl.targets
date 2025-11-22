@@ -17,16 +17,16 @@
           Condition="'%(FileName)' == 'nunit.framework'" />
     </ItemGroup>
 
-    <!-- Check for PackageReference to MSTest.TestFramework -->
+    <!-- Check for PackageReference to MSTest.TestFramework or MSTest -->
     <ItemGroup>
       <TiverMSTestPackageReference Include="@(PackageReference)"
-          Condition="'%(PackageReference.Identity)' == 'MSTest.TestFramework'" />
+          Condition="'%(PackageReference.Identity)' == 'MSTest.TestFramework' OR '%(PackageReference.Identity)' == 'MSTest'" />
     </ItemGroup>
 
     <!-- Check for assembly references to MSTest (including transitive dependencies) -->
     <ItemGroup>
       <TiverMSTestAssemblyReference Include="@(ReferencePath)"
-          Condition="'%(FileName)' == 'Microsoft.VisualStudio.TestPlatform.TestFramework'" />
+          Condition="'%(FileName)' == 'Microsoft.VisualStudio.TestPlatform.TestFramework' OR '%(FileName)' == 'MSTest.TestFramework'" />
     </ItemGroup>
 
     <!-- Define TIVER_NUNIT if NUnit is found -->
