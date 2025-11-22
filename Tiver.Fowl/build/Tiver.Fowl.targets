@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <!-- Auto-detect test framework and define constants -->
-  <Target Name="TiverFowlDetectTestFramework" BeforeTargets="CoreCompile">
+  <!-- Auto-detect test framework based on package references -->
+  <Target Name="TiverFowlDetectTestFramework" BeforeTargets="CoreCompile"
+      AfterTargets="ResolveAssemblyReferences">
 
-    <!-- Detect NUnit -->
-    <PropertyGroup Condition="'%(PackageReference.Identity)' == 'NUnit'">
+    <!-- Check for PackageReference to NUnit -->
+    <ItemGroup>
+      <TiverNUnitPackageReference Include="@(PackageReference)"
+          Condition="'%(PackageReference.Identity)' == 'NUnit'" />
+    </ItemGroup>
+
+    <!-- Check for assembly references to NUnit (including transitive dependencies) -->
+    <ItemGroup>
+      <TiverNUnitAssemblyReference Include="@(ReferencePath)"
+          Condition="'%(FileName)' == 'nunit.framework'" />
+    </ItemGroup>
+
+    <!-- Check for PackageReference to MSTest.TestFramework -->
+    <ItemGroup>
+      <TiverMSTestPackageReference Include="@(PackageReference)"
+          Condition="'%(PackageReference.Identity)' == 'MSTest.TestFramework'" />
+    </ItemGroup>
+
+    <!-- Check for assembly references to MSTest (including transitive dependencies) -->
+    <ItemGroup>
+      <TiverMSTestAssemblyReference Include="@(ReferencePath)"
+          Condition="'%(FileName)' == 'Microsoft.VisualStudio.TestPlatform.TestFramework'" />
+    </ItemGroup>
+
+    <!-- Define TIVER_NUNIT if NUnit is found -->
+    <PropertyGroup Condition="'@(TiverNUnitPackageReference)' != '' OR '@(TiverNUnitAssemblyReference)' != ''">
       <DefineConstants>$(DefineConstants);TIVER_NUNIT</DefineConstants>
     </PropertyGroup>
 
-    <!-- Detect MSTest -->
-    <PropertyGroup Condition="'%(PackageReference.Identity)' == 'MSTest.TestFramework'">
+    <!-- Define TIVER_MSTEST if MSTest is found -->
+    <PropertyGroup Condition="'@(TiverMSTestPackageReference)' != '' OR '@(TiverMSTestAssemblyReference)' != ''">
       <DefineConstants>$(DefineConstants);TIVER_MSTEST</DefineConstants>
     </PropertyGroup>
 
