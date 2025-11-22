@@ -1,0 +1,14 @@
+{
+  "BrowserConfiguration": {
+    "BrowserType": "chrome",
+    "Headless": true,
+    "Resolution": {
+      "Width": 1200,
+      "Height": 800
+    }
+  },
+  "Tiver.Fowl.Waiting": {
+    "Timeout": 10000,
+    "PollingInterval": 500
+  }
+}

@@ -39,14 +39,14 @@ namespace Tiver.Fowl.TestingBase
         public void Teardown()
         {
             var outcome = TestContext.CurrentTestOutcome;
-            TestResult testResult;
+            Core.Enums.TestResult testResult;
             switch (outcome)
             {
                 case UnitTestOutcome.Passed:
-                    testResult = TestResult.Passed;
+                    testResult = Core.Enums.TestResult.Passed;
                     break;
                 case UnitTestOutcome.Failed:
-                    testResult = TestResult.Failed;
+                    testResult = Core.Enums.TestResult.Failed;
                     break;
                 case UnitTestOutcome.Inconclusive:
                 case UnitTestOutcome.Error:
@@ -54,7 +54,7 @@ namespace Tiver.Fowl.TestingBase
                 case UnitTestOutcome.NotRunnable:
                 case UnitTestOutcome.Unknown:
                 default:
-                    testResult = TestResult.Unknown;
+                    testResult = Core.Enums.TestResult.Unknown;
                     break;
             }
 
