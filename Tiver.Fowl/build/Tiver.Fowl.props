@@ -4,13 +4,25 @@
   <!-- Auto-detect test framework based on package references at evaluation time -->
   <!-- This runs early enough for IDE IntelliSense to recognize the symbols -->
 
+  <!-- Filter NUnit package references -->
+  <ItemGroup>
+    <TiverNUnitPackageReference Include="@(PackageReference)"
+        Condition="'%(PackageReference.Identity)' == 'NUnit'" />
+  </ItemGroup>
+
+  <!-- Filter MSTest package references -->
+  <ItemGroup>
+    <TiverMSTestPackageReference Include="@(PackageReference)"
+        Condition="'%(PackageReference.Identity)' == 'MSTest.TestFramework'" />
+  </ItemGroup>
+
   <!-- Define TIVER_NUNIT if NUnit package is referenced -->
-  <PropertyGroup Condition="'@(PackageReference->WithMetadataValue('Identity', 'NUnit'))' != ''">
+  <PropertyGroup Condition="'@(TiverNUnitPackageReference)' != ''">
     <DefineConstants>$(DefineConstants);TIVER_NUNIT</DefineConstants>
   </PropertyGroup>
 
   <!-- Define TIVER_MSTEST if MSTest.TestFramework package is referenced -->
-  <PropertyGroup Condition="'@(PackageReference->WithMetadataValue('Identity', 'MSTest.TestFramework'))' != ''">
+  <PropertyGroup Condition="'@(TiverMSTestPackageReference)' != ''">
     <DefineConstants>$(DefineConstants);TIVER_MSTEST</DefineConstants>
   </PropertyGroup>
 
