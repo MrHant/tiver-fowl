@@ -26,9 +26,6 @@ jobs:
         with:
           dotnet-version: "10.x"
 
-      - name: Pack Tiver.Fowl for testing
-        run: dotnet pack Tiver.Fowl/Tiver.Fowl.csproj -o test-packages -p:MinVerSkip=true -p:Version=0.0.1-testing -v quiet
-
       - name: Run tests - net10.0
         run: dotnet test -f net10.0 -c Release -v quiet
 
