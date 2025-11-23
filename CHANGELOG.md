@@ -6,6 +6,7 @@
 - Auto-detection of test framework based on package references
 - `BaseTestForNUnit` and `BaseTestForMSTest` base classes shipped as source files
 - MSBuild props/targets files for automatic `TIVER_NUNIT`/`TIVER_MSTEST` constant definition
+- `Logger` class shipped as source file for easier customization of Serilog configuration
 
 ## [0.2.0-alpha]
 

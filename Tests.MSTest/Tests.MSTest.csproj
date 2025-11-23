@@ -12,7 +12,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.8.3" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.8.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-    <PackageReference Include="Tiver.Fowl-ForTesting" Version="*-*" />
+    <PackageReference Include="Tiver.Fowl" Version="0.0.1-testing" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
@@ -24,8 +24,8 @@
   </PropertyGroup>
 
   <Target Name="PackTiverFowl" BeforeTargets="Restore">
-    <Exec Command="dotnet pack $(MSBuildThisFileDirectory)../Tiver.Fowl/Tiver.Fowl.csproj -o $(MSBuildThisFileDirectory)../test-packages -p:PackageId=Tiver.Fowl-ForTesting -v q" />
     <Exec Command="dotnet nuget locals all --clear" />
+    <Exec Command="dotnet pack $(MSBuildThisFileDirectory)../Tiver.Fowl/Tiver.Fowl.csproj -o $(MSBuildThisFileDirectory)../test-packages -p:MinVerSkip=true -p:Version=0.0.1-testing -v q" />
   </Target>
 
   <ItemGroup>

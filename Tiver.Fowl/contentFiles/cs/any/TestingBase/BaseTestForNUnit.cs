@@ -53,7 +53,7 @@ namespace Tiver.Fowl.TestingBase
         [OneTimeSetUp]
         public static void Initialize()
         {
-            Logging.Logger.Configure();
+            Tiver.Fowl.Logging.Logger.Configure();
         }
 
         [OneTimeTearDown]

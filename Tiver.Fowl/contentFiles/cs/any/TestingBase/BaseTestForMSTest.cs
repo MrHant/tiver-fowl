@@ -17,7 +17,7 @@ namespace Tiver.Fowl.TestingBase
         [AssemblyInitialize]
         public static void AssemblyInitialize(TestContext context)
         {
-            Logging.Logger.Configure();
+            Tiver.Fowl.Logging.Logger.Configure();
         }
 
         [AssemblyCleanup]

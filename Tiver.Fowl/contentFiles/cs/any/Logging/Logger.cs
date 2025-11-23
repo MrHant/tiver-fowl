@@ -1,11 +1,8 @@
 namespace Tiver.Fowl.Logging
 {
-    using System.IO;
-    using NUnit.Framework;
     using Serilog;
-    using Serilog.Extensions.Logging;
     using Serilog.Formatting.Json;
-    using Tiver.Fowl.Waiting;
+    using Serilog.Extensions.Logging;
 
     public class Logger
     {
@@ -20,11 +17,11 @@ namespace Tiver.Fowl.Logging
                 .MinimumLevel.Information()
                 .Enrich.With(new TestNameEnricher())
                 .WriteTo.Console()
-                .WriteTo.File(new JsonFormatter(), Path.Combine(TestContext.CurrentContext.TestDirectory, "./log.txt"))
+                .WriteTo.File(new JsonFormatter(), "./log.txt")
                 .CreateLogger();
             configured = true;
 
-            Wait.SetLogger(new SerilogLoggerProvider(Log.Logger, false).CreateLogger("Wait"));
+            Tiver.Fowl.Waiting.Wait.SetLogger(new SerilogLoggerProvider(Log.Logger, false).CreateLogger("Wait"));
         }
 
         private static bool configured;
