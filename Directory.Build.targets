@@ -1,0 +1,13 @@
+<Project>
+  <Target Name="PackTiverFowlForTesting" BeforeTargets="Build" Condition="'$(MSBuildProjectName)' == 'Tests.NUnit' OR '$(MSBuildProjectName)' == 'Tests.MSTest'">
+    <PropertyGroup>
+      <TiverFowlTestVersion Condition="'$(MSBuildProjectName)' == 'Tests.NUnit'">0.0.1-testingnunit</TiverFowlTestVersion>
+      <TiverFowlTestVersion Condition="'$(MSBuildProjectName)' == 'Tests.MSTest'">0.0.1-testingmstest</TiverFowlTestVersion>
+      <TestPackagesDir>$(MSBuildThisFileDirectory)test-packages</TestPackagesDir>
+      <PackagePath>$(TestPackagesDir)/Tiver.Fowl.$(TiverFowlTestVersion).nupkg</PackagePath>
+    </PropertyGroup>
+
+    <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/$(TiverFowlTestVersion)" Condition="!Exists('$(PackagePath)')" />
+    <Exec Command="dotnet pack &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -o &quot;$(TestPackagesDir)&quot; -p:MinVerSkip=true -p:Version=$(TiverFowlTestVersion) --force -v q" Condition="!Exists('$(PackagePath)')" />
+  </Target>
+</Project>

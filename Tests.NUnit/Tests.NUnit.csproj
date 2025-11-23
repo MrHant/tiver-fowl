@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" InitialTargets="PackTiverFowl">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -23,10 +23,6 @@
     <RestoreAdditionalProjectSources>$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)../test-packages</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
-  <Target Name="PackTiverFowl">
-    <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/0.0.1-testingnunit" />
-    <Exec Command="dotnet pack $(MSBuildThisFileDirectory)../Tiver.Fowl/Tiver.Fowl.csproj -o $(MSBuildThisFileDirectory)../test-packages -p:MinVerSkip=true -p:Version=0.0.1-testingnunit --force -v q" />
-  </Target>
 
   <ItemGroup>
     <None Update="config.json">
