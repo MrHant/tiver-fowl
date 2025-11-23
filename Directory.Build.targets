@@ -1,5 +1,5 @@
 <Project>
-  <Target Name="PackTiverFowlForTesting" BeforeTargets="Build" Condition="'$(MSBuildProjectName)' == 'Tests.NUnit' OR '$(MSBuildProjectName)' == 'Tests.MSTest'">
+  <Target Name="PackTiverFowlForTesting" BeforeTargets="Restore" Condition="'$(MSBuildProjectName)' == 'Tests.NUnit' OR '$(MSBuildProjectName)' == 'Tests.MSTest'">
     <PropertyGroup>
       <TiverFowlTestVersion Condition="'$(MSBuildProjectName)' == 'Tests.NUnit'">0.0.1-testingnunit</TiverFowlTestVersion>
       <TiverFowlTestVersion Condition="'$(MSBuildProjectName)' == 'Tests.MSTest'">0.0.1-testingmstest</TiverFowlTestVersion>
