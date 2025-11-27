@@ -1,0 +1,23 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/.nuget/">
+    <File Path=".nuget/NuGet.Config" />
+    <File Path=".nuget/NuGet.exe" />
+    <File Path=".nuget/NuGet.targets" />
+  </Folder>
+  <Folder Name="/Package/">
+    <File Path="package/Package.nuspec" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="CustomCodeAnalysisDictionary.xml" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Tests.MSTest/Tests.MSTest.csproj" />
+  <Project Path="Tests.NUnit/Tests.NUnit.csproj" />
+  <Project Path="Tests/Tests.csproj" />
+  <Project Path="Tiver.Fowl/Tiver.Fowl.csproj" />
+</Solution>
