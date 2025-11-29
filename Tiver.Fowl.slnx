@@ -8,6 +8,7 @@
     <File Path="CustomCodeAnalysisDictionary.xml" />
     <File Path="README.md" />
   </Folder>
+  <Project Path="TestContentFiles/TestContentFiles.csproj" />
   <Project Path="Tests.MSTest/Tests.MSTest.csproj" />
   <Project Path="Tests.NUnit/Tests.NUnit.csproj" />
   <Project Path="Tests/Tests.csproj" />

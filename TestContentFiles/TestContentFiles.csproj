@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>14</LangVersion>
+        <TargetFramework>net10.0</TargetFramework>
+        <IsPackable>false</IsPackable>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    </PropertyGroup>
+
+    <!-- Link contentFiles for compilation validation -->
+    <ItemGroup>
+        <Compile Include="..\Tiver.Fowl\contentFiles\cs\any\**\*.cs" Link="ContentFiles\%(RecursiveDir)%(Filename)%(Extension)" />
+    </ItemGroup>
+
+    <!-- Import Tiver.Fowl targets for auto-detection -->
+    <Import Project="..\Tiver.Fowl\build\Tiver.Fowl.targets" />
+
+    <!-- Reference the main framework -->
+    <ItemGroup>
+        <ProjectReference Include="..\Tiver.Fowl\Tiver.Fowl.csproj" />
+    </ItemGroup>
+
+    <!-- Both test frameworks to validate both BaseTest variants -->
+    <ItemGroup>
+        <PackageReference Include="NUnit" Version="4.4.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="5.1.0" />
+        <PackageReference Include="MSTest.TestFramework" Version="3.8.1" />
+        <PackageReference Include="MSTest.TestAdapter" Version="3.8.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    </ItemGroup>
+
+</Project>
