@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+* xxx
+
+## [0.2.0-beta]
+
 ### Added
 - Auto-detection of test framework based on package references
 - `BaseTestForNUnit` and `BaseTestForMSTest` base classes shipped as source files
