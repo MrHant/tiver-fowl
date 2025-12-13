@@ -16,6 +16,11 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
+    <!-- In Development configuration, disable auto-include to avoid duplicates -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Development'">
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    </PropertyGroup>
+
     <ItemGroup>
       <CodeAnalysisDictionary Include="..\CustomCodeAnalysisDictionary.xml">
         <Link>CustomCodeAnalysisDictionary.xml</Link>
@@ -39,8 +44,22 @@
 
     <!-- Source files shipped to be compiled in consumer project -->
     <!-- Must use Content with BuildAction=Compile to generate contentFiles entry in nuspec -->
-    <ItemGroup>
+    <!-- In Development configuration, also compile them to catch errors before packaging -->
+    <ItemGroup Condition="'$(Configuration)' != 'Development'">
       <Compile Remove="contentFiles\cs\any\**\*.cs" />
+      <Content Include="contentFiles\cs\any\**\*.cs">
+        <Pack>true</Pack>
+        <PackagePath>contentFiles\cs\any\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+        <BuildAction>Compile</BuildAction>
+        <CopyToOutput>false</CopyToOutput>
+      </Content>
+    </ItemGroup>
+
+    <!-- In Development configuration: compile contentFiles AND include in package -->
+    <ItemGroup Condition="'$(Configuration)' == 'Development'">
+      <!-- Include all main source files -->
+      <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
+      <!-- contentFiles are already included above, so this adds them for compilation -->
       <Content Include="contentFiles\cs\any\**\*.cs">
         <Pack>true</Pack>
         <PackagePath>contentFiles\cs\any\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
@@ -56,6 +75,15 @@
         <PackagePath>build\</PackagePath>
       </Content>
     </ItemGroup>
+
+    <!-- Test framework references - only for Development configuration to compile contentFiles -->
+    <ItemGroup Condition="'$(Configuration)' == 'Development'">
+      <PackageReference Include="NUnit" Version="4.4.0" />
+      <PackageReference Include="MSTest.TestFramework" Version="3.8.1" />
+    </ItemGroup>
+
+    <!-- Import targets to auto-detect test frameworks in Development configuration -->
+    <Import Project="build\Tiver.Fowl.targets" Condition="'$(Configuration)' == 'Development'" />
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Configuration">

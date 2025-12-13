@@ -7,7 +7,9 @@
       <PackagePath>$(TestPackagesDir)/Tiver.Fowl.$(TiverFowlTestVersion).nupkg</PackagePath>
     </PropertyGroup>
 
-    <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/$(TiverFowlTestVersion)" Condition="!Exists('$(PackagePath)')" />
-    <Exec Command="dotnet pack &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -o &quot;$(TestPackagesDir)&quot; -p:MinVerSkip=true -p:Version=$(TiverFowlTestVersion) --force -v q" Condition="!Exists('$(PackagePath)')" />
+    <!-- Always rebuild with Development configuration to catch contentFiles errors -->
+    <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/$(TiverFowlTestVersion)" />
+    <Exec Command="dotnet build &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -c Development" />
+    <Exec Command="dotnet pack &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -c Development -o &quot;$(TestPackagesDir)&quot; -p:MinVerVersionOverride=$(TiverFowlTestVersion) --no-build --force" />
   </Target>
 </Project>

@@ -23,7 +23,6 @@
     <RestoreAdditionalProjectSources>$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)../test-packages</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
-
   <ItemGroup>
     <None Update="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
