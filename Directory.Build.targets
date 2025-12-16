@@ -9,16 +9,26 @@
       <PackagePath>$(TestPackagesDir)/Tiver.Fowl.$(TiverFowlTestVersion).nupkg</PackagePath>
       <TiverFowlProject>$([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', 'Tiver.Fowl', 'Tiver.Fowl.csproj'))</TiverFowlProject>
       <!-- Build Development to validate contentFiles compilation, but pack in Release so contentFiles aren't compiled into the library assembly. -->
-      <!-- Paths must end with a trailing slash; use '/' to avoid cmd.exe escaping issues on Windows. -->
-      <TestPackIntermediateDirDevelopmentMsbuild>$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Development'))/</TestPackIntermediateDirDevelopmentMsbuild>
-      <TestPackIntermediateDirReleaseMsbuild>$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Release'))/</TestPackIntermediateDirReleaseMsbuild>
-      <TestPackBaseOutputDirMsbuild>$([System.IO.Path]::Combine('$(TestPackagesDir)', '.bin', '$(TiverFowlTestVersion)'))/</TestPackBaseOutputDirMsbuild>
+      <!-- Paths must end with a trailing slash. On Windows, quoted args ending with '\' need it doubled to avoid escaping the closing quote. -->
+      <_IsWindows Condition="'$(OS)' == 'Windows_NT'">true</_IsWindows>
+      <TestPackIntermediateDirDevelopmentMsbuild Condition="'$(_IsWindows)' == 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Development'))\\</TestPackIntermediateDirDevelopmentMsbuild>
+      <TestPackIntermediateDirReleaseMsbuild Condition="'$(_IsWindows)' == 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Release'))\\</TestPackIntermediateDirReleaseMsbuild>
+      <TestPackBaseOutputDirMsbuild Condition="'$(_IsWindows)' == 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.bin', '$(TiverFowlTestVersion)'))\\</TestPackBaseOutputDirMsbuild>
+      <TestPackIntermediateDirDevelopmentMsbuild Condition="'$(_IsWindows)' != 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Development'))/</TestPackIntermediateDirDevelopmentMsbuild>
+      <TestPackIntermediateDirReleaseMsbuild Condition="'$(_IsWindows)' != 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Release'))/</TestPackIntermediateDirReleaseMsbuild>
+      <TestPackBaseOutputDirMsbuild Condition="'$(_IsWindows)' != 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.bin', '$(TiverFowlTestVersion)'))/</TestPackBaseOutputDirMsbuild>
     </PropertyGroup>
 
     <!-- Always rebuild with Development configuration to catch contentFiles errors -->
     <MakeDir Directories="$(TestPackagesDir)" />
     <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/$(TiverFowlTestVersion)" />
-    <Exec Command="dotnet build &quot;$(TiverFowlProject)&quot; -c Development -p:IntermediateOutputPath=&quot;$(TestPackIntermediateDirDevelopmentMsbuild)&quot; -p:BaseOutputPath=&quot;$(TestPackBaseOutputDirMsbuild)&quot;" />
-    <Exec Command="dotnet pack &quot;$(TiverFowlProject)&quot; -c Release -o &quot;$(TestPackagesDir)&quot; -p:MinVerVersionOverride=$(TiverFowlTestVersion) -p:IntermediateOutputPath=&quot;$(TestPackIntermediateDirReleaseMsbuild)&quot; -p:BaseOutputPath=&quot;$(TestPackBaseOutputDirMsbuild)&quot; --force" />
+    <Exec Command="dotnet build &quot;$(TiverFowlProject)&quot; -c Development -p:IntermediateOutputPath=&quot;$(TestPackIntermediateDirDevelopmentMsbuild)&quot; -p:BaseOutputPath=&quot;$(TestPackBaseOutputDirMsbuild)&quot; -v:m"
+          ConsoleToMSBuild="true"
+          StandardOutputImportance="High"
+          StandardErrorImportance="High" />
+    <Exec Command="dotnet pack &quot;$(TiverFowlProject)&quot; -c Release -o &quot;$(TestPackagesDir)&quot; -p:MinVerVersionOverride=$(TiverFowlTestVersion) -p:IntermediateOutputPath=&quot;$(TestPackIntermediateDirReleaseMsbuild)&quot; -p:BaseOutputPath=&quot;$(TestPackBaseOutputDirMsbuild)&quot; --force -v:m"
+          ConsoleToMSBuild="true"
+          StandardOutputImportance="High"
+          StandardErrorImportance="High" />
   </Target>
 </Project>
