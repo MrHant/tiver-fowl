@@ -62,7 +62,7 @@ The framework ships source files (`BaseTestForNUnit.cs`, `BaseTestForMSTest.cs`,
 **How it works** (automated via `Directory.Build.targets`):
 - Before restore: Build Tiver.Fowl in Development config (validates contentFiles)
 - Clear NuGet cache to prevent stale packages
-- Pack with test-specific versions (`0.0.1-testingnunit`, `0.0.1-testingmstest`)
+- Pack (Release config) with test-specific versions (`0.0.1-testingnunit`, `0.0.1-testingmstest`)
 - Restore package from local `test-packages/` directory
 - Build and run tests using the packaged contentFiles
 
