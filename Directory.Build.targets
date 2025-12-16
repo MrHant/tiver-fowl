@@ -1,15 +1,20 @@
 <Project>
-  <Target Name="PackTiverFowlForTesting" BeforeTargets="Restore" Condition="'$(MSBuildProjectName)' == 'Tests.NUnit' OR '$(MSBuildProjectName)' == 'Tests.MSTest'">
+  <Target Name="PackTiverFowlForTesting"
+          BeforeTargets="Restore;_GenerateRestoreGraphProjectEntry"
+          Condition="('$(MSBuildProjectName)' == 'Tests.NUnit' OR '$(MSBuildProjectName)' == 'Tests.MSTest') AND '$(MSBuildIsRestoring)' == 'true'">
     <PropertyGroup>
       <TiverFowlTestVersion Condition="'$(MSBuildProjectName)' == 'Tests.NUnit'">0.0.1-testingnunit</TiverFowlTestVersion>
       <TiverFowlTestVersion Condition="'$(MSBuildProjectName)' == 'Tests.MSTest'">0.0.1-testingmstest</TiverFowlTestVersion>
       <TestPackagesDir>$(MSBuildThisFileDirectory)test-packages</TestPackagesDir>
       <PackagePath>$(TestPackagesDir)/Tiver.Fowl.$(TiverFowlTestVersion).nupkg</PackagePath>
+      <TestPackIntermediateDir>$(TestPackagesDir)/.obj/$(TiverFowlTestVersion)/</TestPackIntermediateDir>
+      <TestPackOutputDir>$(TestPackagesDir)/.bin/$(TiverFowlTestVersion)/</TestPackOutputDir>
     </PropertyGroup>
 
     <!-- Always rebuild with Development configuration to catch contentFiles errors -->
+    <MakeDir Directories="$(TestPackagesDir)" />
     <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/$(TiverFowlTestVersion)" />
-    <Exec Command="dotnet build &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -c Development" />
-    <Exec Command="dotnet pack &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -c Development -o &quot;$(TestPackagesDir)&quot; -p:MinVerVersionOverride=$(TiverFowlTestVersion) --no-build --force" />
+    <Exec Command="dotnet build &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -c Development -p:BaseIntermediateOutputPath=&quot;$(TestPackIntermediateDir)&quot; -p:BaseOutputPath=&quot;$(TestPackOutputDir)&quot;" />
+    <Exec Command="dotnet pack &quot;$(MSBuildThisFileDirectory)Tiver.Fowl/Tiver.Fowl.csproj&quot; -c Development -o &quot;$(TestPackagesDir)&quot; -p:MinVerVersionOverride=$(TiverFowlTestVersion) -p:BaseIntermediateOutputPath=&quot;$(TestPackIntermediateDir)&quot; -p:BaseOutputPath=&quot;$(TestPackOutputDir)&quot; --no-build --force" />
   </Target>
 </Project>
