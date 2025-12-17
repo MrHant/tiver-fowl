@@ -1,3 +1,6 @@
 {
-    "StartUrl": "https://www.demoblaze.com/"
+    "Urls": {
+        "home": "https://www.demoblaze.com/",
+        "cart": "https://www.demoblaze.com/cart.html"
+    }
 }

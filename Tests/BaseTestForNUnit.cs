@@ -1,9 +1,7 @@
 namespace Tests
 {
-    using Configuration;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;
-    using Tiver.Fowl.Core.Context;
     using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
     using Logging;
@@ -15,11 +13,9 @@ namespace Tests
         public void Setup()
         {
             Flow.Setup(
-                GetType(), 
+                GetType(),
                 TestContext.CurrentContext.Test.Name,
                 () => TestContext.CurrentContext.Test.Name);
-            
-            TestExecutionContext.BrowserActions.NavigateToUrl(ActiveConfiguration.StartUrl);
         }
 
         [TearDown]

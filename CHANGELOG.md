@@ -2,7 +2,14 @@
 
 ## [Unreleased]
 
-* xxx
+### Changed
+- **BREAKING**: Replaced `StartUrl` configuration with named URLs map (`Urls` dictionary in config.json)
+- **BREAKING**: Removed automatic navigation from `BaseTestForNUnit.Setup()` - tests now control their own navigation via `ActiveConfiguration.NavigateTo("urlName")`
+
+### Added
+- `UrlsConfiguration` class for managing named URLs
+- `ActiveConfiguration.Urls` property for accessing URL configuration
+- `ActiveConfiguration.NavigateTo(string)` helper method for test navigation
 
 ## [0.2.0-beta]
 

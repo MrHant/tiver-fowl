@@ -82,7 +82,7 @@ The Tests project in this repo uses **NUnit 4.4.0**:
      - Reads `BrowserConfiguration` from `Tiver_config.json`
      - Creates browser via `BrowserFactory.GetBrowser()`
      - Automatically downloads browser driver via Selenium Manager (default) or optionally via Tiver.Fowl.Drivers
-     - Navigates to StartUrl from `config.json`
+   - **Note**: Tests control their own navigation via `ActiveConfiguration.NavigateTo("urlName")`
 
 3. **[Test] Test Method** - Test execution
    - Access current browser via `TestExecutionContext.Browser`
@@ -173,8 +173,18 @@ Two configuration files required:
 **config.json** - Test-specific configuration:
 ```json
 {
-  "StartUrl": "https://example.com"
+  "Urls": {
+    "home": "https://example.com",
+    "login": "https://example.com/login",
+    "dashboard": "https://example.com/dashboard"
+  }
 }
+```
+
+Tests navigate using named URLs:
+```csharp
+ActiveConfiguration.NavigateTo("home");     // Navigate by name
+var url = ActiveConfiguration.Urls.GetUrl("login");  // Get URL directly
 ```
 
 Both files copied to output directory via .csproj configuration.
@@ -282,6 +292,8 @@ public class MyTests : BaseTestForNUnit
     [Test]
     public void MyTest()
     {
+        ActiveConfiguration.NavigateTo("home");  // Navigate to starting page
+
         this.LogStep("Navigate to section");
         SomeView.SomeButton.Click();
 
@@ -315,7 +327,11 @@ public class CatalogItem : Element, IVisible
 
 ### Accessing Browser Actions Directly
 ```csharp
-TestExecutionContext.BrowserActions.NavigateToUrl("https://example.com");
+// Navigate using named URLs (recommended)
+ActiveConfiguration.NavigateTo("dashboard");
+
+// Or navigate directly
+TestExecutionContext.BrowserActions.NavigateToUrl(new Uri("https://example.com"));
 TestExecutionContext.BrowserActions.ExecuteScript("return document.title;");
 byte[] screenshot = TestExecutionContext.BrowserActions.TakeScreenshot();
 ```

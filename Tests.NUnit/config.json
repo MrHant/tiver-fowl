@@ -1,3 +1,5 @@
 {
-  "StartUrl": "https://example.com"
+    "Urls": {
+        "home": "https://example.com"
+    }
 }

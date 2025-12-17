@@ -1,5 +1,6 @@
 namespace Tests.FrameworkTests;
 
+using Configuration;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using Tiver.Fowl.Core.Attributes;
@@ -18,6 +19,8 @@ public class ParallelizationTests : BaseTestForNUnit
     [TestCase("Monitors", "ASUS Full HD")]
     public void SelectCatalogSection(string menuItemText, string expectedItemName)
     {
+        ActiveConfiguration.NavigateTo("home");
+
         this.LogStep("Open catalog section");
         CatalogView.CategoryMenuItem.Click(menuItemText);
 

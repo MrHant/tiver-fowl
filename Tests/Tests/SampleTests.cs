@@ -1,6 +1,7 @@
 ﻿namespace Tests.Tests
 {
     using System.Linq;
+    using Configuration;
     using Elements;
     using Views;
     using NUnit.Framework;
@@ -15,6 +16,8 @@
         [Test]
         public void SelectCategory()
         {
+            ActiveConfiguration.NavigateTo("home");
+
             this.LogStep("Open 'Laptops' catalog section");
             CatalogView.LaptopsMenuItem.Click();
             
@@ -31,6 +34,8 @@
         [Test]
         public void CheckNumberOfItems()
         {
+            ActiveConfiguration.NavigateTo("home");
+
             this.LogStep("Open 'Monitors' catalog section");
             CatalogView.MonitorsMenuItem.Click();
             

@@ -1,5 +1,6 @@
 namespace Tests.FrameworkTests
 {
+    using Configuration;
     using Elements;
     using NUnit.Framework;
     using NUnit.Framework.Legacy;
@@ -16,6 +17,8 @@ namespace Tests.FrameworkTests
         [Test]
         public void BasicElementsMethods()
         {
+            ActiveConfiguration.NavigateTo("home");
+
             // Element
             ClassicAssert.IsNotEmpty(CatalogView.CategoryMenuItem.Locator);
             ClassicAssert.IsNotEmpty(CatalogView.CategoryMenuItem.Name);
@@ -35,6 +38,8 @@ namespace Tests.FrameworkTests
         [Test]
         public void InvalidLocatorFormatting()
         {
+            ActiveConfiguration.NavigateTo("home");
+
             Assert.Throws<LocatorFormattingException>(() =>
             {
                 CatalogView.CategoryMenuItem.GetAttribute("title");
@@ -44,6 +49,8 @@ namespace Tests.FrameworkTests
         [Test]
         public void ElementLocatorFormatting()
         {
+            ActiveConfiguration.NavigateTo("home");
+
             var el = new Element("//p[text()='{0}']");
             var derivedElement = new Element(el, locatorFormattingArguments: "Hello");
             ClassicAssert.IsTrue(derivedElement.LocatorFormattingArguments.Length == 1);
