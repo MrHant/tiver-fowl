@@ -1,7 +1,7 @@
 ﻿namespace Tests.Tests
 {
     using System.Linq;
-    using Configuration;
+    using Tiver.Fowl.Core.Configuration;
     using Elements;
     using Views;
     using NUnit.Framework;

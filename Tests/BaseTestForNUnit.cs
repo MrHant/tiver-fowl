@@ -5,6 +5,7 @@ namespace Tests
     using Tiver.Fowl.Core.Enums;
     using Tiver.Fowl.TestingBase;
     using Logging;
+    using Tiver.Fowl.Core.Configuration;
 
     [TestFixture]
     public class BaseTestForNUnit : IBaseTest

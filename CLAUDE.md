@@ -170,21 +170,72 @@ Two configuration files required:
 - `"TiverFowlDrivers"` - Uses Tiver.Fowl.Drivers package for more control over driver versions. Requires `Tiver.Fowl.Drivers` configuration section.
 - `"None"` - No automatic driver management. Assumes drivers are already in PATH.
 
-**config.json** - Test-specific configuration:
+**config.json** - Test-specific configuration (generic, supports any structure):
 ```json
 {
   "Urls": {
     "home": "https://example.com",
-    "login": "https://example.com/login",
-    "dashboard": "https://example.com/dashboard"
+    "login": "https://example.com/login"
+  },
+  "Database": {
+    "Connection": {
+      "String": "Server=localhost;Database=test",
+      "Timeout": 30
+    }
+  },
+  "FeatureFlags": {
+    "NewUI": true
   }
 }
 ```
 
-Tests navigate using named URLs:
+**Environment-based configuration layering:**
+Files are loaded in order (later overrides earlier):
+1. `config.json` - base configuration
+2. `config.{environment}.json` - environment-specific overrides (optional)
+
+Environment is resolved in priority order:
+1. `ActiveConfiguration.SetEnvironment("qa")` - code override (highest priority)
+2. `TIVER_ENVIRONMENT` environment variable
+3. `"Environment"` key in `Tiver_config.json` (lowest priority)
+
+```json
+// Tiver_config.json - set default environment
+{
+  "Environment": "qa",
+  "BrowserConfiguration": { ... }
+}
+```
+
 ```csharp
-ActiveConfiguration.NavigateTo("home");     // Navigate by name
-var url = ActiveConfiguration.Urls.GetUrl("login");  // Get URL directly
+// Override environment in code (reloads configuration)
+ActiveConfiguration.SetEnvironment("prod");
+
+// Check current environment
+var env = ActiveConfiguration.Environment;
+```
+
+**Accessing configuration values:**
+```csharp
+// Get typed values using colon-separated paths
+var timeout = ActiveConfiguration.Get<int>("Database:Connection:Timeout");
+var connStr = ActiveConfiguration.Get<string>("Database:Connection:String");
+
+// Get with default value
+var retries = ActiveConfiguration.Get<int>("Retries", defaultValue: 3);
+
+// Bind section to object
+var dbConfig = ActiveConfiguration.GetSection<DatabaseConfig>("Database");
+
+// Get section as dictionary
+var urls = ActiveConfiguration.GetSectionAsDictionary("Urls");
+
+// Check if key exists
+if (ActiveConfiguration.Exists("FeatureFlags:NewUI")) { ... }
+
+// URL convenience methods (backward compatible)
+ActiveConfiguration.NavigateTo("home");  // Navigate browser to named URL
+var url = ActiveConfiguration.GetUrl("login");  // Get URL as Uri
 ```
 
 Both files copied to output directory via .csproj configuration.

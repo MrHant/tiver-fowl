@@ -3,13 +3,11 @@
 ## [Unreleased]
 
 ### Changed
-- **BREAKING**: Replaced `StartUrl` configuration with named URLs map (`Urls` dictionary in config.json)
-- **BREAKING**: Removed automatic navigation from `BaseTestForNUnit.Setup()` - tests now control their own navigation via `ActiveConfiguration.NavigateTo("urlName")`
-
-### Added
-- `UrlsConfiguration` class for managing named URLs
-- `ActiveConfiguration.Urls` property for accessing URL configuration
-- `ActiveConfiguration.NavigateTo(string)` helper method for test navigation
+- **BREAKING**: New generic configuration system via `ActiveConfiguration` class (now in `Tiver.Fowl.Core.Configuration` namespace)
+  - Supports custom keys with arbitrary nesting using path syntax (e.g., `Get<int>("Database:Timeout")`)
+  - Environment-based layering: `config.json` → `config.{env}.json`
+  - Environment set via code, `TIVER_ENVIRONMENT` env var, or `Tiver_config.json`
+- **BREAKING**: Tests control their own navigation via `ActiveConfiguration.NavigateTo("urlName")`
 
 ## [0.2.0-beta]
 

@@ -1,6 +1,7 @@
 namespace Tests.FrameworkTests;
 
-using Configuration;
+using System.Collections.Generic;
+using Tiver.Fowl.Core.Configuration;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using Tiver.Fowl.Core.Attributes;
@@ -14,17 +15,22 @@ using Views;
 public class ParallelizationTests : BaseTestForNUnit
 {
     [Test]
-    [TestCase("Laptops", "MacBook air")]
-    [TestCase("Phones", "Nexus 6")]
-    [TestCase("Monitors", "ASUS Full HD")]
-    public void SelectCatalogSection(string menuItemText, string expectedItemName)
+    [TestCaseSource(nameof(GetCatalogTestData))]
+    public void SelectCatalogSection((string menuItemText, string expectedItemName) testData)
     {
         ActiveConfiguration.NavigateTo("home");
 
         this.LogStep("Open catalog section");
-        CatalogView.CategoryMenuItem.Click(menuItemText);
+        CatalogView.CategoryMenuItem.Click(testData.menuItemText);
 
         this.LogStep("Specific item from catalog is displayed");
-        ClassicAssert.IsTrue(new Element("//div[contains(@class,'card-block')]/h4[contains(.,'{0}')]/a").Displayed(expectedItemName));
+        ClassicAssert.IsTrue(new Element("//div[contains(@class,'card-block')]/h4[contains(.,'{0}')]/a").Displayed(testData.expectedItemName));
+    }
+
+    private static IEnumerable<(string menuItemText, string expectedItemName)> GetCatalogTestData()
+    {
+        yield return (ActiveConfiguration.Get<string>("TestData:CategoryName"), "MacBook air");
+        yield return ("Phones", "Nexus 6");
+        yield return ("Monitors", "ASUS Full HD");
     }
 }

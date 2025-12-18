@@ -1,6 +1,6 @@
 namespace Tests.FrameworkTests
 {
-    using Configuration;
+    using Tiver.Fowl.Core.Configuration;
     using Elements;
     using NUnit.Framework;
     using NUnit.Framework.Legacy;
@@ -19,16 +19,18 @@ namespace Tests.FrameworkTests
         {
             ActiveConfiguration.NavigateTo("home");
 
+            var categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName");
+
             // Element
             ClassicAssert.IsNotEmpty(CatalogView.CategoryMenuItem.Locator);
             ClassicAssert.IsNotEmpty(CatalogView.CategoryMenuItem.Name);
 
             // IHasAttributes
-            ClassicAssert.IsNotNull(CatalogView.CategoryMenuItem.GetAttribute("title", "Laptops"));
-            ClassicAssert.IsNull(CatalogView.CategoryMenuItem.GetAttribute("xxxxx", "Laptops"));
+            ClassicAssert.IsNotNull(CatalogView.CategoryMenuItem.GetAttribute("title", categoryName));
+            ClassicAssert.IsNull(CatalogView.CategoryMenuItem.GetAttribute("xxxxx", categoryName));
 
             // IVisible
-            ClassicAssert.IsTrue(CatalogView.CategoryMenuItem.Displayed("Laptops"));
+            ClassicAssert.IsTrue(CatalogView.CategoryMenuItem.Displayed(categoryName));
             Assert.Throws<WaitTimeoutException>(() =>
             {
                 ClassicAssert.IsFalse(CatalogView.CategoryMenuItem.Displayed("xxxxx"));
