@@ -6,7 +6,7 @@
     using OpenQA.Selenium;
     using Serilog;
 
-    public abstract class Browser : IBrowser, IWebElementActions, IBrowserActions
+    public abstract class Browser : IBrowser, IWebElementActions, IBrowserActions, IDisposable
     {
         public IBrowserActions BrowserActions => this;
 
@@ -68,6 +68,12 @@
         public void Quit()
         {
             this.webDriver?.Quit();
+        }
+
+        public void Dispose()
+        {
+            Quit();
+            GC.SuppressFinalize(this);
         }
 
         public object ExecuteScript(string script, params object[] arguments)

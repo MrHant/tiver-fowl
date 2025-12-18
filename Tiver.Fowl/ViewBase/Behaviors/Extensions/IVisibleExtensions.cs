@@ -18,7 +18,7 @@
                 e =>
                 {
                     result = e.Displayed;
-                    return true;
+                    return true; // indentifies that value was recieved successfully
                 },
                 locatorFormattingArguments
             );

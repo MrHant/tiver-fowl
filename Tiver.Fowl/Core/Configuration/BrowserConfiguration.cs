@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Tiver.Fowl.Core.Configuration
+﻿namespace Tiver.Fowl.Core.Configuration
 {
+    using System;
+
     public class BrowserConfiguration
     {
         /// <summary>
