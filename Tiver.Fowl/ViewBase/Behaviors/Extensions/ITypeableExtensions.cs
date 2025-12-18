@@ -20,7 +20,7 @@
         {
             element.Process(
                 e => TestExecutionContext.BrowserActions
-                    .ExecuteScript($"arguments[0].setAttribute('value', '{value}')", e),
+                    .ExecuteScript("arguments[0].setAttribute('value', arguments[1])", e, value),
                 locatorFormattingArguments
             );
         }

@@ -27,7 +27,7 @@
                 driver = new FirefoxDriver(options);
             }
 
-            if (configuration.Resolution.Width != null || configuration.Resolution.Height != null)
+            if (configuration.Resolution?.Width != null || configuration.Resolution?.Height != null)
             {
                 int width = Convert.ToInt32(configuration.Resolution.Width);
                 int height = Convert.ToInt32(configuration.Resolution.Height);

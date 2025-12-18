@@ -87,7 +87,8 @@
             {
                 return elements.Single();
             }
-            throw new NoSuchElementException();
+
+            throw new NoSuchElementException("Element not found or multiple elements found for locator: " + locator);
         }
 
         public IEnumerable<IWebElement> FindSeveral(string locator)
