@@ -1,65 +1,45 @@
 ﻿namespace Tiver.Fowl.Core.Context
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Collections.Concurrent;
     using Exceptions;
 
     public class Storage : IStorage
     {
-        private Dictionary<string, object> items;
-
-        public Storage()
-        {
-            items = new Dictionary<string, object>();
-        }
-
-        private Dictionary<string, object> Items
-        {
-            get
-            {
-                items = items ?? new Dictionary<string, object>();
-                return items;
-            }
-        }
+        private readonly ConcurrentDictionary<string, object> _items = new();
 
         public void Write(string key, object value)
         {
-            if (Items.ContainsKey(key))
-            {
-                Items[key] = value;
-            }
-            else
-            {
-                Items.Add(key, value);
-            }
+            _items[key] = value;
         }
 
         public object Read(string key)
         {
-            try
+            if (_items.TryGetValue(key, out var value))
             {
-                return Items[key];
+                return value;
             }
-            catch(Exception ex)
-            {
-                throw new StorageKeyNotFoundException($"Storage item for key '{key}' not found", ex);
-            }
+
+            throw new StorageKeyNotFoundException($"Storage item for key '{key}' not found");
         }
 
-        public object ReadOrAdd(string key, object defaultValue)
+        public T Read<T>(string key)
         {
-            if (!Items.Keys.Contains(key))
-            {
-                Items.Add(key, defaultValue);
-            }
+            return (T)Read(key);
+        }
 
-            return Items[key];
+        public object ReadOrInit(string key, object defaultValue)
+        {
+            return _items.GetOrAdd(key, defaultValue);
+        }
+
+        public T ReadOrInit<T>(string key, T defaultValue)
+        {
+            return (T)_items.GetOrAdd(key, defaultValue);
         }
 
         public void Clear()
         {
-            Items.Clear();
+            _items.Clear();
         }
     }
 }

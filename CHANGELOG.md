@@ -3,6 +3,9 @@
 ## [Unreleased]
 
 ### Changed
+- **BREAKING**: `IStorage.ReadOrAdd` renamed to `ReadOrInit`
+- `Storage` now uses `ConcurrentDictionary` for thread safety in parallel tests
+- Added generic `Read<T>()` and `ReadOrInit<T>()` methods to `IStorage`
 - **BREAKING**: New generic configuration system via `ActiveConfiguration` class (now in `Tiver.Fowl.Core.Configuration` namespace)
   - Supports custom keys with arbitrary nesting using path syntax (e.g., `Get<int>("Database:Timeout")`)
   - Environment-based layering: `config.json` → `config.{env}.json`

@@ -9,67 +9,32 @@
     {
         public static Type TestType
         {
-            private get
-            {
-                return (Type)Context.Test.Read("TestType");
-            }
-
-            set
-            {
-                Context.Test.Write("TestType", value);
-            }
+            private get => Context.Test.Read<Type>("TestType");
+            set => Context.Test.Write("TestType", value);
         }
 
         public static IBrowser Browser
         {
-            private get
-            {
-                return (IBrowser) Context.Test.Read("Browser");
-            }
-
-            set
-            {
-                Context.Test.Write("Browser", value);
-            }
+            private get => Context.Test.Read<IBrowser>("Browser");
+            set => Context.Test.Write("Browser", value);
         }
 
         public static string TestName
         {
-            get
-            {
-                return (string)Context.Test.Read("TestName");
-            }
-
-            set
-            {
-                Context.Test.Write("TestName", value);
-            }
+            get => Context.Test.Read<string>("TestName");
+            set => Context.Test.Write("TestName", value);
         }
 
         public static TestResult TestResult
         {
-            get
-            {
-                return (TestResult)Context.Test.Read("TestResult");
-            }
-
-            set
-            {
-                Context.Test.Write("TestResult", value);
-            }
+            get => Context.Test.Read<TestResult>("TestResult");
+            set => Context.Test.Write("TestResult", value);
         }
 
         public static int TestStep
         {
-            get
-            {
-                return (int)Context.Test.ReadOrAdd("TestStep", 0);
-            }
-
-            set
-            {
-                Context.Test.Write("TestStep", value);
-            }
+            get => Context.Test.ReadOrInit("TestStep", 0);
+            set => Context.Test.Write("TestStep", value);
         }
 
         

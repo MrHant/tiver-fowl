@@ -22,7 +22,7 @@
         {
             get
             {
-                return TestContext.GetOrAdd(TestKey.Invoke(), new Storage());
+                return TestContext.GetOrAdd(TestKey.Invoke(), _ => new Storage());
             }
         }
 
