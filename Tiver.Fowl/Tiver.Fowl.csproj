@@ -76,6 +76,16 @@
       </Content>
     </ItemGroup>
 
+    <!-- Report template file -->
+    <ItemGroup>
+      <None Include="Core\Reporting\report-template.html">
+        <Link>report-template.html</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <Pack>true</Pack>
+        <PackagePath>lib\$(TargetFramework)\</PackagePath>
+      </None>
+    </ItemGroup>
+
     <!-- Test framework references - only for Development configuration to compile contentFiles -->
     <ItemGroup Condition="'$(Configuration)' == 'Development'">
       <PackageReference Include="NUnit" Version="4.4.0" />

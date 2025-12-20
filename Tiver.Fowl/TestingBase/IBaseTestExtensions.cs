@@ -1,4 +1,4 @@
-﻿namespace Tiver.Fowl.TestingBase
+namespace Tiver.Fowl.TestingBase
 {
     using Core.Context;
     using Serilog;

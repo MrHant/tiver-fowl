@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Custom styles for specific elements */
+        .test-expand-icon {
+            transition: transform 0.15s ease;
+        }
+        .test-expanded .test-expand-icon {
+            transform: rotate(180deg);
+        }
+        .ns-icon {
+            transition: transform 0.15s ease;
+        }
+        .ns-collapsed .ns-icon {
+            transform: rotate(-90deg);
+        }
+    </style>
+</head>
+<body class="bg-base-200 p-4">
+    <div class="container mx-auto max-w-7xl">
+        <!-- Header -->
+        <h1 class="text-2xl font-bold mb-6">Test Report</h1>
+
+        <!-- Summary Statistics -->
+        <div class="stats stats-horizontal shadow mb-6 flex-wrap gap-2 bg-base-100">
+            {{SUMMARY}}
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap gap-2 mb-6 items-center">
+            <div class="join">
+                <button class="btn btn-sm join-item btn-active" data-filter="all">All</button>
+                <button class="btn btn-sm join-item" data-filter="pass">Passed</button>
+                <button class="btn btn-sm join-item" data-filter="fail">Failed</button>
+                <button class="btn btn-sm join-item" data-filter="skip">Skipped</button>
+            </div>
+            <input type="text" placeholder="Search tests..." class="input input-bordered input-sm flex-1 min-w-[200px]" id="search-input">
+        </div>
+
+        <!-- Tests Grouped by Namespace -->
+        <div class="card bg-base-100 shadow-lg">
+            <div class="card-body p-0">
+                {{TESTS}}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-sm text-base-content/60 mt-6">{{FOOTER}}</div>
+    </div>
+
+    <!-- Screenshot Modal -->
+    <dialog id="screenshot-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-7xl p-4">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <img id="modal-img" src="" alt="Screenshot" class="w-full">
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <script>
+        // Toggle namespace collapse
+        function toggleNs(el) {
+            el.classList.toggle('ns-collapsed');
+            const content = el.nextElementSibling;
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+        }
+
+        // Toggle test details
+        function toggleTest(el) {
+            el.classList.toggle('test-expanded');
+            const details = el.nextElementSibling;
+            if (details && details.classList.contains('test-details')) {
+                details.classList.toggle('hidden');
+            }
+        }
+
+        // Show screenshot modal
+        function showModal(src) {
+            document.getElementById('modal-img').src = src;
+            document.getElementById('screenshot-modal').showModal();
+        }
+
+        // Filter functionality
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('btn-active'));
+                btn.classList.add('btn-active');
+
+                // Apply filter
+                applyFilter(btn.dataset.filter, document.getElementById('search-input').value);
+            });
+        });
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const activeFilter = document.querySelector('[data-filter].btn-active').dataset.filter;
+            applyFilter(activeFilter, e.target.value);
+        });
+
+        function applyFilter(status, searchText) {
+            const query = searchText.toLowerCase();
+
+            // Filter tests
+            document.querySelectorAll('.test-row').forEach(row => {
+                const matchStatus = status === 'all' || row.dataset.result === status;
+                const matchText = !searchText || row.dataset.name.toLowerCase().includes(query);
+
+                if (matchStatus && matchText) {
+                    row.classList.remove('hidden');
+                    // Also show details if expanded
+                    const details = row.nextElementSibling;
+                    if (details && details.classList.contains('test-details') && row.classList.contains('test-expanded')) {
+                        details.classList.remove('hidden');
+                    }
+                } else {
+                    row.classList.add('hidden');
+                    // Hide details too
+                    const details = row.nextElementSibling;
+                    if (details && details.classList.contains('test-details')) {
+                        details.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Show/hide namespace groups based on visible tests
+            document.querySelectorAll('.ns-group').forEach(group => {
+                const visibleTests = group.querySelectorAll('.test-row:not(.hidden)').length;
+                if (visibleTests > 0) {
+                    group.classList.remove('hidden');
+                } else {
+                    group.classList.add('hidden');
+                }
+            });
+        }
+
+        // Close modal on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('screenshot-modal').close();
+            }
+        });
+    </script>
+</body>
+</html>

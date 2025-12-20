@@ -9,6 +9,7 @@ namespace Tiver.Fowl.TestingBase
     /// <summary>
     /// Base test class for NUnit tests.
     /// Requires TIVER_NUNIT to be defined in the consuming project.
+    /// Uses fully qualified test name (Namespace.Class.Method) for proper hierarchy in reports.
     /// </summary>
     [TestFixture]
     public class BaseTestForNUnit : IBaseTest
@@ -16,7 +17,10 @@ namespace Tiver.Fowl.TestingBase
         [SetUp]
         public void Setup()
         {
-            Flow.Setup(GetType(), TestContext.CurrentContext.Test.Name,() => TestContext.CurrentContext.Test.Name);
+            Flow.Setup(
+                GetType(),
+                TestContext.CurrentContext.Test.FullName,
+                () => TestContext.CurrentContext.Test.FullName);
         }
 
         [TearDown]

@@ -254,6 +254,61 @@ Log types:
 - "Screenshot" - Base64 image data
 - "TestStep" - Custom step logging via `this.LogStep("message")`
 
+### HTML Test Reporting
+
+Uses **automatic HTML report generation** from Serilog structured log files:
+- Reports generated automatically in `Flow.SessionTeardown()` after all tests complete
+- Parses `log.txt` file to extract test execution data (no code instrumentation needed)
+- Self-contained single HTML file with embedded CSS/JS
+- Each session generates separate report: `test-report-{SessionId}.html`
+
+**Report Contents**:
+- Summary statistics (total, passed, failed, skipped, duration)
+- Tests grouped by namespace with collapsible sections
+- For each test: name, result, duration, steps, element actions
+- Screenshots embedded as base64 for failed tests
+- Interactive filtering by result (all/passed/failed/skipped)
+- Search by test name
+
+**Report Structure**:
+```
+Test Report
+├─ Summary: Total/Passed/Failed/Skipped/Duration
+├─ Filters: All | Passed | Failed | Skipped | Search
+└─ Namespaces (collapsible)
+    └─ Tests (click to expand)
+        ├─ Error message & stack trace (if failed)
+        ├─ Screenshot (if failed)
+        └─ Steps & Element Actions
+```
+
+**Session Identification**:
+- SessionId format: `yyyyMMdd-HHmmss-fff-RRRR` (date, time, milliseconds, random suffix)
+- Set automatically in `Logger.Configure()` via `TestExecutionContext.SessionId`
+- Used to separate multiple test runs in accumulated `log.txt` file
+- Milliseconds and random suffix prevent collisions in parallel/rapid executions
+
+**Template Customization**:
+- Template file: `Tiver.Fowl/Core/Reporting/report-template.html`
+- Copied to output directory via `.csproj` configuration
+- Uses `{{PLACEHOLDER}}` tokens: `{{TITLE}}`, `{{SUMMARY}}`, `{{TESTS}}`, `{{FOOTER}}`
+- **Styling**: Uses Tailwind CSS and DaisyUI loaded via CDN for modern, responsive design
+- Customize appearance by editing Tailwind/DaisyUI classes or adding custom CSS in template `<style>` section
+- Template loaded from multiple fallback locations (current dir, base dir, assembly locations)
+
+**Related Classes**:
+- `LogFileParser` - Parses Serilog JSON log entries with validation and error logging
+- `HtmlReportGenerator` - Template-based HTML generation with robust path resolution
+- `TestResultRecord`, `TestStepRecord`, `ElementActionRecord` - Data models
+- `SessionIdEnricher` - Adds SessionId to all log events
+
+**Troubleshooting**:
+- If report not generated, check console for "Failed to generate test report" error
+- Template must be in output directory (check `.csproj` has `<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>`)
+- If parsing fails, check `log.txt` contains valid JSON (one object per line)
+- Malformed JSON entries are logged as warnings and skipped (partial parsing supported)
+- If template not found, error message lists all searched locations
+
 ### Wait/Retry Mechanism
 
 All element interactions use `Tiver.Fowl.Waiting` package:

@@ -7,6 +7,12 @@
 
     public static class TestExecutionContext
     {
+        public static string SessionId
+        {
+            get => Context.Session.Read<string>("SessionId");
+            set => Context.Session.Write("SessionId", value);
+        }
+
         public static Type TestType
         {
             private get => Context.Test.Read<Type>("TestType");
@@ -37,7 +43,12 @@
             set => Context.Test.Write("TestStep", value);
         }
 
-        
+        public static DateTime TestStartTime
+        {
+            get => Context.Test.ReadOrInit("TestStartTime", DateTime.MinValue);
+            set => Context.Test.Write("TestStartTime", value);
+        }
+
         public static IBrowserActions BrowserActions => Browser.BrowserActions;
 
         public static IWebElementActions WebElementActions => Browser.WebElementActions;

@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+- **HTML Test Report Generation**: Self-contained HTML report generated automatically after test execution
+  - Parses existing Serilog JSON log file (`log.txt`) - no additional code instrumentation required
+  - Includes test name, result (pass/fail/skip), duration, test steps, element actions
+  - Tests organized hierarchically by namespace with collapsible sections
+- New `Tiver.Fowl.Core.Reporting` namespace with `LogFileParser`, `HtmlReportGenerator`, and data record classes
+- `SessionIdEnricher` for Serilog to enrich all logs with session identifiers
+- `TestExecutionContext.SessionId` property to access/set the current test session identifier
+
 ### Changed
 - **BREAKING**: `IStorage.ReadOrAdd` renamed to `ReadOrInit`
 - `Storage` now uses `ConcurrentDictionary` for thread safety in parallel tests
@@ -11,6 +20,9 @@
   - Environment-based layering: `config.json` → `config.{env}.json`
   - Environment set via code, `TIVER_ENVIRONMENT` env var, or `Tiver_config.json`
 - **BREAKING**: Tests control their own navigation via `ActiveConfiguration.NavigateTo("urlName")`
+- `BaseTestForNUnit` now uses `TestContext.CurrentContext.Test.FullName` to include namespace in test identification
+  - `BaseTestForMSTest` now uses fully qualified test names (with namespace) for proper report hierarchy
+  - Added comprehensive documentation for HTML reporting feature in CLAUDE.md
 
 ## [0.2.0-beta]
 

@@ -1,4 +1,4 @@
-﻿namespace Tiver.Fowl.Logging
+namespace Tiver.Fowl.Logging
 {
     using Serilog;
 

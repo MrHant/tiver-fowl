@@ -8,6 +8,7 @@ namespace Tiver.Fowl.TestingBase
     /// <summary>
     /// Base test class for MSTest tests.
     /// Requires TIVER_MSTEST to be defined in the consuming project.
+    /// Uses fully qualified test name (Namespace.Class.Method) for proper hierarchy in reports.
     /// </summary>
     [TestClass]
     public class BaseTestForMSTest : IBaseTest
@@ -29,10 +30,14 @@ namespace Tiver.Fowl.TestingBase
         [TestInitialize]
         public void Setup()
         {
+            // Construct full name similar to NUnit's FullName for proper namespace hierarchy
+            var testType = GetType();
+            var fullName = $"{testType.Namespace}.{testType.Name}.{TestContext.TestName}";
+
             Flow.Setup(
-                GetType(),
-                TestContext.TestName,
-                () => TestContext.TestName);
+                testType,
+                fullName,
+                () => fullName);
         }
 
         [TestCleanup]

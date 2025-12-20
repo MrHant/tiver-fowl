@@ -15,8 +15,8 @@ namespace Tests
         {
             Flow.Setup(
                 GetType(),
-                TestContext.CurrentContext.Test.Name,
-                () => TestContext.CurrentContext.Test.Name);
+                TestContext.CurrentContext.Test.FullName,
+                () => TestContext.CurrentContext.Test.FullName);
         }
 
         [TearDown]
