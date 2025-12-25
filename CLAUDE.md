@@ -327,12 +327,12 @@ Always update `CHANGELOG.md` for meaningful changes that affect end-users. Add e
 - **Language version**: C# 14
 
 ### Key Dependencies
-- Selenium.WebDriver 4.38.0 (includes Selenium Manager for automatic driver management)
-- Microsoft.Extensions.Configuration 9.0.10
-- Serilog 4.3.0
-- Tiver.Fowl.Drivers 0.6.0-alpha.4 (optional - for advanced driver management)
-- Tiver.Fowl.Waiting 0.5.0-alpha (wait/retry logic)
-- NUnit 4.4.0 (test framework)
+- Selenium.WebDriver (includes Selenium Manager for automatic driver management)
+- Microsoft.Extensions.Configuration 
+- Serilog 
+- Tiver.Fowl.Drivers (optional - for advanced driver management)
+- Tiver.Fowl.Waiting (wait/retry logic)
+- NUnit (test framework)
 
 ### XPath Locators
 All element location uses XPath (not CSS selectors). Define locators as:
