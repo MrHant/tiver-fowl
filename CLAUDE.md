@@ -13,8 +13,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Task runner
 The DevContainer installs [go-task](https://taskfile.dev); `Taskfile.yml` wraps the common commands.
-Run `task` (or `task --list`) to see them: `restore`, `build`, `test`, `test-nunit`, `test-mstest`,
-`tests`, `pack`, `tag`. The raw `dotnet` commands below work equally well.
+Run `task` (or `task --list`) to see them: `restore`, `build`, `test-main`, `test-nunit`, `test-mstest`,
+`tests`, `report-demo`, `pack`, `tag`. The raw `dotnet` commands below work equally well.
+
+`task report-demo` runs the `[Explicit]` fixtures in `Tests/Demo/` to produce a sample HTML report
+(passing, failing-with-screenshot and skipped tests across two groups), then prints the report path.
+One of its tests fails by design, so the task ignores the non-zero exit code.
 
 ### Build
 ```bash

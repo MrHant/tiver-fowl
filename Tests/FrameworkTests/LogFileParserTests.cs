@@ -5,38 +5,6 @@ namespace Tests.FrameworkTests
     using NUnit.Framework;
     using NUnit.Framework.Legacy;
     using Tiver.Fowl.Core.Reporting;
-    using Tiver.Fowl.TestingBase;
-
-    /// <summary>
-    /// Tests to verify the reporting functionality without requiring a browser.
-    /// These tests are marked as [Explicit] and won't run during normal test execution.
-    /// Run them explicitly with: dotnet test --filter "FullyQualifiedName~ReportingTests"
-    /// </summary>
-    [Explicit("Framework tests for report generation - excluded from regular test runs")]
-    public class ReportingTests : BaseTestForNUnit
-    {
-        [Test]
-        public void PassingTest()
-        {
-            this.LogStep("First step of passing test");
-            this.LogStep("Second step of passing test");
-            ClassicAssert.IsTrue(true);
-        }
-
-        [Test]
-        public void FailingTest()
-        {
-            this.LogStep("Step before failure");
-            ClassicAssert.Fail("Intentional failure for report testing");
-        }
-
-        [Test]
-        public void AnotherPassingTest()
-        {
-            this.LogStep("Only step in this test");
-            ClassicAssert.AreEqual(42, 42);
-        }
-    }
 
     /// <summary>
     /// Unit tests for LogFileParser - these don't require the base test class

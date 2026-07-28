@@ -38,6 +38,13 @@ tasks:
       - task: test-nunit
       - task: test-mstest
 
+  report-demo:
+    desc: Generate a sample HTML report from the explicit demo fixtures (one test fails on purpose)
+    cmds:
+      - cmd: dotnet test Tests/Tests.csproj --filter "FullyQualifiedName~Tests.Demo"
+        ignore_error: true
+      - cmd: 'echo "Report: $(ls -t Tests/bin/Debug/net10.0/test-report-*.html | head -1)"'
+
   pack:
     desc: Create the NuGet package; version set by MinVer from git tags (VERSIONING.md)
     cmds:
