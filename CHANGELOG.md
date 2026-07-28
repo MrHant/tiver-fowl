@@ -22,7 +22,8 @@
 - **BREAKING**: Tests control their own navigation via `ActiveConfiguration.NavigateTo("urlName")`
 - `BaseTestForNUnit` now uses `TestContext.CurrentContext.Test.FullName` to include namespace in test identification
   - `BaseTestForMSTest` now uses fully qualified test names (with namespace) for proper report hierarchy
-  - Added comprehensive documentation for HTML reporting feature in CLAUDE.md
+- Reorganized documentation into topic-specific files under `docs/`
+
 
 ## [0.2.0-beta]
 
