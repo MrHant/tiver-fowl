@@ -11,10 +11,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build and Test Commands
 
+### Task runner
+The DevContainer installs [go-task](https://taskfile.dev); `Taskfile.yml` wraps the common commands.
+Run `task` (or `task --list`) to see them: `restore`, `build`, `test`, `test-nunit`, `test-mstest`,
+`tests`, `pack`, `tag`. The raw `dotnet` commands below work equally well.
+
 ### Build
 ```bash
 # Build entire solution
-dotnet build /workspaces/tiver-fowl/Tiver.Fowl.sln
+dotnet build /workspaces/tiver-fowl/Tiver.Fowl.slnx
 
 # Build specific projects
 dotnet build /workspaces/tiver-fowl/Tiver.Fowl/Tiver.Fowl.csproj
@@ -384,9 +389,16 @@ public static class CatalogView
 
 ### DevContainer
 Project includes DevContainer with:
-- .NET 10.0 SDK (primary)
+- .NET 10.0 SDK
 - Node.js 1.6.3
 - Pre-configured VS Code extensions
+
+`postCreateCommand` runs the setup scripts in `.devcontainer/` (all idempotent, safe to re-run):
+- `setup-task.sh` - installs go-task (`task` runner, see `Taskfile.yml`)
+- `setup-agents.sh` - installs coding-agent CLIs (Claude Code, Codex, OpenCode, herdr)
+- `setup-browser-deps.sh` - installs native libs Chrome/Chromedriver need to run headless
+
+then finishes with `dotnet restore`.
 
 ## Common Patterns
 

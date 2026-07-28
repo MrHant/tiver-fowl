@@ -1,0 +1,56 @@
+version: "3"
+
+tasks:
+  default:
+    desc: List available tasks
+    cmd: task --list
+    silent: true
+
+  restore:
+    desc: Fetch solution dependencies
+    cmds:
+      - dotnet restore
+
+  build:
+    desc: Compile the whole solution
+    cmds:
+      - dotnet build Tiver.Fowl.slnx
+
+  test-main:
+    desc: Run the main test suite (framework tests + Selenium examples)
+    cmds:
+      - dotnet test Tests/Tests.csproj
+
+  test-nunit:
+    desc: Run the NUnit consumer suite against the packed NuGet package
+    cmds:
+      - dotnet test Tests.NUnit/Tests.NUnit.csproj
+
+  test-mstest:
+    desc: Run the MSTest consumer suite against the packed NuGet package
+    cmds:
+      - dotnet test Tests.MSTest/Tests.MSTest.csproj
+
+  tests:
+    desc: Run the full test suite (main + NUnit + MSTest consumers)
+    cmds:
+      - task: test-main
+      - task: test-nunit
+      - task: test-mstest
+
+  pack:
+    desc: Create the NuGet package; version set by MinVer from git tags (VERSIONING.md)
+    cmds:
+      - dotnet pack Tiver.Fowl/Tiver.Fowl.csproj -c Release
+
+  tag:
+    desc: 'Tag a version and push it, starting a pre-release or finalizing a release (VERSIONING.md) — usage: task tag VERSION=1.1.0-alpha.0 (pre-release) or task tag VERSION=1.1.0 (release)'
+    requires:
+      vars: [VERSION]
+    preconditions:
+      - sh: test -z "$(git status --porcelain)"
+        msg: Uncommitted changes present — commit or stash before tagging.
+    prompt: Tag {{.VERSION}} and push it to origin?
+    cmds:
+      - git tag {{.VERSION}}
+      - git push --tags
