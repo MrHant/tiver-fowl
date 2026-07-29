@@ -12,12 +12,14 @@ namespace Tiver.Fowl.Core.Reporting
 
     /// <summary>
     /// Generates HTML test reports from a template file with dynamic content injection.
-    /// Template file (report-template.html) must be copied to output directory via .csproj configuration.
-    /// Searches multiple locations: current directory, base directory, entry/executing assembly directories.
+    /// Searches multiple locations for report-template.html: current directory, base directory,
+    /// entry/executing assembly directories. Falls back to the copy embedded in this assembly,
+    /// so consumers that reference Tiver.Fowl as a NuGet package need no template file of their own.
     /// </summary>
     public static class HtmlReportGenerator
     {
         private const string TemplateName = "report-template.html";
+        private const string EmbeddedTemplateName = "Tiver.Fowl.report-template.html";
 
         public static void Generate(IEnumerable<TestResultRecord> results, string outputPath)
         {
@@ -67,10 +69,34 @@ namespace Tiver.Fowl.Core.Reporting
                 }
             }
 
+            // NuGet consumers never get the template as a file: only assemblies flow out of a
+            // package's lib/ folder into the consumer's output directory. Fall back to the copy
+            // embedded in this assembly, which is always available.
+            var embedded = LoadEmbeddedTemplate();
+            if (embedded != null)
+            {
+                Log.Debug("Report template not found on disk, using the copy embedded in Tiver.Fowl");
+                return embedded;
+            }
+
             var searchedPaths = string.Join(", ", searchPaths.Where(p => !string.IsNullOrEmpty(p)));
-            var errorMessage = $"Report template '{TemplateName}' not found. Searched locations: {searchedPaths}";
+            var errorMessage = $"Report template '{TemplateName}' not found on disk (searched: {searchedPaths}) " +
+                               $"and embedded resource '{EmbeddedTemplateName}' is missing from the Tiver.Fowl assembly";
             Log.Error(errorMessage);
             throw new FileNotFoundException(errorMessage, TemplateName);
+        }
+
+        private static string LoadEmbeddedTemplate()
+        {
+            using var stream = typeof(HtmlReportGenerator).Assembly
+                .GetManifestResourceStream(EmbeddedTemplateName);
+            if (stream == null)
+            {
+                return null;
+            }
+
+            using var reader = new StreamReader(stream);
+            return reader.ReadToEnd();
         }
 
         private static string BuildHtmlFromTemplate(List<TestResultRecord> results)

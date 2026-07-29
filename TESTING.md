@@ -58,6 +58,18 @@ The framework ships source files (`BaseTestForNUnit.cs`, `BaseTestForMSTest.cs`,
 - ContentFiles are extracted to consumer projects
 - Framework auto-detection identifies NUnit vs MSTest correctly
 - Tests run successfully using packaged contentFiles
+- HTML report generation works end to end (`ReportGenerationTests` in both consumer projects)
+
+**Why report generation is validated here and not only in `Tests`**: the main suite uses a
+ProjectReference, which copies `report-template.html` into its output and puts its `[SetUpFixture]`
+in an ancestor namespace of its tests. Neither holds for a package consumer, so report defects are
+invisible outside Layer 3. `ReportGenerationTests` covers:
+
+- Generating a report with **no template file** in the project — the only exercise of the template
+  embedded in `Tiver.Fowl.dll`, since NuGet does not copy non-assembly files out of `lib/`
+- Parsing the live `log.txt` the packaged `Logger.cs` contentFile wrote for the running session,
+  proving session setup actually fires and the enrichers emit parseable entries
+- Rendering summary counts, namespace grouping, failure details and embedded screenshots
 
 **How it works** (automated via `Directory.Build.targets`):
 - Before restore: Build Tiver.Fowl in Development config (validates contentFiles)
@@ -108,7 +120,11 @@ The framework ships source files (`BaseTestForNUnit.cs`, `BaseTestForMSTest.cs`,
 
 ## Troubleshooting
 
-**Stale package cache**: Clear with `dotnet nuget locals all --clear` and delete `~/.nuget/packages/tiver.fowl/0.0.1-testing*`
+**Stale package cache**: `Directory.Build.targets` deletes `~/.nuget/packages/tiver.fowl/0.0.1-testing*`
+before each restore and prints the directory it cleared. Note that it resolves the global packages
+folder itself rather than using `$(NuGetPackageRoot)`, which is empty during restore because NuGet
+skips importing `nuget.g.props` (`ExcludeRestorePackageImports`). To clear manually:
+`dotnet nuget locals all --clear` plus deleting `~/.nuget/packages/tiver.fowl/0.0.1-testing*`
 
 **ContentFiles not compiling**: Verify Development config builds: `dotnet build Tiver.Fowl/Tiver.Fowl.csproj -c Development`
 

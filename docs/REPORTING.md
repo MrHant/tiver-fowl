@@ -69,11 +69,23 @@ report path. One of its tests fails by design, so the task ignores the non-zero 
 ## Template customization
 
 - Template file: `Tiver.Fowl/Core/Reporting/report-template.html`
-- Copied to the output directory via `.csproj` configuration
 - Uses `{{PLACEHOLDER}}` tokens: `{{TITLE}}`, `{{SUMMARY}}`, `{{TESTS}}`, `{{FOOTER}}`
 - Styled with Tailwind CSS and DaisyUI loaded via CDN
 - Customize by editing Tailwind/DaisyUI classes or adding CSS to the template `<style>` block
-- Loaded from several fallback locations (current directory, base directory, assembly locations)
+
+### How the template is resolved
+
+`HtmlReportGenerator` looks for `report-template.html` on disk first — current directory, base
+directory, entry assembly directory, executing assembly directory — and falls back to a copy
+embedded in `Tiver.Fowl.dll`.
+
+The embedded copy is what package consumers use: NuGet only flows assemblies out of a package's
+`lib/` folder into the consumer's output directory, so a packed `.html` there would never be
+reachable. Projects referencing Tiver.Fowl via `ProjectReference` get the file copied to their
+output directory and use that.
+
+Because the on-disk file wins, dropping your own `report-template.html` next to the test assembly
+overrides the built-in template without rebuilding the framework.
 
 ## Related classes
 
@@ -90,7 +102,8 @@ All in `Tiver.Fowl/Core/Reporting/` unless noted:
 
 | Symptom | Check |
 | ------- | ----- |
-| No report generated | Console output for a "Failed to generate test report" error |
-| Template not found | Error message lists every searched location; confirm `.csproj` has `<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>` |
+| No report generated | Console output for a "Failed to generate test report" error — `Flow.SessionTeardown()` logs failures rather than failing the run |
+| No report and no `log.txt` (NUnit) | Session setup never ran. `TiverFowlSessionFixture` must stay outside any namespace; NUnit scopes a `[SetUpFixture]` to its own namespace and that namespace's children only |
+| Template not found | Error message lists every searched location and names the embedded resource; confirm `report-template.html` is still an `EmbeddedResource` in `Tiver.Fowl.csproj` |
 | Empty or partial report | `log.txt` must contain valid JSON, one object per line |
 | Missing entries | Malformed JSON entries are logged as warnings and skipped — partial parsing is supported by design |

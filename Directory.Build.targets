@@ -17,11 +17,20 @@
       <TestPackIntermediateDirDevelopmentMsbuild Condition="'$(_IsWindows)' != 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Development'))/</TestPackIntermediateDirDevelopmentMsbuild>
       <TestPackIntermediateDirReleaseMsbuild Condition="'$(_IsWindows)' != 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.obj', '$(TiverFowlTestVersion)', 'Release'))/</TestPackIntermediateDirReleaseMsbuild>
       <TestPackBaseOutputDirMsbuild Condition="'$(_IsWindows)' != 'true'">$([System.IO.Path]::Combine('$(TestPackagesDir)', '.bin', '$(TiverFowlTestVersion)'))/</TestPackBaseOutputDirMsbuild>
+      <!-- NuGetPackageRoot comes from obj/*.nuget.g.props, which restore deliberately does not
+           import (ExcludeRestorePackageImports). Resolve the global packages folder ourselves,
+           otherwise the RemoveDir below silently targets a relative path that never exists and
+           the consumer projects restore a stale, previously extracted package. -->
+      <TiverFowlPackageRoot>$(NuGetPackageRoot)</TiverFowlPackageRoot>
+      <TiverFowlPackageRoot Condition="'$(TiverFowlPackageRoot)' == ''">$(NUGET_PACKAGES)</TiverFowlPackageRoot>
+      <TiverFowlPackageRoot Condition="'$(TiverFowlPackageRoot)' == ''">$([System.IO.Path]::Combine($([System.Environment]::GetFolderPath(SpecialFolder.UserProfile)), '.nuget', 'packages'))</TiverFowlPackageRoot>
+      <TiverFowlCachedPackageDir>$([System.IO.Path]::Combine('$(TiverFowlPackageRoot)', 'tiver.fowl', '$(TiverFowlTestVersion)'))</TiverFowlCachedPackageDir>
     </PropertyGroup>
 
     <!-- Always rebuild with Development configuration to catch contentFiles errors -->
     <MakeDir Directories="$(TestPackagesDir)" />
-    <RemoveDir Directories="$(NuGetPackageRoot)tiver.fowl/$(TiverFowlTestVersion)" />
+    <Message Importance="High" Text="Clearing extracted test package: $(TiverFowlCachedPackageDir)" />
+    <RemoveDir Directories="$(TiverFowlCachedPackageDir)" />
     <Exec Command="dotnet build &quot;$(TiverFowlProject)&quot; -c Development -p:IntermediateOutputPath=&quot;$(TestPackIntermediateDirDevelopmentMsbuild)&quot; -p:BaseOutputPath=&quot;$(TestPackBaseOutputDirMsbuild)&quot; -v:m"
           ConsoleToMSBuild="true"
           StandardOutputImportance="High"

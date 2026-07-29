@@ -47,24 +47,29 @@ namespace Tiver.Fowl.TestingBase
             Flow.Teardown(testResult);
         }
     }
+}
 
-    /// <summary>
-    /// NUnit setup fixture for session-level initialization.
-    /// </summary>
-    [SetUpFixture]
-    public class SetupFixtureForNUnit
+/// <summary>
+/// NUnit setup fixture for session-level initialization: configures logging before the first test
+/// and generates the HTML report after the last one.
+///
+/// Declared outside any namespace on purpose. NUnit scopes a SetUpFixture to its own namespace and
+/// that namespace's children, so a fixture inside Tiver.Fowl.TestingBase would never apply to a
+/// consumer's test namespace. Only a fixture outside any namespace covers the whole assembly.
+/// </summary>
+[NUnit.Framework.SetUpFixture]
+public class TiverFowlSessionFixture
+{
+    [NUnit.Framework.OneTimeSetUp]
+    public static void Initialize()
     {
-        [OneTimeSetUp]
-        public static void Initialize()
-        {
-            Tiver.Fowl.Logging.Logger.Configure();
-        }
+        Tiver.Fowl.Logging.Logger.Configure();
+    }
 
-        [OneTimeTearDown]
-        public static void Cleanup()
-        {
-            Flow.SessionTeardown();
-        }
+    [NUnit.Framework.OneTimeTearDown]
+    public static void Cleanup()
+    {
+        Tiver.Fowl.TestingBase.Flow.SessionTeardown();
     }
 }
 #endif

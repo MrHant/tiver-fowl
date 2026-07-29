@@ -32,6 +32,26 @@
     silently, so a stale entry stops the exception from being swallowed and element lookups fail on
     the first attempt instead of retrying until `Timeout`
 
+### Fixed
+- HTML report generation now works for projects consuming Tiver.Fowl as a NuGet package. The report
+  template was packed into `lib/net10.0/`, from which NuGet only flows assemblies into a consumer's
+  output directory, so `HtmlReportGenerator` threw `FileNotFoundException` on every run and
+  `Flow.SessionTeardown()` swallowed it into a log entry. `report-template.html` is now embedded in
+  `Tiver.Fowl.dll` and used whenever no template file is found on disk. A `report-template.html` in
+  the output directory still takes precedence, so template customization is unaffected
+- **BREAKING**: NUnit session setup no longer runs only for tests under the `Tiver.Fowl.TestingBase`
+  namespace. `SetupFixtureForNUnit` was declared inside that namespace, and NUnit scopes a
+  `[SetUpFixture]` to its own namespace and that namespace's children — so for package consumers
+  neither `Logger.Configure()` nor `Flow.SessionTeardown()` ever ran, leaving them with no `log.txt`
+  and no HTML report. It is replaced by `TiverFowlSessionFixture`, declared outside any namespace so
+  that it applies to the whole test assembly. Consumers who referenced `SetupFixtureForNUnit` by
+  name must update; no change is needed to use it. MSTest was unaffected, as
+  `[AssemblyInitialize]`/`[AssemblyCleanup]` are assembly-wide
+- Package validation (`Tests.NUnit`, `Tests.MSTest`) no longer restores a stale, previously
+  extracted `Tiver.Fowl` package. `Directory.Build.targets` cleared the extracted package using
+  `$(NuGetPackageRoot)`, which restore leaves empty because it does not import `nuget.g.props`
+  (`ExcludeRestorePackageImports`), making the `RemoveDir` a no-op against a relative path
+
 
 ## [0.2.0-beta]
 

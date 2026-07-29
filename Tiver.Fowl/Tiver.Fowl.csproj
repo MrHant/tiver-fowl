@@ -76,13 +76,16 @@
       </Content>
     </ItemGroup>
 
-    <!-- Report template file -->
+    <!-- Report template file.
+         Embedded so package consumers always have a template: NuGet only flows assemblies out of
+         lib/ into a consumer's output directory, so a packed .html there would be unreachable.
+         Also copied to the output directory, where HtmlReportGenerator prefers it over the
+         embedded copy - that on-disk file stays the customization point. -->
     <ItemGroup>
+      <EmbeddedResource Include="Core\Reporting\report-template.html" LogicalName="Tiver.Fowl.report-template.html" />
       <None Include="Core\Reporting\report-template.html">
         <Link>report-template.html</Link>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        <Pack>true</Pack>
-        <PackagePath>lib\$(TargetFramework)\</PackagePath>
       </None>
     </ItemGroup>
 

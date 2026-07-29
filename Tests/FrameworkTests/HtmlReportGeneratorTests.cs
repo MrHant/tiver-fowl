@@ -203,6 +203,27 @@ namespace Tests.FrameworkTests
         }
 
         [Test]
+        public void EmbeddedTemplateIsShippedInsideTheAssembly()
+        {
+            // This project resolves the template from disk (ProjectReference copies it to the
+            // output), so the embedded copy that package consumers depend on is never exercised
+            // here. Assert it is present, otherwise dropping the EmbeddedResource item from
+            // Tiver.Fowl.csproj would only break the NUnit/MSTest consumer suites.
+            using var stream = typeof(HtmlReportGenerator).Assembly
+                .GetManifestResourceStream("Tiver.Fowl.report-template.html");
+
+            ClassicAssert.IsNotNull(stream, "report-template.html is not embedded in Tiver.Fowl.dll");
+
+            using var reader = new StreamReader(stream);
+            var template = reader.ReadToEnd();
+
+            foreach (var placeholder in new[] { "{{TITLE}}", "{{SUMMARY}}", "{{TESTS}}", "{{FOOTER}}" })
+            {
+                StringAssert.Contains(placeholder, template);
+            }
+        }
+
+        [Test]
         public void Generate_ThrowsOnInvalidArguments()
         {
             var outputPath = Path.Combine(Path.GetTempPath(), $"tiver-report-{Guid.NewGuid():N}.html");
