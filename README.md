@@ -24,7 +24,6 @@ Add to your test project, from the NuGet UI or with `dotnet add package <id>`:
 - `Tiver.Fowl`
 - A test framework — `NUnit` + `NUnit3TestAdapter`, or `MSTest.TestFramework` + `MSTest.TestAdapter`
 - `Microsoft.NET.Test.Sdk`
-- `Serilog`, `Serilog.Extensions.Logging`, `Serilog.Sinks.Console`, `Serilog.Sinks.File`
 
 Then add `Tiver_config.json` (browser, waiting) and `config.json` (application settings, named URLs)
 to the project, both copied to the output directory — see

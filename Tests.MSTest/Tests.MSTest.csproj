@@ -12,11 +12,10 @@
     <PackageReference Include="MSTest.TestFramework" Version="4.3.3" />
     <PackageReference Include="MSTest.TestAdapter" Version="4.3.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+    <!-- Serilog is intentionally not referenced here: the shipped Logger.cs contentFile is compiled
+         in this project and types against Serilog, so building proves those compile assets flow
+         transitively from Tiver.Fowl as documented in README.md. -->
     <PackageReference Include="Tiver.Fowl" Version="[0.0.1-testingmstest]" />
-    <PackageReference Include="Serilog" Version="4.4.0" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
-    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
 
   <PropertyGroup>
