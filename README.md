@@ -1,42 +1,54 @@
-# tiver-fowl  ![.NET](https://img.shields.io/badge/.NET-6-blue)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/MrHant/tiver-fowl/master/LICENSE) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMrHant%2Ftiver-fowl.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMrHant%2Ftiver-fowl?ref=badge_shield)
+# tiver-fowl  ![.NET](https://img.shields.io/badge/.NET-10-blue) ![C#](https://img.shields.io/badge/C%23-14-blue) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/MrHant/tiver-fowl/master/LICENSE)
 
-A framework for writing Automated Integration tests (including tests via Selenium).
+[![NuGet](https://img.shields.io/nuget/v/Tiver.Fowl.svg?label=stable)](https://www.nuget.org/packages/Tiver.Fowl) [![NuGet Pre Release](https://img.shields.io/nuget/vpre/Tiver.Fowl.svg?label=pre-release)](https://www.nuget.org/packages/Tiver.Fowl/absoluteLatest)
 
-## Branch status
+A framework for writing Automated Integration tests (including tests via Selenium). Provides an XPath
+element abstraction with built-in wait/retry, JSON configuration, thread-safe context for parallel
+runs, Serilog logging, and an HTML report generated after every run.
 
-| Branch | Package | CI  |
-| ------ | ------- | --- |
-| master (stable) | [![NuGet](https://img.shields.io/nuget/v/Tiver.Fowl.svg)](https://www.nuget.org/packages/Tiver.Fowl) | [![Build status](https://ci.appveyor.com/api/projects/status/6rnoaavfeg192ncd/branch/master?svg=true)](https://ci.appveyor.com/project/MrHant/tiver-fowl/branch/master) |
-| develop | [![NuGet Pre Release](https://img.shields.io/nuget/vpre/Tiver.Fowl.svg)](https://www.nuget.org/packages/Tiver.Fowl/absoluteLatest) | [![Build status](https://ci.appveyor.com/api/projects/status/6rnoaavfeg192ncd/branch/develop?svg=true)](https://ci.appveyor.com/project/MrHant/tiver-fowl/branch/develop) |
+## Documentation
 
+| Doc | Covers |
+| --- | ------ |
+| [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | `Tiver_config.json`, `config.json`, environment layering, `ActiveConfiguration` API, driver management, wait/retry |
+| [docs/USAGE.md](docs/USAGE.md) | Elements, behaviors, locators, page objects, browser actions, context and storage |
+| [docs/REPORTING.md](docs/REPORTING.md) | Serilog logging, HTML report generation, templates, troubleshooting |
 
 ## Installation
 
-### Clean package install
+Requires .NET SDK 10.0.100 or later, and Chrome or Firefox for browser-driven tests — drivers are
+handled by Selenium Manager by default.
 
-* Add [Tiver.Fowl nuget package](https://www.nuget.org/packages/Tiver.Fowl/) to your project with tests, following changes will be done:
-  * Project libraries referenced, as well as other project dependencies (via NuGet packages)
-  * Sample config file ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample) created
-  * Sample BaseClasses created - 'BaseTestForMsTest.cs' and 'BaseTestForNUnit.cs'
-  * 'Elements' folder and sample element implementations created
-  * Driver executables copied to 'lib' folder
-  * Report templates copied to 'templates' folder
-* Add needed configuration options to 'App.config' (refer to ['App.config.tiver.fowl.sample'](package/App.config.tiver.fowl.sample))
-* Add unit-testing framework (preferably NUnit) and add a BaseClass (refer to ['BaseTestForNUnit.cs.pp'](package/BaseTestForNUnit.cs.pp))
-* Write up some tests and you are ready to go
+Add to your test project, from the NuGet UI or with `dotnet add package <id>`:
 
-### Package update
+- `Tiver.Fowl`
+- A test framework — `NUnit` + `NUnit3TestAdapter`, or `MSTest.TestFramework` + `MSTest.TestAdapter`
+- `Microsoft.NET.Test.Sdk`
+- `Serilog`, `Serilog.Extensions.Logging`, `Serilog.Sinks.Console`, `Serilog.Sinks.File`
 
-* Please make sure to use Version Control System and commit all your changes before package update
-* Package update will recreate all package-specific files - like elements and templates
-* Please review changes and run your tests after package update
+Then add `Tiver_config.json` (browser, waiting) and `config.json` (application settings, named URLs)
+to the project, both copied to the output directory — see
+[docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
-### [Obsolete] .NET support
-* Targeting .NET 6, .NET Standard 2.0
-* Tested with .NET 6, .NET Framework 4.8, .NET Framework 4.7.2, .NET Framework 4.6.2
+Tests inherit `BaseTestForNUnit` or `BaseTestForMSTest`; the matching one is enabled automatically
+from the test framework you referenced. Mark classes that need a browser with `[WebDriverTest]`:
 
-## [Obsolete] Local execution
+```csharp
+[WebDriverTest]
+public class CatalogTests : BaseTestForNUnit
+{
+    private static readonly Button LaptopsMenuItem = new("//a[text()='Laptops']", "Laptops");
 
-* To run tests locally - Select "Default.runsettings" as configuration file for Tests
- * It contains settings for output folder
- * As well as copying driver executables
+    [Test]
+    public void SelectCategory()
+    {
+        ActiveConfiguration.NavigateTo("home");   // tests control their own navigation
+        this.LogStep("Open 'Laptops' catalog section");
+        LaptopsMenuItem.Click();
+    }
+}
+```
+
+Logger setup, teardown and report generation need no wiring — the base classes handle them. See
+[docs/USAGE.md](docs/USAGE.md) for elements, page objects and context.
+
