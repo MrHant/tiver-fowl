@@ -17,7 +17,7 @@ namespace TestContentFiles
             // 1. BaseTestForMSTest compiles correctly
             // 2. Setup/Teardown methods work
             // 3. MSTest integration is functional
-            Assert.IsTrue(true, "BaseTestForMSTest validation passed");
+            Assert.IsInstanceOfType<BaseTestForMSTest>(this, "BaseTestForMSTest validation passed");
         }
     }
 }

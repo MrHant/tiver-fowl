@@ -23,6 +23,14 @@
 - `BaseTestForNUnit` now uses `TestContext.CurrentContext.Test.FullName` to include namespace in test identification
   - `BaseTestForMSTest` now uses fully qualified test names (with namespace) for proper report hierarchy
 - Reorganized documentation into topic-specific files under `docs/`
+- Updated `Selenium.WebDriver` to 4.46.0
+  - **BREAKING**: Selenium.WebDriver 4.44.0 renamed its assembly from `WebDriver` to
+    `Selenium.WebDriver`. Any `IgnoredExceptionsTypeNames` entry in the `Tiver.Fowl.Waiting` section
+    of `Tiver_config.json` must be updated accordingly — for example
+    `"OpenQA.Selenium.NoSuchElementException, WebDriver"` becomes
+    `"OpenQA.Selenium.NoSuchElementException, Selenium.WebDriver"`. Unresolvable names are skipped
+    silently, so a stale entry stops the exception from being swallowed and element lookups fail on
+    the first attempt instead of retrying until `Timeout`
 
 
 ## [0.2.0-beta]

@@ -14,8 +14,8 @@
     "Timeout": 10000,
     "PollingInterval": 250,
     "IgnoredExceptionsTypeNames": [
-      "OpenQA.Selenium.NoSuchElementException, WebDriver",
-      "OpenQA.Selenium.StaleElementReferenceException, WebDriver"
+      "OpenQA.Selenium.NoSuchElementException, Selenium.WebDriver",
+      "OpenQA.Selenium.StaleElementReferenceException, Selenium.WebDriver"
     ]
   }
 }

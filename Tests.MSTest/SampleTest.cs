@@ -9,6 +9,6 @@ public class SampleTest : BaseTestForMSTest
     [TestMethod]
     public void BasicTest()
     {
-        Assert.IsTrue(true);
+        Assert.IsInstanceOfType<BaseTestForMSTest>(this);
     }
 }

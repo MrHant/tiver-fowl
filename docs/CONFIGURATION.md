@@ -151,3 +151,22 @@ Every element interaction goes through the `Tiver.Fowl.Waiting` package:
 - `Element.Process()` wraps the underlying Selenium call with automatic retry
 - Timeout, polling interval and ignored exception types are configurable
 - Configured in `Tiver_config.json` under the `Tiver.Fowl.Waiting` section
+
+```json
+"Tiver.Fowl.Waiting": {
+  "Timeout": 10000,
+  "PollingInterval": 250,
+  "IgnoredExceptionsTypeNames": [
+    "OpenQA.Selenium.NoSuchElementException, Selenium.WebDriver",
+    "OpenQA.Selenium.StaleElementReferenceException, Selenium.WebDriver"
+  ]
+}
+```
+
+`IgnoredExceptionsTypeNames` entries are **assembly-qualified type names** resolved at runtime. A
+name that fails to resolve is skipped silently, so the exception is no longer swallowed and the
+first failed attempt aborts the retry loop instead of polling until `Timeout`. Watch for element
+lookups that fail almost instantly — that is the signature of a stale entry here.
+
+Selenium.WebDriver 4.44.0 renamed its assembly from `WebDriver` to `Selenium.WebDriver`. Configs
+written against earlier versions must use the new assembly name, as shown above.
