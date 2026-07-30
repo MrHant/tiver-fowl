@@ -6,10 +6,26 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 element abstraction with built-in wait/retry, JSON configuration, thread-safe context for parallel
 runs, Serilog logging, and an HTML report generated after every run.
 
+## What it believes
+
+1. **Elements are descriptions, not handles** — a locator plus a name, re-resolved against the live
+   DOM on every interaction, so stale-element concerns structurally cannot arise.
+2. **Waiting is not the test author's job** — every operation runs inside a configured retry loop. No
+   `Thread.Sleep`, ever. You need to add only bussiness logic waits, like waiting for a long-running process to complete.
+3. **Capabilities are types** — `class Button : Element, IClickable`; behaviors compose via marker
+   interfaces instead of inheritance.
+4. **One locator language** — XPath only, because it is the one that composes relatively, indexes
+   positionally, and parameterizes cleanly.
+5. **The log is the report** — one structured log pipeline via Serilog; the HTML report is a projection of it.
+6. **Parallel-safe by construction** — per-test state lives in an ambient scope, never in statics.
+
+More on this in [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
+
 ## Documentation
 
 | Doc | Covers |
 | --- | ------ |
+| [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) | Why the project exists, the six principles, non-goals |
 | [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | `Tiver_config.json`, `config.json`, environment layering, `ActiveConfiguration` API, driver management, wait/retry |
 | [docs/USAGE.md](docs/USAGE.md) | Elements, behaviors, locators, page objects, browser actions, context and storage |
 | [docs/REPORTING.md](docs/REPORTING.md) | Serilog logging, HTML report generation, templates, troubleshooting |

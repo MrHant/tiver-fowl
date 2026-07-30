@@ -24,6 +24,7 @@ Load the relevant doc when working in that area rather than assuming behavior:
 | Doc | Covers |
 | --- | ------ |
 | [AGENTS.md](AGENTS.md) | Repository guidelines: structure, commands, style, commits |
+| [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) | Why the project exists, the six principles, non-goals |
 | [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | `Tiver_config.json`, `config.json`, environment layering, `ActiveConfiguration` API, driver management, wait/retry |
 | [docs/USAGE.md](docs/USAGE.md) | Elements, behaviors, locators, page objects, browser actions, context storage |
 | [docs/REPORTING.md](docs/REPORTING.md) | Serilog logging, HTML report generation, templates, troubleshooting |

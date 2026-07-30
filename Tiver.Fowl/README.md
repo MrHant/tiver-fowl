@@ -2,6 +2,11 @@
 
 A framework for writing Automated Integration tests (including tests via Selenium).
 
+## What it believes
+
+Let a .NET developer write a browser test that reads like the manual test case — focuses on actions to be performed, never goes stale, runs in parallel, and produces a shareable HTML report, with no configuration beyond a JSON file.
+
+
 ## Quick Start
 
 ### 1. Create Test Class

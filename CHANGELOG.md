@@ -10,6 +10,8 @@
 - New `Tiver.Fowl.Core.Reporting` namespace with `LogFileParser`, `HtmlReportGenerator`, and data record classes
 - `SessionIdEnricher` for Serilog to enrich all logs with session identifiers
 - `TestExecutionContext.SessionId` property to access/set the current test session identifier
+- `docs/PHILOSOPHY.md` stating the project's goal, six design principles, explicit non-goals. Summarized at the top of
+  both READMEs
 
 ### Changed
 - **BREAKING**: `Flow.Setup(Type, string, Func<string>)` is now `Flow.Setup(Type, string)`. The test
@@ -38,6 +40,10 @@
 - `BaseTestForNUnit` now uses `TestContext.CurrentContext.Test.FullName` to include namespace in test identification
   - `BaseTestForMSTest` now uses fully qualified test names (with namespace) for proper report hierarchy
 - Reorganized documentation into topic-specific files under `docs/`
+- Package `<Description>` and both READMEs now read "The smallest opinionated Selenium layer for .NET
+  — no waits, no stale elements, a report out of the box." The previous tagline ("a framework for
+  writing Automated Integration tests (including tests via Selenium)") implied driver portability the
+  framework does not provide; Selenium is a requirement, not an option
 - Updated `Selenium.WebDriver` to 4.46.0
   - **BREAKING**: Selenium.WebDriver 4.44.0 renamed its assembly from `WebDriver` to
     `Selenium.WebDriver`. Any `IgnoredExceptionsTypeNames` entry in the `Tiver.Fowl.Waiting` section
