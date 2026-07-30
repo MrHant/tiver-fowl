@@ -24,6 +24,16 @@
         T Read<T>(string key);
 
         /// <summary>
+        /// Attempt to read an item from storage without throwing when it is absent.
+        /// For callers that may legitimately run before an item has been written.
+        /// </summary>
+        /// <typeparam name="T">Type to cast the value to</typeparam>
+        /// <param name="key">Key for looked up item</param>
+        /// <param name="value">Value of found item cast to T, or default when not found</param>
+        /// <returns>True when an item was found for <paramref name="key"/></returns>
+        bool TryRead<T>(string key, out T value);
+
+        /// <summary>
         /// Read an item from storage
         /// In case not existing key - create new item with default value and return it
         /// </summary>

@@ -10,9 +10,13 @@ namespace Tiver.Fowl.TestingBase
 
     public static class Flow
     {
-        public static void Setup(Type testType, string testName, Func<string> testKey)
+        /// <summary>
+        /// Starts a test. Must be called from the test's synchronous setup method — the ambient
+        /// test scope is installed here, and an async setup would not propagate it to the test body.
+        /// </summary>
+        public static void Setup(Type testType, string testName)
         {
-            Context.SetTestKey(testKey);
+            Context.BeginTestScope();
             TestExecutionContext.TestName = testName;
             TestExecutionContext.TestType = testType;
 

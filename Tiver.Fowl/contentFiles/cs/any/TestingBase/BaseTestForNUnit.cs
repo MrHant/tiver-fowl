@@ -19,8 +19,7 @@ namespace Tiver.Fowl.TestingBase
         {
             Flow.Setup(
                 GetType(),
-                TestContext.CurrentContext.Test.FullName,
-                () => TestContext.CurrentContext.Test.FullName);
+                TestContext.CurrentContext.Test.FullName);
         }
 
         [TearDown]

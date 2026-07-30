@@ -12,6 +12,21 @@
 - `TestExecutionContext.SessionId` property to access/set the current test session identifier
 
 ### Changed
+- **BREAKING**: `Flow.Setup(Type, string, Func<string>)` is now `Flow.Setup(Type, string)`. The test
+  key delegate is gone — `Flow.Setup` starts an ambient test scope instead of registering a way to
+  compute a key. Custom base classes must drop the third argument. `Flow.Setup` must be called from
+  a **synchronous** setup method: it installs the ambient scope, and mutations to the ambient
+  execution context do not escape an `async` state machine, so a scope installed in an `async` setup
+  would not reach the test body. Both shipped base classes already satisfy this
+- **BREAKING**: `Context.SetTestKey(Func<string>)` removed. It has no meaning now that the current
+  test is tracked by an ambient scope; `Flow.Setup` starts the scope and `Context.ClearTestContext`
+  ends it
+- **BREAKING**: `Context.Test` throws `InvalidOperationException` when no test scope is active, where
+  it previously created storage on demand under whatever key the delegate returned. Ambient consumers
+  that may legitimately run outside a test should use the new `Context.TestOrNull` or
+  `TestExecutionContext.CurrentTestNameOrNull`
+- **BREAKING**: `IStorage` gains `bool TryRead<T>(string key, out T value)`, a non-throwing
+  counterpart to `Read<T>`. Custom `IStorage` implementations must add it
 - **BREAKING**: `IStorage.ReadOrAdd` renamed to `ReadOrInit`
 - `Storage` now uses `ConcurrentDictionary` for thread safety in parallel tests
 - Added generic `Read<T>()` and `ReadOrInit<T>()` methods to `IStorage`
@@ -33,6 +48,27 @@
     the first attempt instead of retrying until `Timeout`
 
 ### Fixed
+- Test context is now genuinely isolated under MSTest parallel execution. The running test was
+  identified through a single process-global `Func<string>` that every test's setup overwrote. Under
+  NUnit the delegate resolved ambiently through `TestContext.CurrentContext`, so it was correct;
+  under MSTest it captured a per-instance value, so as soon as a second test ran setup, *every*
+  thread resolved to the last test to start. Concurrent MSTest tests shared a single storage bucket:
+  they read each other's `TestName` and `TestStep`, and `Flow.Teardown` fetched and quit another
+  test's browser while that test was still using it. `Context` now publishes a per-test `TestScope`
+  through an `AsyncLocal`, which follows its own test across thread hops, `await`s and `Task.Run`,
+  and cannot bleed into a sibling test reusing the same worker thread. `Tests.MSTest` now runs with
+  method-level parallelism and covers this
+- Per-test storage is no longer retained after a test that fails before teardown. Storage lived in a
+  process-global dictionary keyed by test name, and a test that never reached `Flow.Teardown` left
+  its entry — including its `IBrowser` reference — in that dictionary for the rest of the run. The
+  scope is now reachable only from the ambient execution context and is collected with the test.
+  This also removes a collision between distinct tests that resolve to the same name, such as an
+  NUnit test re-run by `[Retry]`
+- Serilog events emitted outside a test scope keep their other enriched properties. `TestNameEnricher`
+  read `TestExecutionContext.TestName`, which throws when no test name has been written — during
+  session setup, report generation and teardown. Serilog swallows enricher exceptions into `SelfLog`,
+  so the failure was silent. The enricher now reads through a non-throwing accessor and simply omits
+  `TestName` when there is no active test
 - HTML report generation now works for projects consuming Tiver.Fowl as a NuGet package. The report
   template was packed into `lib/net10.0/`, from which NuGet only flows assemblies into a consumer's
   output directory, so `HtmlReportGenerator` threw `FileNotFoundException` on every run and

@@ -170,9 +170,25 @@ Context.Current.SessionStorage.Write("key", value);
 
 ## Parallel execution
 
-- Use `[Parallelizable(ParallelScope.All)]` on test classes
-- Each test gets its own browser instance and isolated test storage
-- Session storage is shared — treat writes to it as shared mutable state
+Supported on both test frameworks:
+
+- **NUnit** — `[Parallelizable(ParallelScope.All)]` on test classes
+- **MSTest** — `[assembly: Parallelize(Workers = 0, Scope = ExecutionScope.MethodLevel)]`
+  (`Workers = 0` means one worker per processor)
+
+Each test gets its own browser instance and isolated test storage. Session storage is shared — treat
+writes to it as shared mutable state.
+
+The current test is tracked by an ambient `AsyncLocal` scope, so the context follows its own test
+across thread hops: `async` test methods, code after an `await`, and work spawned on `Task.Run` all
+resolve to the correct test.
+
+One requirement follows from how ambient scopes work: **`Flow.Setup(...)` must be called from a
+synchronous setup method.** Mutations to the ambient execution context do not escape an `async`
+state machine, so a scope installed inside an `async` setup would not reach the test body. Both
+shipped base classes already use synchronous setup, so this only matters if you write your own. It
+fails loudly — accessing the context without an active scope throws `InvalidOperationException`
+rather than silently returning another test's state. The test body itself may be `async` freely.
 
 ## Screenshot on failure
 

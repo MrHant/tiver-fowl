@@ -1,46 +1,46 @@
-﻿namespace Tiver.Fowl.Core.Context
+namespace Tiver.Fowl.Core.Context
 {
     using System;
-    using System.Collections.Concurrent;
+    using System.Threading;
 
     public static class Context
     {
         private static readonly IStorage SessionContext = new Storage();
-        private static readonly ConcurrentDictionary<string, IStorage> TestContext = new ConcurrentDictionary<string, IStorage>();
 
-        internal static Func<string> TestKey { get; set; }
+        /// <summary>
+        /// The running test's scope. <see cref="AsyncLocal{T}"/> flows into async continuations and
+        /// spawned tasks, so a scope follows its own test across thread hops, and each test begins
+        /// from a clean execution context — a scope never reaches a sibling test that reuses the
+        /// same worker thread.
+        /// </summary>
+        private static readonly AsyncLocal<TestScope> CurrentScope = new();
 
-        private static string CurrentTestKey =>
-            TestKey?.Invoke() ?? throw new InvalidOperationException("Test key provider is not set. Call Context.SetTestKey(...) before accessing test context.");
-        
-        internal static IStorage Session
+        internal static IStorage Session => SessionContext;
+
+        internal static IStorage Test =>
+            CurrentScope.Value?.Storage ?? throw new InvalidOperationException(
+                "No Tiver.Fowl test scope is active. Flow.Setup(...) must be called from the " +
+                "test's synchronous setup method before any test context is accessed. Installing " +
+                "the scope from an async setup method does not work.");
+
+        /// <summary>
+        /// Non-throwing view of the current test storage, for ambient consumers that legitimately
+        /// run outside a test — Serilog enrichers, session setup, report generation.
+        /// </summary>
+        internal static IStorage TestOrNull => CurrentScope.Value?.Storage;
+
+        /// <summary>
+        /// Starts a fresh scope for the calling test. Must be called from a synchronous method.
+        /// </summary>
+        internal static void BeginTestScope()
         {
-            get
-            {
-                return SessionContext;
-            }
+            CurrentScope.Value = new TestScope();
         }
 
-        internal static IStorage Test
-        {
-            get
-            {
-                return TestContext.GetOrAdd(CurrentTestKey, _ => new Storage());
-            }
-        }
-
-        public static void SetTestKey(Func<string> testKey)
-        {
-            TestKey = testKey;
-        }
-        
         public static void ClearTestContext()
         {
-            var key = CurrentTestKey;
-            if (TestContext.TryRemove(key, out var storage))
-            {
-                storage.Clear();
-            }
+            CurrentScope.Value?.Storage.Clear();
+            CurrentScope.Value = null;
         }
 
         public static void ClearSessionContext()

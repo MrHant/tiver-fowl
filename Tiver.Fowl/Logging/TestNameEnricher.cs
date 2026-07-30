@@ -8,8 +8,14 @@ namespace Tiver.Fowl.Logging
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
-                "TestName", TestExecutionContext.TestName));
+            // Events are also emitted outside a test scope — session setup, report generation,
+            // teardown. Serilog routes an enricher exception to SelfLog and drops that event's
+            // enrichment, so resolving the name has to stay non-throwing.
+            var testName = TestExecutionContext.CurrentTestNameOrNull;
+            if (!string.IsNullOrEmpty(testName))
+            {
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TestName", testName));
+            }
         }
     }
 }

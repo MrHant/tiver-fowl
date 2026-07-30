@@ -27,6 +27,18 @@
             return (T)Read(key);
         }
 
+        public bool TryRead<T>(string key, out T value)
+        {
+            if (_items.TryGetValue(key, out var item) && item is T typed)
+            {
+                value = typed;
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+
         public object ReadOrInit(string key, object defaultValue)
         {
             return _items.GetOrAdd(key, defaultValue);

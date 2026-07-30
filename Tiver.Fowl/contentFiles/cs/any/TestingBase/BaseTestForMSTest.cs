@@ -34,10 +34,7 @@ namespace Tiver.Fowl.TestingBase
             var testType = GetType();
             var fullName = $"{testType.Namespace}.{testType.Name}.{TestContext.TestName}";
 
-            Flow.Setup(
-                testType,
-                fullName,
-                () => fullName);
+            Flow.Setup(testType, fullName);
         }
 
         [TestCleanup]

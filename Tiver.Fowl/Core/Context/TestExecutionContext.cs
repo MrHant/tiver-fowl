@@ -31,6 +31,16 @@
             set => Context.Test.Write("TestName", value);
         }
 
+        /// <summary>
+        /// The current test name, or <c>null</c> when no test scope is active or the name has not
+        /// been set yet. For ambient consumers such as log enrichers, which also run during session
+        /// setup, report generation and teardown.
+        /// </summary>
+        public static string CurrentTestNameOrNull =>
+            Context.TestOrNull is { } storage && storage.TryRead<string>("TestName", out var name)
+                ? name
+                : null;
+
         public static TestResult TestResult
         {
             get => Context.Test.Read<TestResult>("TestResult");

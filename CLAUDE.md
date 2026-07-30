@@ -70,7 +70,8 @@ Inside `Tiver.Fowl/`:
 The lifecycle every test moves through, driven by `Flow`:
 
 1. **OneTimeSetUp** — `Logger.Configure()` sets up Serilog (including `SessionId`) and the wait module
-2. **Setup** — `Flow.Setup(testType, testName, testKeyFunc)`. If the test has `[WebDriverTest]`, reads
+2. **Setup** — `Flow.Setup(testType, testName)`. Starts the ambient test scope, so it must be called
+   from a *synchronous* setup method. If the test has `[WebDriverTest]`, reads
    `BrowserConfiguration` and creates a browser via `BrowserFactory.GetBrowser()`. No navigation
    happens here — tests navigate themselves via `ActiveConfiguration.NavigateTo("urlName")`
 3. **Test method** — element interactions via the abstraction layer, all wait/retry wrapped
@@ -85,11 +86,25 @@ Test framework (NUnit vs MSTest) is auto-detected from package references, which
 Thread-safe state via the `Context` class, which is what makes parallel execution safe:
 
 - **Session storage** — shared across all tests in a run
-- **Test storage** — isolated per test, cleared in teardown
+- **Test storage** — lives in a `TestScope` published through an `AsyncLocal`, so it is isolated per
+  test and follows that test across thread hops and `await`s. Started by `Flow.Setup`, ended in
+  teardown
 - `TestExecutionContext` exposes the ambient current-test state (`Browser`, `BrowserActions`,
   `WebElementActions`, `TestName`, `TestResult`, `TestStep`, `SessionId`)
 
 Anything added to the framework that holds per-test state must go through `Context`, not statics.
+Never key test state by thread — MSTest and NUnit both resume `async` tests on arbitrary pool
+threads, so a thread-keyed lookup reads another test's state.
+
+The framework owns this scope rather than keying off the test frameworks' own ambient accessors.
+Both `TestContext.CurrentContext` (NUnit) and `TestContext.Current` (MSTest) are `AsyncLocal`-backed
+and do resolve the running test, but MSTest's is experimental — `MSTESTEXP` is a compile error by
+default, and `BaseTestForMSTest.cs` compiles in the *consumer's* project — needs MSTest 4.x, throws
+on `TestName`/`FullyQualifiedTestClassName` outside a test, and reports the same `TestName` for every
+`[DataRow]` of a method, so a key derived from it collides across concurrent rows. Ambient consumers that can run outside
+a test (log enrichers, session setup/teardown) must use `Context.TestOrNull` /
+`TestExecutionContext.CurrentTestNameOrNull` rather than `Context.Test`, which throws when no scope
+is active.
 
 ## Repository Rules
 
@@ -97,7 +112,9 @@ Anything added to the framework that holds per-test state must go through `Conte
   [AGENTS.md](AGENTS.md#changelog) for categories, breaking-change format, and what does not need an
   entry.
 - **XPath only**: all element location uses XPath, never CSS selectors.
-- **Parallel-safe**: tests run with `[Parallelizable(ParallelScope.All)]`; keep new state per-test.
+- **Parallel-safe**: the NUnit suites run with `[Parallelizable(ParallelScope.All)]` and
+  `Tests.MSTest` with `[assembly: Parallelize(Scope = ExecutionScope.MethodLevel)]`; keep new state
+  per-test.
 - **Headless**: browser-dependent tests stay headless and use the checked-in JSON configuration.
 - **Never commit**: credentials in `config*.json`, or generated artifacts from `bin/`, `obj/`,
   `test-packages/`, or test reports.
