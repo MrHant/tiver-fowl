@@ -27,7 +27,12 @@
       </CodeAnalysisDictionary>
     </ItemGroup>
 
-    <!-- README for package -->
+    <!-- README for package. This is Tiver.Fowl/README.md, not the repository one - item paths
+         resolve against the project directory. It is deliberately a separate, shorter file: the
+         repository README targets someone browsing GitHub, this one targets someone deciding on
+         nuget.org. Keep both current when the quick start changes.
+         Its links must be absolute URLs. The package holds this file at the root and nothing else
+         browsable, so nuget.org has nothing to resolve a relative path against. -->
     <ItemGroup>
       <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>

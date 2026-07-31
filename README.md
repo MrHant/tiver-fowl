@@ -11,7 +11,7 @@ runs, Serilog logging, and an HTML report generated after every run.
 1. **Elements are descriptions, not handles** — a locator plus a name, re-resolved against the live
    DOM on every interaction, so stale-element concerns structurally cannot arise.
 2. **Waiting is not the test author's job** — every operation runs inside a configured retry loop. No
-   `Thread.Sleep`, ever. You need to add only bussiness logic waits, like waiting for a long-running process to complete.
+   `Thread.Sleep`, ever. You need to add only business logic waits, like waiting for a long-running process to complete.
 3. **Capabilities are types** — `class Button : Element, IClickable`; behaviors compose via marker
    interfaces instead of inheritance.
 4. **One locator language** — XPath only, because it is the one that composes relatively, indexes

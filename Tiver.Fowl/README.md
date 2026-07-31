@@ -6,27 +6,11 @@ A framework for writing Automated Integration tests (including tests via Seleniu
 
 Let a .NET developer write a browser test that reads like the manual test case — focuses on actions to be performed, never goes stale, runs in parallel, and produces a shareable HTML report, with no configuration beyond a JSON file.
 
-
 ## Quick Start
 
-### 1. Create Test Class
+### 1. Configure
 
-```csharp
-[WebDriverTest]
-public class MyTests : BaseTestForNUnit
-{
-    [Test]
-    public void MyFirstTest()
-    {
-        this.LogStep("Navigate to page");
-        // Your test code here
-    }
-}
-```
-
-### 2. Configure Browser
-
-Create `Tiver_config.json` in your test project:
+Create `Tiver_config.json` in your test project — browser and waiting:
 
 ```json
 {
@@ -38,48 +22,61 @@ Create `Tiver_config.json` in your test project:
 }
 ```
 
-Create `config.json`:
+Create `config.json` — application settings, and the named URLs your tests navigate to:
 
 ```json
 {
-  "StartUrl": "https://your-app.com"
+  "Urls": {
+    "home": "https://your-app.com",
+    "cart": "https://your-app.com/cart"
+  }
 }
 ```
 
-### 3. Setup Logger (Optional)
+Both files must be copied to the output directory.
 
-In your test setup fixture:
+### 2. Create Element Classes
 
-```csharp
-[SetUpFixture]
-public class TestSetup
-{
-    [OneTimeSetUp]
-    public void GlobalSetup()
-    {
-        Logger.Configure();
-    }
-}
-```
-
-### 4. Create Element Classes (Optional)
+A capability is an interface — `IClickable`, `ITypeable`, `IVisible`, `IHasAttributes` — so an
+element declares only what it actually supports:
 
 ```csharp
+using System.Runtime.CompilerServices;
 using Tiver.Fowl.ViewBase;
 using Tiver.Fowl.ViewBase.Behaviors;
 
 public class Button : Element, IClickable
 {
-    public Button(string locator) : base(locator) { }
-    public Button(string locator, string name) : base(locator, name) { }
+    public Button(string locator, [CallerMemberName] string name = null) : base(locator, name) { }
 }
 
 public class Textbox : Element, ITypeable
 {
-    public Textbox(string locator) : base(locator) { }
-    public Textbox(string locator, string name) : base(locator, name) { }
+    public Textbox(string locator, [CallerMemberName] string name = null) : base(locator, name) { }
 }
 ```
+
+### 3. Write a Test
+
+```csharp
+[WebDriverTest]
+public class MyTests : BaseTestForNUnit
+{
+    private static readonly Button PhonesMenuItem = new("//a[text()='Phones']");
+
+    [Test]
+    public void MyFirstTest()
+    {
+        ActiveConfiguration.NavigateTo("home");   // tests control their own navigation
+        this.LogStep("Open the Phones category");
+        PhonesMenuItem.Click();
+    }
+}
+```
+
+Logger configuration, teardown, screenshot-on-failure and HTML report generation need no wiring —
+`BaseTestForNUnit` and `BaseTestForMSTest` handle them. The matching base class is enabled
+automatically from the test framework you referenced.
 
 ## Documentation
 
