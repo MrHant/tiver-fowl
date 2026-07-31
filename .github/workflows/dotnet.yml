@@ -11,11 +11,14 @@ env:
   OutputDirectory: ${{ github.workspace}}/output
 
 jobs:
-  test-and-publish:
-    runs-on: windows-latest
-    permissions:
-      id-token: write
-      contents: read
+  test:
+    strategy:
+      # Report both platforms even when one fails - the point of the matrix is
+      # seeing whether a failure is platform-specific.
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,8 +38,26 @@ jobs:
       - name: Run main tests
         run: dotnet test Tests/Tests.csproj -f net10.0 -c Release -v quiet
 
+  publish:
+    needs: test
+    runs-on: windows-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.x"
+
+      # Pack the library explicitly. Packing the .slnx would also pack any test
+      # project that does not set IsPackable=false, and feed it to the push loop.
       - name: Pack NuGet package
-        run: dotnet pack --configuration Release --output ${{ env.OutputDirectory }}
+        run: dotnet pack Tiver.Fowl/Tiver.Fowl.csproj --configuration Release --output ${{ env.OutputDirectory }}
 
       - name: NuGet login (OIDC → temp API key)
         uses: NuGet/login@v1
