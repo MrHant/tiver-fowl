@@ -81,7 +81,7 @@ namespace Tiver.Fowl.Core.Reporting
                             record.AddStep(new TestStepRecord
                             {
                                 StepNumber = entry.Properties.Step.Value,
-                                Description = entry.Properties.Text,
+                                Description = entry.Properties.Text ?? string.Empty,
                                 Timestamp = entry.Timestamp
                             });
                             break;
@@ -145,7 +145,7 @@ namespace Tiver.Fowl.Core.Reporting
             return sessions.ToDictionary(s => s.Key, s => s.Value.Values.ToList());
         }
 
-        private static TestResult ParseTestResult(string resultString)
+        private static TestResult ParseTestResult(string? resultString)
         {
             var result = resultString?.ToLowerInvariant() switch
             {
@@ -162,27 +162,30 @@ namespace Tiver.Fowl.Core.Reporting
             return result;
         }
 
+        // Deserialization targets for Serilog's JSON lines. Every member is nullable because a given
+        // log entry carries only the properties relevant to it - an element action has Name and
+        // Action but no TestResult, a test completion the reverse.
         private class LogEntry
         {
             public DateTime Timestamp { get; set; }
-            public string Level { get; set; }
-            public string MessageTemplate { get; set; }
-            public string Exception { get; set; }
-            public LogProperties Properties { get; set; }
+            public string? Level { get; set; }
+            public string? MessageTemplate { get; set; }
+            public string? Exception { get; set; }
+            public LogProperties? Properties { get; set; }
         }
 
         private class LogProperties
         {
-            public string SessionId { get; set; }
-            public string TestName { get; set; }
-            public string LogType { get; set; }
-            public string TestResult { get; set; }
+            public string? SessionId { get; set; }
+            public string? TestName { get; set; }
+            public string? LogType { get; set; }
+            public string? TestResult { get; set; }
             public int? Step { get; set; }
-            public string Text { get; set; }
-            public string Type { get; set; }
-            public string Name { get; set; }
-            public string Action { get; set; }
-            public string Base64 { get; set; }
+            public string? Text { get; set; }
+            public string? Type { get; set; }
+            public string? Name { get; set; }
+            public string? Action { get; set; }
+            public string? Base64 { get; set; }
         }
     }
 }

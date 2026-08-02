@@ -1,0 +1,50 @@
+<Project>
+
+  <!-- Imported at the top of every project in the repository, before the project body, so any
+       csproj can still override what is set here. Build logic that must observe final property
+       values belongs in Directory.Build.targets instead, which is imported at the bottom. -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Analyzers are on by default for net10.0. AnalysisLevel pins the rule set to the SDK's latest
+       rather than the target framework's, so an SDK upgrade brings new rules with it. AnalysisMode
+       is left at its default, which enables a subset of that rule set. -->
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- NU1901-NU1904 are raised by NuGet's dependency audit when an advisory is published against a
+         referenced package, so they can appear on a build whose inputs have not changed. They stay
+         warnings rather than errors. -->
+    <WarningsNotAsErrors>NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <!-- Reproducible builds. ContinuousIntegrationBuild normalizes the source paths recorded in the
+       PDB; without it a CI-produced package embeds the build agent's absolute paths and consumers
+       cannot step into the source. It is scoped to CI because the same normalization makes local
+       debugging harder.
+       SourceLink ships in the SDK for net8.0+, so the repository URL and commit are derived from
+       the git remote - but the URL only reaches the nuspec when PublishRepositoryUrl is set. -->
+  <PropertyGroup>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true' OR '$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!-- Package metadata shared by every packable project. Per-package values (Description,
+       PackageReadmeFile) stay in the individual csproj. -->
+  <PropertyGroup>
+    <Authors>Artsiomi Silivonchyk</Authors>
+    <PackageProjectUrl>https://github.com/MrHant/tiver-fowl</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>selenium;webdriver;test-automation;integration-testing;automation;nunit;mstest;page-object</PackageTags>
+  </PropertyGroup>
+
+</Project>

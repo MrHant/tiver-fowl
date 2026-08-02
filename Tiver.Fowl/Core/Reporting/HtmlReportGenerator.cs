@@ -59,7 +59,14 @@ namespace Tiver.Fowl.Core.Reporting
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly()?.Location),
             };
 
-            foreach (var basePath in searchPaths.Where(p => !string.IsNullOrEmpty(p)))
+            // Path.GetDirectoryName and Assembly.Location both yield null in some hosts, so the
+            // candidates are filtered once here and reused for the error message below.
+            var candidatePaths = searchPaths
+                .Where(p => !string.IsNullOrEmpty(p))
+                .Select(p => p!)
+                .ToList();
+
+            foreach (var basePath in candidatePaths)
             {
                 var templatePath = Path.Combine(basePath, TemplateName);
                 if (File.Exists(templatePath))
@@ -79,14 +86,14 @@ namespace Tiver.Fowl.Core.Reporting
                 return embedded;
             }
 
-            var searchedPaths = string.Join(", ", searchPaths.Where(p => !string.IsNullOrEmpty(p)));
+            var searchedPaths = string.Join(", ", candidatePaths);
             var errorMessage = $"Report template '{TemplateName}' not found on disk (searched: {searchedPaths}) " +
                                $"and embedded resource '{EmbeddedTemplateName}' is missing from the Tiver.Fowl assembly";
             Log.Error(errorMessage);
             throw new FileNotFoundException(errorMessage, TemplateName);
         }
 
-        private static string LoadEmbeddedTemplate()
+        private static string? LoadEmbeddedTemplate()
         {
             using var stream = typeof(HtmlReportGenerator).Assembly
                 .GetManifestResourceStream(EmbeddedTemplateName);

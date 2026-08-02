@@ -7,11 +7,11 @@ namespace Tiver.Fowl.Core.Reporting
     /// </summary>
     public class ElementActionRecord
     {
-        public string ElementType { get; set; }
+        public string ElementType { get; set; } = string.Empty;
 
-        public string ElementName { get; set; }
+        public string ElementName { get; set; } = string.Empty;
 
-        public string Action { get; set; }
+        public string Action { get; set; } = string.Empty;
 
         public DateTime Timestamp { get; set; }
     }

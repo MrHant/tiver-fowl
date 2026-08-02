@@ -2,6 +2,9 @@
 {
     public class ApplicationConfiguration
     {
-        public string Title { get; set; }
+        /// <summary>
+        /// Optional display name for the application under test. Null when not configured.
+        /// </summary>
+        public string? Title { get; set; }
     }
 }

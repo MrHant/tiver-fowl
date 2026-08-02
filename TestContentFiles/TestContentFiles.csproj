@@ -1,10 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <LangVersion>14</LangVersion>
-        <TargetFramework>net10.0</TargetFramework>
         <IsPackable>false</IsPackable>
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
     <!-- Link contentFiles for compilation validation -->
@@ -21,12 +18,13 @@
     </ItemGroup>
 
     <!-- Both test frameworks to validate both BaseTest variants -->
+    <!-- Versions come from ../Directory.Packages.props. -->
     <ItemGroup>
-        <PackageReference Include="NUnit" Version="4.6.1" />
-        <PackageReference Include="NUnit3TestAdapter" Version="6.2.0" />
-        <PackageReference Include="MSTest.TestFramework" Version="4.3.3" />
-        <PackageReference Include="MSTest.TestAdapter" Version="4.3.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="MSTest.TestFramework" />
+        <PackageReference Include="MSTest.TestAdapter" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
     </ItemGroup>
 
 </Project>

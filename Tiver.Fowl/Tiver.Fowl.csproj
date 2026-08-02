@@ -1,16 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <!-- TargetFramework, LangVersion, and the package metadata shared across projects
+         (Authors, PackageProjectUrl, PackageLicenseExpression, PackageTags) come from
+         ../Directory.Build.props. -->
     <PropertyGroup>
-        <LangVersion>14</LangVersion>
-        <TargetFramework>net10.0</TargetFramework>
-
-        <!-- NuGet Package Metadata -->
-        <Authors>Artsiomi Silivonchyk</Authors>
         <Description>A framework for writing Automated Integration tests (including tests via Selenium).</Description>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/MrHant/tiver-fowl</PackageProjectUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -20,12 +15,6 @@
     <PropertyGroup Condition="'$(Configuration)' == 'Development'">
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     </PropertyGroup>
-
-    <ItemGroup>
-      <CodeAnalysisDictionary Include="..\CustomCodeAnalysisDictionary.xml">
-        <Link>CustomCodeAnalysisDictionary.xml</Link>
-      </CodeAnalysisDictionary>
-    </ItemGroup>
 
     <!-- README for package. This is Tiver.Fowl/README.md, not the repository one - item paths
          resolve against the project directory. It is deliberately a separate, shorter file: the
@@ -96,49 +85,29 @@
 
     <!-- Test framework references - only for Development configuration to compile contentFiles -->
     <ItemGroup Condition="'$(Configuration)' == 'Development'">
-      <PackageReference Include="NUnit" Version="4.6.1" />
-      <PackageReference Include="MSTest.TestFramework" Version="4.3.3" />
+      <PackageReference Include="NUnit" />
+      <PackageReference Include="MSTest.TestFramework" />
     </ItemGroup>
 
     <!-- Import targets to auto-detect test frameworks in Development configuration -->
     <Import Project="build\Tiver.Fowl.targets" Condition="'$(Configuration)' == 'Development'" />
 
+    <!-- Versions come from ../Directory.Packages.props. -->
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Configuration">
-        <Version>10.0.10</Version>
-      </PackageReference>
-      <PackageReference Include="Microsoft.Extensions.Configuration.Binder">
-        <Version>10.0.10</Version>
-      </PackageReference>
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json">
-        <Version>10.0.10</Version>
-      </PackageReference>
+      <PackageReference Include="Microsoft.Extensions.Configuration" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
       <PackageReference Include="MinVer">
-        <Version>7.0.0</Version>
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Selenium.WebDriver">
-        <Version>4.46.0</Version>
-      </PackageReference>
-      <PackageReference Include="Serilog">
-        <Version>4.4.0</Version>
-      </PackageReference>
-      <PackageReference Include="Serilog.Sinks.Console">
-        <Version>6.1.1</Version>
-      </PackageReference>
-      <PackageReference Include="Serilog.Sinks.File">
-        <Version>7.0.0</Version>
-      </PackageReference>
-      <PackageReference Include="Serilog.Extensions.Logging">
-        <Version>10.0.0</Version>
-      </PackageReference>
-      <PackageReference Include="Tiver.Fowl.Drivers">
-        <Version>0.7.0</Version>
-      </PackageReference>
-      <PackageReference Include="Tiver.Fowl.Waiting">
-        <Version>0.5.0</Version>
-      </PackageReference>
+      <PackageReference Include="Selenium.WebDriver" />
+      <PackageReference Include="Serilog" />
+      <PackageReference Include="Serilog.Sinks.Console" />
+      <PackageReference Include="Serilog.Sinks.File" />
+      <PackageReference Include="Serilog.Extensions.Logging" />
+      <PackageReference Include="Tiver.Fowl.Drivers" />
+      <PackageReference Include="Tiver.Fowl.Waiting" />
     </ItemGroup>
 
 </Project>

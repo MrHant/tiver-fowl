@@ -10,14 +10,24 @@
         /// </summary>
         public DriverManagerType? DriverManager { get; set; }
 
-        public string BrowserType { get; set; }
+        /// <summary>
+        /// Browser to launch. Null or empty selects the default browser, as
+        /// <see cref="Browsers.BrowserFactory.GetFactory"/> treats both as unspecified.
+        /// </summary>
+        public string? BrowserType { get; set; }
 
         public bool Headless { get; set; }
 
         public bool RunningInDocker { get; set; } = false;
 
-        public Uri RemoteAddress { get; set; }
+        /// <summary>
+        /// Address of a remote Selenium grid. Null runs the browser locally.
+        /// </summary>
+        public Uri? RemoteAddress { get; set; }
 
-        public Resolution Resolution { get; set; }
+        /// <summary>
+        /// Window size to apply after launch. Null leaves the browser at its default size.
+        /// </summary>
+        public Resolution? Resolution { get; set; }
     }
 }

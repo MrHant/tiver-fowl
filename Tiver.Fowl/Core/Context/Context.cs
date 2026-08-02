@@ -13,7 +13,7 @@ namespace Tiver.Fowl.Core.Context
         /// from a clean execution context — a scope never reaches a sibling test that reuses the
         /// same worker thread.
         /// </summary>
-        private static readonly AsyncLocal<TestScope> CurrentScope = new();
+        private static readonly AsyncLocal<TestScope?> CurrentScope = new();
 
         internal static IStorage Session => SessionContext;
 
@@ -27,7 +27,7 @@ namespace Tiver.Fowl.Core.Context
         /// Non-throwing view of the current test storage, for ambient consumers that legitimately
         /// run outside a test — Serilog enrichers, session setup, report generation.
         /// </summary>
-        internal static IStorage TestOrNull => CurrentScope.Value?.Storage;
+        internal static IStorage? TestOrNull => CurrentScope.Value?.Storage;
 
         /// <summary>
         /// Starts a fresh scope for the calling test. Must be called from a synchronous method.

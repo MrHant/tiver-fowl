@@ -10,7 +10,7 @@ namespace Tiver.Fowl.Core.Reporting
     {
         public int StepNumber { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         public DateTime Timestamp { get; set; }
 

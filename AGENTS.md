@@ -21,7 +21,13 @@ Equivalent `dotnet` commands are listed in `Taskfile.yml`. Run a focused test wi
 
 ## Coding Style & Naming Conventions
 
-Use C# 14, four-space indentation, braces on new lines, and file-scoped namespaces where consistent with the file being edited. Use PascalCase for types, methods, and public members; camelCase for locals and parameters; and `_camelCase` for private fields. Keep interfaces prefixed with `I` and exception types suffixed with `Exception`. Match nearby style because no repository-wide formatter configuration is committed.
+Style is enforced by `.editorconfig` at the repository root — prefer it over this summary if the two ever disagree, and let your editor apply it rather than formatting by hand.
+
+Use C# 14, four-space indentation, and braces on new lines. Namespaces are **block-scoped**, with `using` directives **inside** the namespace body. That combination is the repository's most fragile convention: it is what every file uses, and it is the opposite of what project templates generate and what an unconfigured "remove and sort usings" produces.
+
+Use PascalCase for types, methods, and public members; camelCase for locals and parameters; and `_camelCase` for private instance fields. Constants and `static readonly` fields are PascalCase. Keep interfaces prefixed with `I` and exception types suffixed with `Exception`.
+
+Style rules are IDE-only: `EnforceCodeStyleInBuild` is not set, so a style deviation will not fail `task build`.
 
 ## Testing Guidelines
 

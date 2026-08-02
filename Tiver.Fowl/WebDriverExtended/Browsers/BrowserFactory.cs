@@ -8,7 +8,12 @@
 
     public abstract class BrowserFactory
     {
-        public static BrowserFactory GetFactory(string browserType)
+        /// <summary>
+        /// Browser used when <see cref="BrowserConfiguration.BrowserType"/> is null or empty.
+        /// </summary>
+        private const string DefaultBrowserType = "firefox";
+
+        public static BrowserFactory GetFactory(string? browserType)
         {
             Log.Information("Building instance of browser type '{browserType}'", browserType);
 
@@ -33,7 +38,12 @@
         public static Browser GetBrowser()
         {
             var config = ConfigurationMapper.Browser;
-            var browserType = config.BrowserType;
+
+            // GetFactory treats null and empty as "the default browser", but the driver downloader
+            // needs a concrete name, so resolve it here rather than passing an unset value through.
+            var browserType = string.IsNullOrEmpty(config.BrowserType)
+                ? DefaultBrowserType
+                : config.BrowserType;
 
             // Determine which driver manager to use
             var driverManager = GetDriverManagerType(config);
@@ -61,7 +71,7 @@
                     break;
             }
 
-            var factory = GetFactory(config.BrowserType);
+            var factory = GetFactory(browserType);
             return factory.Build(config);
         }
 

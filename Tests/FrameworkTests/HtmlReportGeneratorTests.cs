@@ -214,7 +214,7 @@ namespace Tests.FrameworkTests
 
             ClassicAssert.IsNotNull(stream, "report-template.html is not embedded in Tiver.Fowl.dll");
 
-            using var reader = new StreamReader(stream);
+            using var reader = new StreamReader(stream!);
             var template = reader.ReadToEnd();
 
             foreach (var placeholder in new[] { "{{TITLE}}", "{{SUMMARY}}", "{{TESTS}}", "{{FOOTER}}" })
@@ -228,8 +228,8 @@ namespace Tests.FrameworkTests
         {
             var outputPath = Path.Combine(Path.GetTempPath(), $"tiver-report-{Guid.NewGuid():N}.html");
 
-            Assert.Throws<ArgumentNullException>(() => HtmlReportGenerator.Generate(null, outputPath));
-            Assert.Throws<ArgumentException>(() => HtmlReportGenerator.Generate([], null));
+            Assert.Throws<ArgumentNullException>(() => HtmlReportGenerator.Generate(null!, outputPath));
+            Assert.Throws<ArgumentException>(() => HtmlReportGenerator.Generate([], null!));
             Assert.Throws<ArgumentException>(() => HtmlReportGenerator.Generate([], "  "));
         }
 

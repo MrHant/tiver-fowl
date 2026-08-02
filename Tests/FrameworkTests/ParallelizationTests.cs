@@ -29,7 +29,7 @@ public class ParallelizationTests : BaseTestForNUnit
 
     private static IEnumerable<(string menuItemText, string expectedItemName)> GetCatalogTestData()
     {
-        yield return (ActiveConfiguration.Get<string>("TestData:CategoryName"), "MacBook air");
+        yield return (ActiveConfiguration.Get<string>("TestData:CategoryName")!, "MacBook air");
         yield return ("Phones", "Nexus 6");
         yield return ("Monitors", "ASUS Full HD");
     }

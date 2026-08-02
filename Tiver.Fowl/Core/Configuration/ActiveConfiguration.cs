@@ -2,6 +2,7 @@ namespace Tiver.Fowl.Core.Configuration
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.Extensions.Configuration;
     using Tiver.Fowl.Core.Context;
 
@@ -26,16 +27,16 @@ namespace Tiver.Fowl.Core.Configuration
         private const string BaseConfigFileName = "config.json";
 
         private static IConfigurationRoot _config;
-        private static string _environment;
+        private static string? _environment;
         private static readonly object _lock = new();
 
         static ActiveConfiguration()
         {
             _environment = ResolveEnvironment();
-            LoadConfiguration();
+            _config = BuildConfiguration();
         }
 
-        private static string ResolveEnvironment()
+        private static string? ResolveEnvironment()
         {
             // Priority 1: Environment variable (can be overridden by SetEnvironment)
             var envVar = System.Environment.GetEnvironmentVariable(EnvironmentVariableName);
@@ -53,9 +54,10 @@ namespace Tiver.Fowl.Core.Configuration
         }
 
         /// <summary>
-        /// Gets the current environment name.
+        /// Gets the current environment name, or <c>null</c> when no environment is configured, in
+        /// which case only the base <c>config.json</c> layer is loaded.
         /// </summary>
-        public static string Environment
+        public static string? Environment
         {
             get
             {
@@ -69,13 +71,14 @@ namespace Tiver.Fowl.Core.Configuration
         /// <summary>
         /// Sets the environment and reloads configuration.
         /// </summary>
-        /// <param name="environment">Environment name (e.g., "dev", "qa", "prod")</param>
-        public static void SetEnvironment(string environment)
+        /// <param name="environment">Environment name (e.g., "dev", "qa", "prod"). Null or empty
+        /// clears the environment layer, leaving only the base <c>config.json</c>.</param>
+        public static void SetEnvironment(string? environment)
         {
             lock (_lock)
             {
                 _environment = environment;
-                LoadConfiguration();
+                _config = BuildConfiguration();
             }
         }
 
@@ -86,7 +89,7 @@ namespace Tiver.Fowl.Core.Configuration
         {
             lock (_lock)
             {
-                LoadConfiguration();
+                _config = BuildConfiguration();
             }
         }
 
@@ -96,8 +99,9 @@ namespace Tiver.Fowl.Core.Configuration
         /// <typeparam name="T">The type to convert the value to.</typeparam>
         /// <param name="path">Configuration path using colon separator (e.g., "Database:Connection:Timeout")</param>
         /// <param name="defaultValue">Default value if path not found.</param>
-        /// <returns>The configuration value or default.</returns>
-        public static T Get<T>(string path, T defaultValue = default)
+        /// <returns>The configuration value, or <paramref name="defaultValue"/> when the path is
+        /// absent — which is null for reference types unless a default is supplied.</returns>
+        public static T? Get<T>(string path, T? defaultValue = default)
         {
             lock (_lock)
             {
@@ -190,7 +194,7 @@ namespace Tiver.Fowl.Core.Configuration
         /// <param name="name">URL name as defined in config.</param>
         /// <param name="url">The URL if found.</param>
         /// <returns>True if URL was found, false otherwise.</returns>
-        public static bool TryGetUrl(string name, out Uri url)
+        public static bool TryGetUrl(string name, [NotNullWhen(true)] out Uri? url)
         {
             lock (_lock)
             {
@@ -215,7 +219,10 @@ namespace Tiver.Fowl.Core.Configuration
             TestExecutionContext.BrowserActions.NavigateToUrl(url);
         }
 
-        private static void LoadConfiguration()
+        // Returns the built root rather than assigning the field directly: the static constructor
+        // then contains a visible assignment to _config, which is what lets the compiler prove the
+        // field is initialized without a null-forgiving operator.
+        private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
                 .AddJsonFile(BaseConfigFileName, optional: true, reloadOnChange: false);
@@ -226,7 +233,7 @@ namespace Tiver.Fowl.Core.Configuration
                 builder.AddJsonFile(envConfigFile, optional: true, reloadOnChange: false);
             }
 
-            _config = builder.Build();
+            return builder.Build();
         }
     }
 }

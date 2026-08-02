@@ -12,8 +12,44 @@
 - `TestExecutionContext.SessionId` property to access/set the current test session identifier
 - `docs/PHILOSOPHY.md` stating the project's goal, six design principles, explicit non-goals. Summarized at the top of
   both READMEs
+- `Directory.Build.props` centralizing `TargetFramework`, `LangVersion`, nullable reference types,
+  `TreatWarningsAsErrors`, analyzer settings, and shared package metadata across every project.
+  NuGet audit warnings (NU1901-NU1904) stay warnings, so a newly published advisory does not break
+  an unrelated build
+- `Directory.Packages.props` introducing central package management, so each dependency version is
+  declared once for the whole repository
+- `.editorconfig` encoding the conventions `AGENTS.md` previously described only in prose, including
+  block-scoped namespaces with `using` directives inside the namespace body
+- Package now publishes `PackageTags` (`selenium`, `webdriver`, `test-automation`, and others), so it
+  is discoverable by search on nuget.org where it previously had none
+- Package `<repository>` metadata now includes the repository URL via `PublishRepositoryUrl`; it
+  previously recorded only a commit hash
+- Packages built on CI now set `ContinuousIntegrationBuild`, so symbol files record normalized source
+  paths instead of the build agent's absolute paths, making Source Link stepping work for consumers
 
 ### Changed
+- **BREAKING**: Nullable reference types are enabled across the repository. The public API is now
+  annotated, so consumers compiling with `<Nullable>enable</Nullable>` will see new warnings where
+  they treat a nullable result as non-null. Members that became nullable, all of which could already
+  return null at runtime: `ActiveConfiguration.Environment`, `ActiveConfiguration.Get<T>`,
+  `ApplicationConfiguration.Title`, `BrowserConfiguration.BrowserType`,
+  `BrowserConfiguration.RemoteAddress`, `BrowserConfiguration.Resolution`,
+  `IBrowserActions.ExecuteScript`, `TestExecutionContext.CurrentTestNameOrNull`,
+  `TestResultRecord.ErrorMessage`, `TestResultRecord.StackTrace`,
+  `TestResultRecord.ScreenshotBase64`, and `TestResultRecord.CurrentStep`
+- **BREAKING**: `IStorage.ReadOrInit<T>` gains a `where T : notnull` constraint. Storage holds values
+  as `object` and has no representation for a stored null, so the constraint states a rule the type
+  already had. Custom `IStorage` implementations must add it
+- **BREAKING**: `IBrowserActions.ExecuteScript` returns `object?`. Custom implementations must match
+  the nullability or the compiler reports CS8766
+- `IStorage.TryRead<T>` annotates its `out` parameter with `[MaybeNullWhen(false)]` and
+  `ActiveConfiguration.TryGetUrl` annotates its `out` parameter with `[NotNullWhen(true)]`, so
+  callers no longer need a null check after a `true` result
+- `ActiveConfiguration.SetEnvironment` accepts `string?`; passing null or empty clears the
+  environment layer, which `BuildConfiguration` already handled
+- Fixed: when `BrowserConfiguration.BrowserType` is unset and driver management is
+  `TiverFowlDrivers`, the driver downloader received null instead of the browser that would actually
+  be launched. It now resolves the default browser first
 - **BREAKING**: `Flow.Setup(Type, string, Func<string>)` is now `Flow.Setup(Type, string)`. The test
   key delegate is gone — `Flow.Setup` starts an ambient test scope instead of registering a way to
   compute a key. Custom base classes must drop the third argument. `Flow.Setup` must be called from

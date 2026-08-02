@@ -42,7 +42,9 @@
         
         public TResult Process<TResult>(Func<IWebElement, TResult> function, params object[] locatorFormattingArguments)
         {
-            var result = default(TResult);
+            // Wait.Until either runs the callback to completion or throws, so result is assigned by
+            // the time we return. The compiler cannot see that through the delegate, hence default!.
+            TResult result = default!;
             Wait.Until(() =>
             {
                 result = function.Invoke(GetWebElement(locatorFormattingArguments));
@@ -80,7 +82,7 @@
 
         private IWebElement GetWebElement(params object[] locatorFormattingArguments)
         {
-            string locator = null;
+            string? locator = null;
             try
             {
                 var arguments = locatorFormattingArguments.Length > 0

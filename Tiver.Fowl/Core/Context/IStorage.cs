@@ -1,5 +1,6 @@
 ﻿namespace Tiver.Fowl.Core.Context
 {
+    using System.Diagnostics.CodeAnalysis;
     using Exceptions;
 
     public interface IStorage
@@ -31,7 +32,7 @@
         /// <param name="key">Key for looked up item</param>
         /// <param name="value">Value of found item cast to T, or default when not found</param>
         /// <returns>True when an item was found for <paramref name="key"/></returns>
-        bool TryRead<T>(string key, out T value);
+        bool TryRead<T>(string key, [MaybeNullWhen(false)] out T value);
 
         /// <summary>
         /// Read an item from storage
@@ -46,11 +47,13 @@
         /// Read an item from storage with typed return value
         /// In case not existing key - create new item with default value and return it
         /// </summary>
-        /// <typeparam name="T">Type of the value</typeparam>
+        /// <typeparam name="T">Type of the value. Constrained to non-nullable: storage holds
+        /// values as <see cref="object"/> and has no representation for a stored null.</typeparam>
         /// <param name="key">Key for looked up item</param>
         /// <param name="defaultValue">Value for new item to be added in case missing</param>
         /// <returns>Value of found (or created) item cast to T</returns>
-        T ReadOrInit<T>(string key, T defaultValue);
+        T ReadOrInit<T>(string key, T defaultValue)
+            where T : notnull;
 
         void Clear();
     }

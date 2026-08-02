@@ -23,7 +23,11 @@
         /// </summary>
         void SwitchToMainFrame();
 
-        object ExecuteScript(string script, params object[] arguments);
+        /// <summary>
+        /// Executes JavaScript in the browser and returns its result, or <c>null</c> when the
+        /// script returns nothing.
+        /// </summary>
+        object? ExecuteScript(string script, params object[] arguments);
 
         /// <summary>
         /// Takes screenshot and logs it as base64

@@ -1,0 +1,49 @@
+<Project>
+
+  <!-- Central Package Management: with ManagePackageVersionsCentrally set, a PackageReference in
+       any project carries no Version and resolves it from the matching PackageVersion below. An
+       individual project overrides one entry with VersionOverride on its PackageReference. -->
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!-- Library dependencies -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.10" />
+    <PackageVersion Include="Selenium.WebDriver" Version="4.46.0" />
+    <PackageVersion Include="Serilog" Version="4.4.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageVersion Include="Tiver.Fowl.Drivers" Version="0.7.0" />
+    <PackageVersion Include="Tiver.Fowl.Waiting" Version="0.5.0" />
+  </ItemGroup>
+
+  <!-- Build-time only -->
+  <ItemGroup>
+    <PackageVersion Include="MinVer" Version="7.0.0" />
+  </ItemGroup>
+
+  <!-- Test frameworks and adapters -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="4.3.3" />
+    <PackageVersion Include="MSTest.TestFramework" Version="4.3.3" />
+    <PackageVersion Include="NUnit" Version="4.6.1" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
+  </ItemGroup>
+
+  <!-- The consumer test projects restore Tiver.Fowl from ../test-packages, where
+       Directory.Build.targets packs a throwaway build under a per-project sentinel version. The two
+       projects deliberately use different sentinels so each restores its own freshly packed
+       package; Tests.MSTest carries the second one as a VersionOverride, since central management
+       allows only one version per package id. Keep these in sync with
+       Directory.Build.targets:6-7. -->
+  <ItemGroup>
+    <PackageVersion Include="Tiver.Fowl" Version="[0.0.1-testingnunit]" />
+  </ItemGroup>
+
+</Project>

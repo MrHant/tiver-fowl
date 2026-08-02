@@ -76,7 +76,7 @@
             GC.SuppressFinalize(this);
         }
 
-        public object ExecuteScript(string script, params object[] arguments)
+        public object? ExecuteScript(string script, params object[] arguments)
         {
             return ((IJavaScriptExecutor) webDriver).ExecuteScript(script, arguments);
         }

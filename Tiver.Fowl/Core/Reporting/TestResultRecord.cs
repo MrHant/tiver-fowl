@@ -9,7 +9,7 @@ namespace Tiver.Fowl.Core.Reporting
     /// </summary>
     public class TestResultRecord
     {
-        public string TestName { get; set; }
+        public string TestName { get; set; } = string.Empty;
 
         public TestResult Result { get; set; }
 
@@ -19,11 +19,20 @@ namespace Tiver.Fowl.Core.Reporting
 
         public TimeSpan Duration => EndTime - StartTime;
 
-        public string ErrorMessage { get; set; }
+        /// <summary>
+        /// Failure message. Null for tests that did not fail.
+        /// </summary>
+        public string? ErrorMessage { get; set; }
 
-        public string StackTrace { get; set; }
+        /// <summary>
+        /// Failure stack trace. Null for tests that did not fail.
+        /// </summary>
+        public string? StackTrace { get; set; }
 
-        public string ScreenshotBase64 { get; set; }
+        /// <summary>
+        /// Screenshot captured on failure. Null when no screenshot was taken.
+        /// </summary>
+        public string? ScreenshotBase64 { get; set; }
 
         private readonly List<TestStepRecord> _steps = new();
         private readonly List<ElementActionRecord> _preStepActions = new();
@@ -57,6 +66,6 @@ namespace Tiver.Fowl.Core.Reporting
         /// <summary>
         /// Get the current (last) step, or null if no steps yet
         /// </summary>
-        public TestStepRecord CurrentStep => _steps.Count > 0 ? _steps[^1] : null;
+        public TestStepRecord? CurrentStep => _steps.Count > 0 ? _steps[^1] : null;
     }
 }

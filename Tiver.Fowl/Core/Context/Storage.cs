@@ -1,6 +1,7 @@
 ﻿namespace Tiver.Fowl.Core.Context
 {
     using System.Collections.Concurrent;
+    using System.Diagnostics.CodeAnalysis;
     using Exceptions;
 
     public class Storage : IStorage
@@ -27,7 +28,7 @@
             return (T)Read(key);
         }
 
-        public bool TryRead<T>(string key, out T value)
+        public bool TryRead<T>(string key, [MaybeNullWhen(false)] out T value)
         {
             if (_items.TryGetValue(key, out var item) && item is T typed)
             {
@@ -45,6 +46,7 @@
         }
 
         public T ReadOrInit<T>(string key, T defaultValue)
+            where T : notnull
         {
             return (T)_items.GetOrAdd(key, defaultValue);
         }

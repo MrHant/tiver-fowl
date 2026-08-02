@@ -36,7 +36,7 @@
         /// been set yet. For ambient consumers such as log enrichers, which also run during session
         /// setup, report generation and teardown.
         /// </summary>
-        public static string CurrentTestNameOrNull =>
+        public static string? CurrentTestNameOrNull =>
             Context.TestOrNull is { } storage && storage.TryRead<string>("TestName", out var name)
                 ? name
                 : null;

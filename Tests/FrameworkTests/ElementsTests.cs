@@ -19,7 +19,7 @@ namespace Tests.FrameworkTests
         {
             ActiveConfiguration.NavigateTo("home");
 
-            var categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName");
+            var categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName")!;
 
             // Element
             ClassicAssert.IsNotEmpty(CatalogView.CategoryMenuItem.Locator);

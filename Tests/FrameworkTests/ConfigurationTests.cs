@@ -17,7 +17,7 @@ namespace Tests.FrameworkTests
             ClassicAssert.AreEqual(null, ActiveConfiguration.Environment);
 
             // Verify config value comes from config.json file
-            var categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName");
+            var categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName")!;
             ClassicAssert.AreEqual("Laptops", categoryName);
 
             // Override environment to "qa" 
@@ -27,7 +27,7 @@ namespace Tests.FrameworkTests
             ClassicAssert.AreEqual("qa", ActiveConfiguration.Environment);
 
             // Verify config value comes from qa override
-            categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName");
+            categoryName = ActiveConfiguration.Get<string>("TestData:CategoryName")!;
             ClassicAssert.AreEqual("Phones", categoryName);
 
             // Verify it works with actual page interaction
