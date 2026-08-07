@@ -80,7 +80,7 @@ make it show up in the report.
 
 ### 6. Parallel-safe by construction
 
-Per-test state lives in an ambient `TestScope` published through an `AsyncLocal` and reached via
+Per-test state lives in an ambient `StorageScope` published through an `AsyncLocal` and reached via
 `Context` / `TestExecutionContext` — never in statics, and never keyed by thread. 
 
 This allows user to store test-specific, access it from different parts of the test classes (like page objects, elements, and test methods) without worrying about cross-test contamination, even when tests are run in parallel.

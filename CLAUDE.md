@@ -87,11 +87,21 @@ Test framework (NUnit vs MSTest) is auto-detected from package references, which
 Thread-safe state via the `Context` class, which is what makes parallel execution safe:
 
 - **Session storage** — shared across all tests in a run
-- **Test storage** — lives in a `TestScope` published through an `AsyncLocal`, so it is isolated per
-  test and follows that test across thread hops and `await`s. Started by `Flow.Setup`, ended in
+- **Test storage** — lives in a `StorageScope` published through an `AsyncLocal`, so it is isolated
+  per test and follows that test across thread hops and `await`s. Started by `Flow.Setup`, ended in
   teardown
 - `TestExecutionContext` exposes the ambient current-test state (`Browser`, `BrowserActions`,
   `WebElementActions`, `TestName`, `TestResult`, `TestStep`, `SessionId`)
+
+Both levels are the same type — a `StorageScope` holding **two** storages — and differ only in
+lifetime and publication: the session scope is one long-lived instance, the test scope is
+`AsyncLocal`. That is why the session accessors cannot fail and the test ones throw outside a test.
+
+The two-storage split is load-bearing. `Context.TestStorage` / `Context.SessionStorage` are public
+and belong to the test author; `Context.Test` / `Context.Session` are internal and hold the
+framework's own state (`Browser`, `TestName`, `TestResult`, …). Keeping them apart is what stops a
+consumer writing a key named `"Browser"`, or calling `IStorage.Clear()`, from breaking teardown.
+Framework state goes in the internal pair — never the public one.
 
 Anything added to the framework that holds per-test state must go through `Context`, not statics.
 Never key test state by thread — MSTest and NUnit both resume `async` tests on arbitrary pool

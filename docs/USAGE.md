@@ -144,17 +144,25 @@ TestExecutionContext.BrowserActions.TakeScreenshot();
 
 ## Context and storage
 
-`Context` provides thread-safe, per-test isolation backed by `ConcurrentDictionary`.
+`Context` is where a test keeps state it needs to carry between steps — a created record's ID, a
+generated username. Use it instead of static fields: statics are shared by every test running in
+parallel, `Context.TestStorage` is not.
 
 ```csharp
-// Test-level: isolated per test, cleared in teardown
-Context.Current.TestStorage.Write("key", value);
-var data = Context.Current.TestStorage.Read<T>("key");
-var orDefault = Context.Current.TestStorage.ReadOrInit<T>("key", fallback);
+// Test-level: isolated per test, discarded when the test ends
+Context.TestStorage.Write("userId", createdId);
+var userId = Context.TestStorage.Read<string>("userId");
+var orDefault = Context.TestStorage.ReadOrInit("retries", 0);
+if (Context.TestStorage.TryRead<string>("userId", out var id)) { }
 
-// Session-level: shared across all tests in the run
-Context.Current.SessionStorage.Write("key", value);
+// Session-level: shared across all tests in the run, and readable outside a test
+Context.SessionStorage.Write("apiToken", token);
 ```
+
+The storage follows its own test across `await`s and `Task.Run`, so it stays correct in an async
+test. It is available from the moment setup runs; reading it outside a test throws
+`InvalidOperationException`. `SessionStorage` is shared mutable state across parallel tests — treat
+it as read-mostly and keep anything a single test owns in `TestStorage`.
 
 `TestExecutionContext` exposes the ambient state for the current test:
 

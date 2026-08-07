@@ -3,6 +3,15 @@
 ## [Unreleased]
 
 ### Added
+- **Public per-test storage**: `Context.TestStorage` and `Context.SessionStorage`, the supported
+  place for state a test carries between steps — a created record's ID, a generated username. Per-test
+  scratch state is a routine need in UI tests, and the design principles rule out static fields for it
+  because the suites run in parallel, but the framework previously offered no public route at all:
+  `Context.Test` and `Context.Session` were internal, and `docs/USAGE.md` documented a
+  `Context.Current.TestStorage` API that never existed. `TestStorage` is isolated per test and follows
+  it across `await`s and `Task.Run`; `SessionStorage` is shared for the run and readable outside a
+  test. Both are backed by separate stores from the framework's own state, so writing a key such as
+  `"Browser"` or calling `Clear()` cannot disturb the browser lifecycle or teardown
 - **HTML Test Report Generation**: Self-contained HTML report generated automatically after test execution
   - Parses existing Serilog JSON log file (`log.txt`) - no additional code instrumentation required
   - Includes test name, result (pass/fail/skip), duration, test steps, element actions
@@ -123,7 +132,7 @@
   under MSTest it captured a per-instance value, so as soon as a second test ran setup, *every*
   thread resolved to the last test to start. Concurrent MSTest tests shared a single storage bucket:
   they read each other's `TestName` and `TestStep`, and `Flow.Teardown` fetched and quit another
-  test's browser while that test was still using it. `Context` now publishes a per-test `TestScope`
+  test's browser while that test was still using it. `Context` now publishes a per-test `StorageScope`
   through an `AsyncLocal`, which follows its own test across thread hops, `await`s and `Task.Run`,
   and cannot bleed into a sibling test reusing the same worker thread. `Tests.MSTest` now runs with
   method-level parallelism and covers this
