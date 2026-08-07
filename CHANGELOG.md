@@ -90,6 +90,16 @@
     the first attempt instead of retrying until `Timeout`
 
 ### Fixed
+- **Behavior change**: `ActiveConfiguration.Get<T>` no longer discards a configured value that
+  happens to equal `default(T)`. It compared the value it read against `default(T)` and substituted
+  the caller's default when they matched, so "absent" and "present but falsy" were indistinguishable:
+  `Get<bool>("Flags:Enabled", true)` returned `true` even where the config file said `false`, and
+  `Get<int>("Retries:Max", 3)` returned `3` where the file said `0` — the file was silently
+  overruled for exactly the values most often used to switch something off. The default now applies
+  when the path carries no value: absent, explicitly `null`, or naming a parent section rather than
+  a leaf. Callers relying on the old behavior to treat a configured `false`/`0` as "unset" must now
+  remove the key instead. `Get<string>` is unaffected, since `default(string)` is `null` and never
+  equalled a configured `""`
 - Test context is now genuinely isolated under MSTest parallel execution. The running test was
   identified through a single process-global `Func<string>` that every test's setup overwrote. Under
   NUnit the delegate resolved ambiently through `TestContext.CurrentContext`, so it was correct;

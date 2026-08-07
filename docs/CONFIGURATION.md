@@ -129,6 +129,12 @@ var urls = ActiveConfiguration.GetSectionAsDictionary("Urls");
 if (ActiveConfiguration.Exists("FeatureFlags:NewUI")) { }
 ```
 
+`Get<T>` applies `defaultValue` only when the path carries no value — it is absent, explicitly
+`null`, or names a parent section rather than a leaf. A configured value is always returned as
+configured, including `false`, `0` and `""`, so `Get<bool>("FeatureFlags:NewUI", true)` returns
+`false` when the file says `false`. To express "unset" for a flag, omit the key rather than setting
+it to a falsy value.
+
 ### URL helpers
 
 ```csharp

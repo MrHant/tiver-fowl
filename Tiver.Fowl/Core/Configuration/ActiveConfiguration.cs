@@ -98,19 +98,23 @@ namespace Tiver.Fowl.Core.Configuration
         /// </summary>
         /// <typeparam name="T">The type to convert the value to.</typeparam>
         /// <param name="path">Configuration path using colon separator (e.g., "Database:Connection:Timeout")</param>
-        /// <param name="defaultValue">Default value if path not found.</param>
-        /// <returns>The configuration value, or <paramref name="defaultValue"/> when the path is
-        /// absent — which is null for reference types unless a default is supplied.</returns>
+        /// <param name="defaultValue">Default value used only when the path carries no value.</param>
+        /// <returns>The configured value — including a falsy one such as <c>false</c>, <c>0</c> or
+        /// <c>""</c> — or <paramref name="defaultValue"/> when the path carries no value, which is
+        /// null for reference types unless a default is supplied.</returns>
+        /// <remarks>
+        /// A path "carries no value" when it is absent, when it is explicitly null in the config
+        /// file, or when it names a parent section rather than a leaf. Those are the same three
+        /// cases <see cref="ConfigurationBinder.GetValue{T}(IConfiguration, string)"/> has nothing
+        /// to convert for, so the default applies exactly when there is no configured value to
+        /// return — and never merely because the configured value equals <c>default(T)</c>.
+        /// </remarks>
         public static T? Get<T>(string path, T? defaultValue = default)
         {
             lock (_lock)
             {
-                var value = _config.GetValue<T>(path);
-                if (EqualityComparer<T>.Default.Equals(value, default))
-                {
-                    return defaultValue;
-                }
-                return value;
+                var section = _config.GetSection(path);
+                return section.Value is null ? defaultValue : _config.GetValue<T>(path);
             }
         }
 

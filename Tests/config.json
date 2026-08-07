@@ -5,5 +5,11 @@
     },
     "TestData": {
         "CategoryName": "Laptops"
+    },
+    "Flags": {
+        "Enabled": false,
+        "Count": 0,
+        "Name": "",
+        "ExplicitNull": null
     }
 }
