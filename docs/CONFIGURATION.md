@@ -37,6 +37,34 @@ configuration:
 
 Bound by `ConfigurationMapper` into `BrowserConfiguration`; consumed by `BrowserFactory.GetBrowser()`.
 
+### Remote browsers (Selenium Grid)
+
+Set `RemoteAddress` to run the browser on a grid node instead of the local machine. Every other
+property still applies — `Headless`, `Resolution` and the rest configure the browser wherever it runs.
+
+```json
+"BrowserConfiguration": {
+  "BrowserType": "chrome",
+  "Headless": true,
+  "Resolution": { "Width": 1200, "Height": 800 },
+  "RemoteAddress": "http://localhost:4444/"
+}
+```
+
+Two properties behave differently against a grid:
+
+- **`RunningInDocker` must be set explicitly** when the node runs in a container. Local runs also
+  detect a container automatically by probing for `/.dockerenv`, but that file describes the machine
+  running the tests, not the one running the browser.
+- **`DriverManager` does not affect the session** — the node supplies its own driver. A
+  `TiverFowlDrivers` download still runs on the test machine and then goes unused.
+
+To try this locally:
+
+```bash
+docker run -d --shm-size=2g -p 4444:4444 selenium/standalone-chrome
+```
+
 ### Tiver.Fowl.Waiting
 
 Consumed by the `Tiver.Fowl.Waiting` package, which backs every element interaction. Configures

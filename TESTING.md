@@ -92,6 +92,25 @@ invisible outside Layer 3. `ReportGenerationTests` covers:
 - `dotnet build Tests.MSTest/Tests.MSTest.csproj` - Validates MSTest package
 - `dotnet test Tests.MSTest/Tests.MSTest.csproj` - Runs tests via package
 
+**Grid integration (opt-in)**:
+
+`GridIntegrationTests` verifies that browser configuration actually reaches a remote session — the
+one thing unit tests over `ChromeOptions` cannot prove. The tests are `[Explicit]`, so they never run
+in the default suite and everyday work needs no infrastructure.
+
+- `task test-grid` - Starts a throwaway `selenium/standalone-chrome` container, waits for the grid to
+  report ready, runs the tests, and removes the container afterwards even if they fail. Needs Docker;
+  the first run pulls roughly 1.5GB.
+
+Against a grid you already have, skip the task and set `TIVER_GRID_ADDRESS` (default
+`http://localhost:4444/`):
+
+```bash
+TIVER_GRID_ADDRESS=http://my-grid:4444/ dotnet test Tests/Tests.csproj --filter "TestCategory=Grid"
+```
+
+Not yet wired into CI; plan 08 covers that.
+
 ## Key Design Decisions
 
 ### Automation via Directory.Build.targets

@@ -23,29 +23,11 @@
 
         public override Browser Build(BrowserConfiguration configuration)
         {
-            IWebDriver driver;
-            if (configuration.RemoteAddress != null)
-            {
-                var options = new ChromeOptions();
-                driver = new RemoteWebDriver(configuration.RemoteAddress, options);
-            }
-            else
-            {
-                var options = new ChromeOptions();
-                if (configuration.Headless)
-                {
-                    options.AddArgument("--headless");
-                }
+            var options = BuildOptions(configuration);
 
-                bool useDockerMode = configuration.RunningInDocker || IsRunningInDocker();
-                if (useDockerMode)
-                {
-                    options.AddArgument("--no-sandbox");
-                    options.AddArgument("--disable-dev-shm-usage");
-                }
-
-                driver = new ChromeDriver(options);
-            }
+            IWebDriver driver = configuration.RemoteAddress != null
+                ? new RemoteWebDriver(configuration.RemoteAddress, options)
+                : new ChromeDriver(options);
 
             if (configuration.Resolution?.Width != null || configuration.Resolution?.Height != null)
             {
@@ -55,6 +37,44 @@
             }
 
             return new ChromeBrowser(driver);
+        }
+
+        /// <summary>
+        /// Builds the options describing *what* the browser should be. This is deliberately
+        /// independent of *where* it runs: a grid session gets the same options as a local one,
+        /// which is what makes headless-on-grid — the most common grid setup there is — behave.
+        /// </summary>
+        internal static ChromeOptions BuildOptions(BrowserConfiguration configuration)
+        {
+            var options = new ChromeOptions();
+
+            if (configuration.Headless)
+            {
+                options.AddArgument("--headless");
+            }
+
+            if (UseDockerMode(configuration))
+            {
+                options.AddArgument("--no-sandbox");
+                options.AddArgument("--disable-dev-shm-usage");
+            }
+
+            return options;
+        }
+
+        /// <summary>
+        /// Chrome needs <c>--no-sandbox</c> and <c>--disable-dev-shm-usage</c> to run inside a
+        /// container. The two signals for that are not equivalent: <see
+        /// cref="BrowserConfiguration.RunningInDocker"/> is a statement about the browser and holds
+        /// wherever it runs, while the <c>/.dockerenv</c> probe only describes *this* process's
+        /// machine. On a grid the browser runs on the node, so the local probe says nothing about
+        /// it and is consulted only when launching locally — a grid node that needs the switches
+        /// must be told via configuration.
+        /// </summary>
+        private static bool UseDockerMode(BrowserConfiguration configuration)
+        {
+            return configuration.RunningInDocker
+                || (configuration.RemoteAddress is null && IsRunningInDocker());
         }
     }
 }

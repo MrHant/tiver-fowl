@@ -38,6 +38,33 @@ tasks:
       - task: test-nunit
       - task: test-mstest
 
+  test-grid:
+    desc: Run the Selenium Grid integration tests against a throwaway container (needs Docker; first run pulls ~1.5GB)
+    vars:
+      CONTAINER: tiver-fowl-grid
+      IMAGE: selenium/standalone-chrome
+    preconditions:
+      - sh: docker info
+        msg: Docker is unavailable — the Grid tests need a container to run against.
+    cmds:
+      # Clear a container left behind by an interrupted run, so the port is free.
+      - cmd: docker rm -f {{.CONTAINER}}
+        ignore_error: true
+      - docker run -d --name {{.CONTAINER}} --shm-size=2g -p 4444:4444 {{.IMAGE}}
+      # Registered before the wait, so the container is removed even if readiness or the tests fail.
+      - defer: docker rm -f {{.CONTAINER}}
+      - cmd: |
+          for _ in $(seq 1 60); do
+            if curl -sf --max-time 2 http://localhost:4444/status | grep -q '"ready": *true'; then
+              echo "Grid ready."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Grid did not report ready within 120s." >&2
+          exit 1
+      - dotnet test Tests/Tests.csproj --filter "TestCategory=Grid"
+
   report-demo:
     desc: Generate a sample HTML report from the explicit demo fixtures (one test fails on purpose)
     cmds:

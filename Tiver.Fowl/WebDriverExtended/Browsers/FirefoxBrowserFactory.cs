@@ -11,21 +11,11 @@
     {
         public override Browser Build(BrowserConfiguration configuration)
         {
-            IWebDriver driver;
-            if (configuration.RemoteAddress != null)
-            {
-                var options = new FirefoxOptions();
-                driver = new RemoteWebDriver(configuration.RemoteAddress, options);
-            }
-            else
-            {
-                var options = new FirefoxOptions();
-                if (configuration.Headless)
-                {
-                    options.AddArgument("-headless");
-                }
-                driver = new FirefoxDriver(options);
-            }
+            var options = BuildOptions(configuration);
+
+            IWebDriver driver = configuration.RemoteAddress != null
+                ? new RemoteWebDriver(configuration.RemoteAddress, options)
+                : new FirefoxDriver(options);
 
             if (configuration.Resolution?.Width != null || configuration.Resolution?.Height != null)
             {
@@ -35,6 +25,23 @@
             }
 
             return new FirefoxBrowser(driver);
+        }
+
+        /// <summary>
+        /// Builds the options describing *what* the browser should be. This is deliberately
+        /// independent of *where* it runs: a grid session gets the same options as a local one,
+        /// which is what makes headless-on-grid — the most common grid setup there is — behave.
+        /// </summary>
+        internal static FirefoxOptions BuildOptions(BrowserConfiguration configuration)
+        {
+            var options = new FirefoxOptions();
+
+            if (configuration.Headless)
+            {
+                options.AddArgument("-headless");
+            }
+
+            return options;
         }
     }
 }

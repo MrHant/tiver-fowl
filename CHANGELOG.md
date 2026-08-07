@@ -90,6 +90,14 @@
     the first attempt instead of retrying until `Timeout`
 
 ### Fixed
+- Browser configuration is no longer discarded when running against a Selenium Grid. Both factories
+  built their options object *inside* the local branch and handed `RemoteWebDriver` a bare one, so
+  setting `RemoteAddress` silently dropped `Headless` and the container switches — meaning
+  headless-on-grid, the most common grid setup there is, launched a headed browser and no
+  configuration error was reported. Options are now built once and applied to local and remote
+  sessions alike. `RunningInDocker` is honoured on both paths; the `/.dockerenv` auto-detection is
+  not, since it describes the machine running the tests rather than the node running the browser, so
+  a grid node needing `--no-sandbox` must be told through `RunningInDocker`
 - **Behavior change**: `ActiveConfiguration.Get<T>` no longer discards a configured value that
   happens to equal `default(T)`. It compared the value it read against `default(T)` and substituted
   the caller's default when they matched, so "absent" and "present but falsy" were indistinguishable:

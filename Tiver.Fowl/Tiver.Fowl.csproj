@@ -16,6 +16,14 @@
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     </PropertyGroup>
 
+    <!-- The repository's own test project only. Lets tests assert on seams that are deliberately
+         not public API — currently the browser factories' option building, which otherwise could
+         only be reached by constructing a real driver. Consumer suites (Tests.NUnit, Tests.MSTest)
+         are excluded on purpose: they exist to validate the *published* surface. -->
+    <ItemGroup>
+        <InternalsVisibleTo Include="Tests" />
+    </ItemGroup>
+
     <!-- README for package. This is Tiver.Fowl/README.md, not the repository one - item paths
          resolve against the project directory. It is deliberately a separate, shorter file: the
          repository README targets someone browsing GitHub, this one targets someone deciding on
