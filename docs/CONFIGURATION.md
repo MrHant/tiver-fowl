@@ -30,7 +30,7 @@ configuration:
 | -------- | ---- | ----- |
 | `BrowserType` | string | `chrome` or `firefox` |
 | `Headless` | bool | Run without a visible browser window |
-| `Resolution` | object | `{ "Width": 1200, "Height": 800 }` |
+| `Resolution` | object | `{ "Width": 1200, "Height": 800 }` — both dimensions required, or omit entirely |
 | `DriverManager` | string | `SeleniumManager` (default), `TiverFowlDrivers`, or `None` |
 | `RunningInDocker` | bool | Defaults to `false`; applies container-friendly browser switches |
 | `RemoteAddress` | Uri | Set to use a remote WebDriver (Selenium Grid) instead of a local browser |

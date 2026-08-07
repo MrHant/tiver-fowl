@@ -90,6 +90,15 @@
     the first attempt instead of retrying until `Timeout`
 
 ### Fixed
+- **Behavior change**: a half-specified `BrowserConfiguration.Resolution` is now a configuration
+  error instead of a zero-size window. Setting only `Width` or only `Height` converted the missing
+  dimension to `0` and launched a browser with no usable viewport, which then failed every
+  interaction with errors pointing nowhere near the config file. Both dimensions are now required
+  together — omit `Resolution` entirely to keep the browser's default size — and non-positive
+  dimensions such as `"Width": 0` are rejected for the same reason. The check runs before the driver
+  is created, so a bad resolution no longer leaves an orphaned browser process behind. Configurations
+  that relied on the old zero-filling behavior will now throw
+  `IncorrectBrowserConfigurationException` naming the missing dimension
 - Browser configuration is no longer discarded when running against a Selenium Grid. Both factories
   built their options object *inside* the local branch and handed `RemoteWebDriver` a bare one, so
   setting `RemoteAddress` silently dropped `Headless` and the container switches — meaning

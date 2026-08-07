@@ -12,16 +12,15 @@
         public override Browser Build(BrowserConfiguration configuration)
         {
             var options = BuildOptions(configuration);
+            var windowSize = ResolveWindowSize(configuration.Resolution);
 
             IWebDriver driver = configuration.RemoteAddress != null
                 ? new RemoteWebDriver(configuration.RemoteAddress, options)
                 : new FirefoxDriver(options);
 
-            if (configuration.Resolution?.Width != null || configuration.Resolution?.Height != null)
+            if (windowSize is not null)
             {
-                int width = Convert.ToInt32(configuration.Resolution.Width);
-                int height = Convert.ToInt32(configuration.Resolution.Height);
-                driver.Manage().Window.Size = new Size(width, height);
+                driver.Manage().Window.Size = windowSize.Value;
             }
 
             return new FirefoxBrowser(driver);
